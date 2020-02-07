@@ -1,0 +1,67 @@
+.loading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.loading-s { height: 30px; }
+.loading-l { height: 50px; }
+
+.loading-balls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.loading-sb { width: 30px; }
+.loading-lb { width: 60px; }
+
+.loading-balls-item {
+  border-radius: 50%;
+  background: var(--black);
+}
+.loading-sbi { height: 5px; width: 5px; }
+.loading-lbi { height: 10px; width: 10px; }
+
+
+.loading-sbi:nth-child(1) {
+  animation: bouncing-s 0.5s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95);
+}
+.loading-sbi:nth-child(2) {
+  animation: bouncing-s 0.5s 0.125s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95) backwards;
+}
+.loading-sbi:nth-child(3) {
+  animation: bouncing-s 0.5s 0.25s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95) backwards;
+}
+
+.loading-lbi:nth-child(1) {
+  animation: bouncing 0.5s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95);
+}
+.loading-lbi:nth-child(2) {
+  animation: bouncing 0.5s 0.125s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95) backwards;
+}
+.loading-lbi:nth-child(3) {
+  animation: bouncing 0.5s 0.25s alternate infinite cubic-bezier(0.4, 0.05, 0.15, 0.95) backwards;
+}
+
+@keyframes bouncing {
+  0% {
+    transform: translate3d(0, 10px, 0) scale(1, 1);
+  }
+  100% {
+    transform: translate3d(0, -10px, 0) scale(1, 1);
+  }
+}
+@keyframes bouncing-s {
+  0% {
+    transform: translate3d(0, 5px, 0) scale(1, 1);
+  }
+  100% {
+    transform: translate3d(0, -5px, 0) scale(1, 1);
+  }
+}
+
+.loading-minHeight {
+  min-height: 100px;
+}

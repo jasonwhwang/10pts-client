@@ -1,8 +1,104 @@
+:root {
+  --black: #050f23;
+  --gray: #676772;
+  --mediumgray: #a5a5ac;
+  --background: #fafafd;
+  --border: #eceff1;
+
+  --blue: #1555f5;
+  --darkblue: #0d2085;
+  --red: #da3856;
+  --green: #35ffbb;
+
+  --width: 600px;
+}
+
+html { min-height: 100%; display: flex; -webkit-overflow-scrolling: touch; }
 body {
+  flex: 1;
   margin: 0;
-  font-family: 'Red Hat Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Red Hat Text', 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  overscroll-behavior: contain;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+  -webkit-touch-callout: none;
+}
+#root { min-height: 100%; display: flex; }
+@media only screen and (max-width: var(--width)) {
+  body {
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+
+/***** HTML Default Overwrites *****/
+input {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+  background-color: none;
+  font-family: 'Red Hat Text', 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  transition: 150ms;
+}
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+input:focus { outline: none; }
+input:disabled { border: none; background-color: transparent; }
+
+textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  box-sizing: border-box;
+  padding: 0;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  font-family: 'Red Hat Text', 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  transition: 150ms;
+}
+textarea:focus { outline: none; }
+textarea:disabled { border: none; background-color: transparent; }
+
+a {
+  text-decoration: none;
+  color: #050f2380;
+  transition: 150ms;
+}
+a:hover { color: var(--black); }
+a:focus { outline:none; }
+
+button, [type="button"], [type="reset"], [type="submit"] {
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background-color: transparent;
+  color: #050f2380;
+  font-size: 12px;
+  font-family: 'Red Hat Text', sans-serif;
+  cursor: pointer;
+  text-transform: none;
+  user-select: none;
+  transition: 150ms ease-in-out;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+button:focus { outline: none; }
+button:hover { color: var(--black); }
+button::-moz-focus-inner { border: 0; }
+
+label {
+  cursor: pointer;
+  transition: 150ms ease-in-out;
 }

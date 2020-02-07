@@ -1,0 +1,21 @@
+.navBar {
+  position: fixed;
+  z-index: 10;
+  height: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border);
+  background-color: white;
+  transition: 150ms;
+}
+.navBar-wrapper {
+  height: 100%;
+  max-width: var(--width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+
+.navBar-logo {
+  height: 15px;
+}

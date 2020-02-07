@@ -1,0 +1,28 @@
+import React from 'react'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import FadeTransition from '../7_FadeTransition/FadeTransition'
+
+const NotFound = () => {
+  return (
+    <FadeTransition>
+      <div className="page box-flex-col">
+        <HelmetProvider><Helmet>
+          <title>Not Found</title>
+          <meta name="description" content="Not Found" />
+        </Helmet></HelmetProvider>
+
+        <div className="box-flex-row-center box-flex-1">
+          <div className="box-margin-bottom-60">
+            <h1 className="box-flex-row-center box-margin-bottom-20">404</h1>
+            <h5 className="box-flex-row-center box-text-nobold">
+              Not Found
+            </h5>
+          </div>
+        </div>
+
+      </div>
+    </FadeTransition>
+  )
+}
+
+export default NotFound

@@ -1,0 +1,17 @@
+.tabBar {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top: 1px solid var(--border);
+  background-color: white;
+}
+.tabBar-wrapper {
+  height: 100%;
+  max-width: var(--width);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 15px;
+}

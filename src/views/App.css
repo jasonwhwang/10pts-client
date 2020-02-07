@@ -1,0 +1,9 @@
+.app { flex: 1; }
+.page {
+  min-height: 100%;
+  max-width: var(--width);
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 50px 0;
+}
