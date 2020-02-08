@@ -14,9 +14,9 @@ const NotFound = () => {
         <div className="box-flex-row-center box-flex-1">
           <div className="box-margin-bottom-60">
             <h1 className="box-flex-row-center box-margin-bottom-20">404</h1>
-            <h5 className="box-flex-row-center box-text-nobold">
+            <h6 className="box-flex-row-center box-text-nobold">
               Not Found
-            </h5>
+            </h6>
           </div>
         </div>
 

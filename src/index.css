@@ -9,8 +9,10 @@
   --darkblue: #0d2085;
   --red: #da3856;
   --green: #35ffbb;
+  --gold: #caa847;
 
   --width: 600px;
+  --padding: 15px;
 }
 
 html { min-height: 100%; display: flex; -webkit-overflow-scrolling: touch; }
@@ -37,7 +39,6 @@ body {
 
 /***** HTML Default Overwrites *****/
 input {
-  width: 100%;
   border: none;
   box-sizing: border-box;
   padding: 0;
@@ -53,10 +54,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 input[type="number"] { -moz-appearance: textfield; }
 input:focus { outline: none; }
+input:focus::placeholder { color: transparent; }
 input:disabled { border: none; background-color: transparent; }
 
 textarea {
-  width: 100%;
   resize: none;
   border: none;
   box-sizing: border-box;
@@ -72,7 +73,7 @@ textarea:disabled { border: none; background-color: transparent; }
 
 a {
   text-decoration: none;
-  color: #050f2380;
+  color: var(--mediumgray);
   transition: 150ms;
 }
 a:hover { color: var(--black); }
@@ -84,7 +85,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
   margin: 0;
   text-decoration: none;
   background-color: transparent;
-  color: #050f2380;
+  color: var(--mediumgray);
   font-size: 12px;
   font-family: 'Red Hat Text', sans-serif;
   cursor: pointer;

@@ -24,8 +24,8 @@ class Search extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>10pts - Search</title>
-            <meta name="description" content="10pts - Search" />
+            <title>Search</title>
+            <meta name="description" content="Search" />
           </Helmet></HelmetProvider>
 
           <div className="test">Search</div>

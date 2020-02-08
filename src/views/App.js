@@ -12,9 +12,9 @@ import Search from './2_Search/Search'
 const App = (props) => {
   return (
     <div className="app">
-      <NavBar history={props.history} location={props.location}/>
+      <NavBar {...props} />
 
-      <ScrollTop location={props.location}>
+      <ScrollTop location={props.location} >
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/search/:route?" component={Search} />
@@ -22,7 +22,7 @@ const App = (props) => {
         </Switch>
       </ScrollTop>
 
-      <TabBar history={props.history} location={props.location}/>
+      <TabBar location={props.location} />
     </div>
   )
 }

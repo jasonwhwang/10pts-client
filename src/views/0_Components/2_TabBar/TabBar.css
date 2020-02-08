@@ -7,11 +7,44 @@
   box-sizing: border-box;
   border-top: 1px solid var(--border);
   background-color: white;
+  transition: 150ms;
+}
+.tabBar-hide {
+  bottom: -50px;
 }
 .tabBar-wrapper {
   height: 100%;
   max-width: var(--width);
   margin: 0 auto;
   box-sizing: border-box;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.tabBar-link {
+  height: 100%;
+  box-sizing: border-box;
   padding: 0 15px;
+  transition: 150ms;
+}
+.tabBar-stroke {
+  stroke-width: 3.5;
+}
+.tabBar-fillUser {
+  fill: var(--black);
+  stroke-linecap: butt;
+}
+.tabBar-fillHome {
+  position: absolute;
+  z-index: 11;
+  height: 12px;
+  width: 4px;
+  margin-top: 7px;
+  background-color: white;
+}
+.tabBar-homeWidth {
+  width: 5px !important;
+  border-radius: 1px;
 }

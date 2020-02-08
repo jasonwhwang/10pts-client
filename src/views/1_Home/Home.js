@@ -24,8 +24,8 @@ class Home extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>10pts - Home</title>
-            <meta name="description" content="10pts - Home" />
+            <title>Home</title>
+            <meta name="description" content="Home" />
           </Helmet></HelmetProvider>
 
           <div className="test">Test</div>
