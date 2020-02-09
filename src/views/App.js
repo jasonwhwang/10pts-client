@@ -8,7 +8,7 @@ import NavBar from './0_Components/1_NavBar/NavBar'
 import TabBar from './0_Components/2_TabBar/TabBar'
 import Home from './1_Home/Home'
 import Search from './2_Search/Search'
-import NewEdit from './3_NewEdit/NewEdit'
+import New from './3_New/New'
 import Saved from './4_Saved/Saved'
 import Account from './5_Account/Account'
 
@@ -21,8 +21,8 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/search/:route?" component={Search} />
-          <Route path="/new/:route?" component={NewEdit} />
-          <Route path="/edit/:foodname/:route?" component={NewEdit} />
+          <Route path="/new/:route?" component={New} />
+          <Route path="/edit/:foodname/:route?" component={New} />
           <Route path="/saved/:route?" component={Saved} />
           <Route path="/account/:route?" component={Account} />
           <Route component={NotFound} />

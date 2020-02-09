@@ -6,7 +6,7 @@ import Logo from '../../../img/logo.png'
 import { ChevronLeft } from 'react-feather'
 
 import SearchNav from './SearchNav'
-import NewEditNav from './NewEditNav'
+import NewNav from './NewNav'
 import AccountNav from './AccountNav'
 import FoodNav from './FoodNav'
 
@@ -17,8 +17,8 @@ const NavBar = () => {
         <Route exact path='/search' component={SearchNav} />
         <Route exact path='/search/filters' component={FiltersMapSettingsNav} />
         <Route exact path='/account/settings' component={FiltersMapSettingsNav} />
-        <Route path='/new/:route?' component={NewEditNav} />
-        <Route path='/edit/:foodname/:route?' component={NewEditNav} />
+        <Route path='/new/:route?' component={NewNav} />
+        <Route path='/edit/:foodname/:route?' component={NewNav} />
         <Route path='/saved/:route?' component={SavedNav} />
         <Route exact path='/account' component={AccountNav} />
 

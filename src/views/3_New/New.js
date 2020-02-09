@@ -1,5 +1,5 @@
 import React from 'react'
-import './NewEdit.css'
+import './New.css'
 import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   user: state.common.user
 })
 
-class NewEdit extends React.Component {
+class New extends React.Component {
   state = {
     loading: true
   }
@@ -28,9 +28,9 @@ class NewEdit extends React.Component {
             <meta name="description" content="New" />
           </Helmet></HelmetProvider>
 
-          <div className="test">NewEdit</div>
-          <div className="test">NewEdit</div>
-          <div className="test">NewEdit</div>
+          <div className="test">New</div>
+          <div className="test">New</div>
+          <div className="test">New</div>
 
         </div>
       </FadeTransition>
@@ -38,4 +38,4 @@ class NewEdit extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(NewEdit)
+export default connect(mapStateToProps)(New)

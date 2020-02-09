@@ -4,7 +4,7 @@ import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { Link } from 'react-router-dom'
 import { X, ChevronLeft, ChevronRight } from 'react-feather'
 
-const NewEditNav = (props) => {
+const NewNav = (props) => {
   let path = props.location.pathname.indexOf("/new") === 0 ? "/new" : `/edit/${props.match.params.foodname}`
   if (props.match.params.route === "details") return <DetailsNew history={props.history} path={path} />
   if (props.match.params.route === "review") return <ReviewNew history={props.history} path={path} />
@@ -71,4 +71,4 @@ const ReviewNew = (props) => {
   )
 }
 
-export default NewEditNav
+export default NewNav
