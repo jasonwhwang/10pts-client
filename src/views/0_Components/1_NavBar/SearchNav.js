@@ -26,14 +26,14 @@ const SearchNav = (props) => {
           onChange={e => props.changeVal("keywords", e.target.value)} />
 
         <button
-          className={`box-flex-row-center box-color-black searchNav-xButton
+          className={`box-flex-row-center defaultNav-button searchNav-xButton
           ${props.keywords ? "box-show" : "box-hide"}`}
           onClick={() => props.changeVal("keywords", "")}>
           <XCircle size={16} />
         </button>
 
-        <Link to="/search/filters" className="box-flex-row-center searchNav-filterIconPadding">
-          <Filter size={18} className="box-color-black" />
+        <Link to="/search/filters" className="box-flex-row-center searchNav-filterIconPadding defaultNav-button">
+          <Filter size={18} />
         </Link>
       </div>
     </FadeTransition>

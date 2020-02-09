@@ -5,6 +5,7 @@
   --background: #fafafd;
   --border: #eceff1;
 
+  --lightblue: #549DF9;
   --blue: #1555f5;
   --darkblue: #0d2085;
   --red: #da3856;
@@ -15,7 +16,7 @@
   --padding: 15px;
 }
 
-html { min-height: 100%; display: flex; -webkit-overflow-scrolling: touch; }
+html { min-height: 100%; display: flex; }
 body {
   flex: 1;
   margin: 0;
@@ -29,10 +30,9 @@ body {
   -webkit-touch-callout: none;
 }
 #root { min-height: 100%; display: flex; }
-@media only screen and (max-width: var(--width)) {
+@media only screen and (max-width: 600px) {
   body {
     -webkit-user-select: none;
-    -webkit-tap-highlight-color: transparent;
   }
 }
 

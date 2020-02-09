@@ -14,17 +14,25 @@
   box-sizing: border-box;
 }
 
-.defaultNav-logoWrapper {
-  box-sizing: border-box;
-  padding: 0 15px;
-}
+.nav-padding10 { box-sizing: border-box; padding: 0 10px;}
+.nav-padding15 { box-sizing: border-box; padding: 0 15px;}
+.nav-buttonWidth { width: 50px; }
+
+.defaultNav-button { color: var(--black); }
+.defaultNav-button:hover { color: var(--mediumgray); }
 .defaultNav-logo { height: 15px; }
-.defaultNav-buttonPadding { width: 50px; box-sizing: border-box; padding: 0 10px; }
 
 .searchNav-xButton { padding: 0 10px;}
 .searchNav-searchIconPadding { padding: 0 10px 0 15px; }
 .searchNav-filterIconPadding { padding: 0 15px 0 7px; }
 .searchNav-searchInput::placeholder { color: var(--black); }
 
-.chevron-left { width: 50px; box-sizing: border-box; padding-left: 8px; }
-.chevron-right { width: 50px; box-sizing: border-box; padding-right: 8px; }
+.chevron-left { width: 50px; box-sizing: border-box; padding-left: 10px; }
+.chevron-right { width: 50px; box-sizing: border-box; padding-right: 10px; }
+
+.saved-selected {
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--black);
+}
+.follow-blue { color: var(--lightblue); }
+.follow-blue:hover { color: var(--lightblue); }

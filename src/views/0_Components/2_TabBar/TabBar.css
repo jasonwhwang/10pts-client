@@ -8,9 +8,15 @@
   border-top: 1px solid var(--border);
   background-color: white;
   transition: 150ms;
+  transform: none;
+  -webkit-transform: none;
+  will-change: transform;
 }
 .tabBar-hide {
-  bottom: -50px;
+  transform: translateY(50px);
+  -webkit-transform: translateY(50px);
+  transition: 150ms;
+  will-change: transform;
 }
 .tabBar-wrapper {
   height: 100%;
@@ -28,14 +34,10 @@
   box-sizing: border-box;
   padding: 0 15px;
   transition: 150ms;
+  color: var(--black);
 }
-.tabBar-stroke {
-  stroke-width: 3.5;
-}
-.tabBar-fillUser {
-  fill: var(--black);
-  stroke-linecap: butt;
-}
+.tabBar-stroke { stroke-width: 3.5; }
+.tabBar-fillUser { fill: var(--black); stroke-linecap: butt; }
 .tabBar-fillHome {
   position: absolute;
   z-index: 11;
