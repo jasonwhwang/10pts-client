@@ -1,4 +1,4 @@
-#navBar {
+.navBar {
   position: fixed;
   z-index: 10;
   height: 50px;
@@ -6,7 +6,6 @@
   box-sizing: border-box;
   border-bottom: 1px solid var(--border);
   background-color: white;
-  transition: 150ms;
 }
 .navBar-wrapper {
   max-width: var(--width);
@@ -30,9 +29,8 @@
 .chevron-left { width: 50px; box-sizing: border-box; padding-left: 10px; }
 .chevron-right { width: 50px; box-sizing: border-box; padding-right: 10px; }
 
-.saved-selected {
-  box-sizing: border-box;
-  border-bottom: 1px solid var(--black);
-}
+.saved-border { box-sizing: border-box; border-bottom: 1px solid transparent; }
+.saved-selected { box-sizing: border-box; border-bottom: 1px solid var(--black); }
+
 .follow-blue { color: var(--lightblue); }
 .follow-blue:hover { color: var(--lightblue); }

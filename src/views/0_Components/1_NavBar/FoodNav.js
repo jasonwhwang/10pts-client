@@ -10,11 +10,6 @@ const mapStateToProps = state => ({
   currentPage: state.common.currentPage
 })
 
-const mapDispatchToProps = dispatch => ({
-  changeVal: (type, val) =>
-    dispatch({ type, val })
-})
-
 const FoodNav = (props) => {
   let foodname = props.match.params.foodname
   let username = props.match.params.username
@@ -57,4 +52,4 @@ const FoodNav = (props) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FoodNav)
+export default connect(mapStateToProps)(FoodNav)

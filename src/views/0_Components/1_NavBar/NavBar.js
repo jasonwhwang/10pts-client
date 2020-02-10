@@ -12,19 +12,23 @@ import FoodNav from './FoodNav'
 
 const NavBar = () => {
   return (
-    <div id="navBar">
+    <div className="navBar">
       <Switch>
         <Route exact path='/search' component={SearchNav} />
-        <Route exact path='/search/filters' component={FiltersMapSettingsNav} />
-        <Route exact path='/account/settings' component={FiltersMapSettingsNav} />
-        <Route path='/new/:route?' component={NewNav} />
-        <Route path='/edit/:foodname/:route?' component={NewNav} />
-        <Route path='/saved/:route?' component={SavedNav} />
-        <Route exact path='/account' component={AccountNav} />
+        <Route exact path='/search/filters' component={TitleNav} />
 
-        <Route path='/:path*/f/:foodname/:username?' component={FoodNav} />
-        <Route path='/:path*/a/:username' component={AccountNav} />
-        <Route exact path='/:path*/map/:id?' component={FiltersMapSettingsNav} />
+        <Route exact path='/new/:route?' component={NewNav} />
+        <Route exact path='/edit/:foodname/:route?' component={NewNav} />
+
+        <Route exact path='/saved/:route?' component={SavedNav} />
+
+        <Route exact path='/account' component={AccountNav} />
+        <Route exact path='/account/settings' component={TitleNav} />
+
+        <Route exact path='/:path*/f/:foodname/:username?' component={FoodNav} />
+        <Route exact path='/:path*/p/:foodname' component={TitleNav} />
+        <Route exact path='/:path*/a/:username' component={AccountNav} />
+        <Route exact path='/:path*/m/:address' component={TitleNav} />
         <Route component={DefaultNav} />
       </Switch>
     </div>
@@ -43,7 +47,7 @@ const DefaultNav = () => {
   )
 }
 
-const FiltersMapSettingsNav = (props) => {
+const TitleNav = (props) => {
   let title = ""
   if(props.location.pathname.indexOf("/filters") !== -1) title = "Filters"
   else if(props.location.pathname.indexOf("/settings") !== -1) title = "Settings"
@@ -66,19 +70,21 @@ const FiltersMapSettingsNav = (props) => {
 
 const SavedNav = (props) => {
   let route = props.match.params.route
+  if(route && route !== "likes" && route !== "following") return <TitleNav {...props} />
+
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <Link to="/saved"
-          className={`${!route && "saved-selected"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${!route ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
           Bookmarks
         </Link>
         <Link to="/saved/likes"
-          className={`${route === "likes" && "saved-selected"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${route === "likes" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
           Likes
         </Link>
         <Link to="/saved/following"
-          className={`${route === "following" && "saved-selected"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${route === "following" ? "saved-selected": "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
           Following
         </Link>
       </div>

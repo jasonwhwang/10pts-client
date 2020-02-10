@@ -1,4 +1,14 @@
 /* Box CSS Styles */
+/* Placeholder */
+.box-box {
+  height: min(var(--width), 100vmin);
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 15px;
+}
+
+/* Input */
 .box-input {
   box-sizing: border-box;
   padding: 8px 10px;

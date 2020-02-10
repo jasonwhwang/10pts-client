@@ -24,13 +24,13 @@ class Saved extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>New</title>
-            <meta name="description" content="New" />
+            <title>Saved</title>
+            <meta name="description" content="Saved" />
           </Helmet></HelmetProvider>
 
-          <div className="test">Saved</div>
-          <div className="test">Saved</div>
-          <div className="test">Saved</div>
+          <div className="box-box">Saved</div>
+          <div className="box-box">Saved</div>
+          <div className="box-box">Saved</div>
 
         </div>
       </FadeTransition>

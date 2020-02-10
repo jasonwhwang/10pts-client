@@ -1,6 +1,7 @@
 import React from 'react'
+import './Other.css'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
-import FadeTransition from '../7_FadeTransition/FadeTransition'
+import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 
 const NotFound = () => {
   return (

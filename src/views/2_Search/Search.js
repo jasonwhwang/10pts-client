@@ -28,9 +28,9 @@ class Search extends React.Component {
             <meta name="description" content="Search" />
           </Helmet></HelmetProvider>
 
-          <div className="test">Search</div>
-          <div className="test">Search</div>
-          <div className="test">Search</div>
+          <div className="box-box">Search</div>
+          <div className="box-box">Search</div>
+          <div className="box-box">Search</div>
 
         </div>
       </FadeTransition>

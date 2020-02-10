@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   user: state.common.user
 })
 
-class New extends React.Component {
+class Review extends React.Component {
   state = {
     loading: true
   }
@@ -24,13 +24,13 @@ class New extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>New</title>
-            <meta name="description" content="New" />
+            <title>Review</title>
+            <meta name="description" content="Review" />
           </Helmet></HelmetProvider>
 
-          <div className="test">New</div>
-          <div className="test">New</div>
-          <div className="test">New</div>
+          <div className="box-box">Review</div>
+          <div className="box-box">Review</div>
+          <div className="box-box">Review</div>
 
         </div>
       </FadeTransition>
@@ -38,4 +38,4 @@ class New extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(New)
+export default connect(mapStateToProps)(Review)

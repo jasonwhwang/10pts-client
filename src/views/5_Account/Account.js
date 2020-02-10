@@ -24,13 +24,13 @@ class Account extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>New</title>
-            <meta name="description" content="New" />
+            <title>Account</title>
+            <meta name="description" content="Account" />
           </Helmet></HelmetProvider>
 
-          <div className="test">Account</div>
-          <div className="test">Account</div>
-          <div className="test">Account</div>
+          <div className="box-box">Account</div>
+          <div className="box-box">Account</div>
+          <div className="box-box">Account</div>
 
         </div>
       </FadeTransition>

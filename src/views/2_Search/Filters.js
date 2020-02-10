@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import './Search.css'
 import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   user: state.common.user
 })
 
-class Home extends React.Component {
+class Filters extends React.Component {
   state = {
     loading: true
   }
@@ -24,13 +24,13 @@ class Home extends React.Component {
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>Home</title>
-            <meta name="description" content="Home" />
+            <title>Filters</title>
+            <meta name="description" content="Filters" />
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Home</div>
-          <div className="box-box">Home</div>
-          <div className="box-box">Home</div>
+          <div className="box-box">Filters</div>
+          <div className="box-box">Filters</div>
+          <div className="box-box">Filters</div>
 
         </div>
       </FadeTransition>
@@ -38,4 +38,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(Filters)
