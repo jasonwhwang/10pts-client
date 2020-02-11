@@ -103,7 +103,7 @@ async function uploadFile(file) {
         console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
       },
     })
-    let fileURL = "https://stratagan.s3.amazonaws.com/public/" + uploadFileKey.key
+    let fileURL = "https://10pts.s3.amazonaws.com/public/" + uploadFileKey.key
     return fileURL
 
   } catch (error) {

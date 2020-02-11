@@ -11,10 +11,25 @@ const mapStateToProps = state => ({
 
 class Account extends React.Component {
   state = {
+    account: {},
     loading: true
   }
-  async componentDidMount() {
-    this.setState({ ...this.state, loading: false })
+  initializeState = async () => {
+    if(this.props.location.pathname === "/account" && !this.props.user) {
+      this.setState({ account: {}, loading: false })
+      return
+    }
+    
+    this.setState({ account: {}, loading: true })
+    // Get User Account
+    this.setState({ account: {}, loading: false })
+  }
+
+  componentDidMount() {
+    this.initializeState()
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
   }
 
   render() {

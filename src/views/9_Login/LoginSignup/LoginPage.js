@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FadeTransition from '../../0_Components/10_FadeTransition/FadeTransition'
+import FadeTransition from '../../0_Components/7_FadeTransition/FadeTransition'
 import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { logIn } from '../../../services/authApi'
 import '../Login.css'
 import LoadingPage from '../../0_Components/4_Loading/LoadingPage'
-import { getLogIn } from '../../../services/api'
+// import { getLogIn } from '../../../services/api'
 
 const mapDispatchToProps = dispatch => ({
   changeUser: (user) =>
@@ -15,8 +15,8 @@ const mapDispatchToProps = dispatch => ({
 
 class Login extends React.Component {
   state = {
-    "email": "",
-    "password": "",
+    email: "",
+    password: "",
     error: "",
     loading: false
   }
@@ -39,7 +39,7 @@ class Login extends React.Component {
       return
     }
     // Get User Profile
-    response = await getLogIn()
+    // response = await getLogIn()
     if (response.error) {
       this.setState({ ...this.state, error: response.error, loading: false })
       return
@@ -49,50 +49,48 @@ class Login extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage medium={true} />
+    if (this.state.loading) return <LoadingPage />
 
-    let title = "Log In"
     return (
       <FadeTransition>
-        <div className="page-wrapper">
+        <div className="page box-flex-row-center box-background">
           <HelmetProvider><Helmet>
-            <title>{title}</title>
-            <meta name="description" content={title} />
+            <title>Log In</title>
+            <meta name="description" content="Log In" />
           </Helmet></HelmetProvider>
 
-          <div className="login box-flex-row box-flex-acenter">
-            <form onSubmit={this.submitForm} className="login-marginBottom100">
-              <h1 className="box-margin-bottom-30">{title}</h1>
+          <form onSubmit={this.submitForm} className="box-flex-col login box-flex-1">
+            <h2 className="box-margin-bottom-30">Log In</h2>
 
-              {
-                this.state.error !== "" &&
-                <h6 className="box-text-8 box-color-red box-text-nobold">{this.state.error}</h6>
-              }
+            {
+              this.state.error &&
+              <h6 className="box-text-8 box-color-red box-text-nobold">{this.state.error}</h6>
+            }
 
-              <input value={this.state.email}
-                type="email"
-                id="email"
-                placeholder="Email"
-                autoComplete="username"
-                className="box-input box-text-5 box-margin-top-10 box-margin-bottom-20"
-                onChange={this.changeInputState} />
+            <input value={this.state.email}
+              type="email"
+              id="email"
+              placeholder="Email"
+              autoComplete="username"
+              className="box-input box-text-5 box-margin-top-10 box-margin-bottom-20"
+              onChange={this.changeInputState} />
 
-              <input value={this.state.password}
-                type="password"
-                id="password"
-                placeholder="Password"
-                autoComplete="current-password"
-                className="box-input box-text-5 box-margin-bottom-20"
-                onChange={this.changeInputState} />
+            <input value={this.state.password}
+              type="password"
+              id="password"
+              placeholder="Password"
+              autoComplete="current-password"
+              className="box-input box-text-5 box-margin-bottom-20"
+              onChange={this.changeInputState} />
 
-              <div className="box-flex-row box-flex-acenter box-margin-top-20">
-                <button className="box-button">{title}</button>
-                <div className="box-spacer"></div>
-                <Link to="/resetpassword" className="box-margin-right-20">Forgot password?</Link>
-                <Link to="/signup">Sign Up</Link>
-              </div>
-            </form>
-          </div>
+            <div className="box-flex-row box-flex-acenter box-margin-top-20">
+              <button className="box-button">Log In</button>
+              <div className="box-flex-1"></div>
+              <Link to="/login/resetpassword" className="box-margin-right-20 box-text-7">Forgot password?</Link>
+              <Link to="/login/signup" className="box-text-6">Sign Up</Link>
+            </div>
+          </form>
+
         </div>
       </FadeTransition>
     )

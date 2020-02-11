@@ -18,6 +18,7 @@ import Settings from './5_Account/Settings'
 import Food from './6_Food/Food'
 import Review from './7_Review/Review'
 import MapFrame from './8_Other/MapFrame'
+import Login from './9_Login/Login'
 
 const App = (props) => {
   return (
@@ -42,20 +43,25 @@ const App = (props) => {
           <Route exact path="/saved/likes" component={Saved} />
           <Route exact path="/saved/following" component={Saved} />
 
-          <Route exact path="/account/settings" component={Settings} />
+          <Route exact path="/account/settings/:route?" component={Settings} />
           <Route exact path="/account/:route?" component={Account} />
+          <Route exact path="/login/:route?" component={Login} />
 
           <Route exact path='/:path*/f/:foodname' component={Food} />
           <Route exact path='/:path*/p/:foodname' component={Food} />
+
           <Route exact path='/:path*/f/:foodname/:username' component={Review} />
-          <Route exact path='/:path*/a/:username' component={Account} />
+          <Route exact path='/:path*/p/:foodname/:username' component={Review} />
+          <Route exact path='/:path*/c/:foodname/:username' component={Review} />
+
+          <Route exact path='/:path*/a/:username/:route?' component={Account} />
           <Route exact path='/:path*/m/:address' component={MapFrame} />
 
           <Route component={NotFound} />
         </Switch>
       </ScrollTop>
 
-      <TabBar location={props.location} />
+      <Route exact path='/:route?/:path*/' component={TabBar} />
     </div>
   )
 }

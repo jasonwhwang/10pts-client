@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom'
 import { Search, Filter, XCircle } from 'react-feather'
 
 const mapStateToProps = state => ({
-  keywords: state.search.keywords
+  keywords: state.search.keywords,
+  category: state.search.category
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -15,12 +16,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const SearchNav = (props) => {
+  let searchPlaceholder = props.category ? `Search ${props.category}...` : "Search..."
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <Search size={18} className="searchNav-searchIconPadding box-expand-height" />
 
-        <input placeholder="Search..."
+        <input placeholder={searchPlaceholder}
           className="searchNav-searchInput box-flex-1 box-text-5"
           value={props.keywords}
           onChange={e => props.changeVal("keywords", e.target.value)} />

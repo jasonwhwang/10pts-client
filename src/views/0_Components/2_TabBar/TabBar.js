@@ -1,15 +1,21 @@
 import React from 'react'
 import './TabBar.css'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Home, Search, PlusSquare, Bookmark, User } from 'react-feather'
 
+const mapStateToProps = state => ({
+  user: state.common.user
+})
+
 const TabBar = (props) => {
-  let path = props.location.pathname
-  let newEdit = path.indexOf("/new") === 0 || path.indexOf("/edit") === 0
-  let home = path.indexOf("/search") !== 0 &&
-    path.indexOf("/new") !== 0 &&
-    path.indexOf("/saved") !== 0 &&
-    path.indexOf("/account") !== 0
+  let route = props.match.params.route
+  let newEdit = route === "new" || route === "edit"
+  let account = route === "account" || route === "login"
+  let home = route !== "search" &&
+    route !== "new" && route !== "edit" &&
+    route !== "saved" &&
+    route !== "account" && route !== "login"
 
   return (
     <div className={`tabBar ${newEdit && "tabBar-hide"}`}>
@@ -20,7 +26,7 @@ const TabBar = (props) => {
         </Link>
 
         <Link to="/search" className="tabBar-link box-flex-row-center">
-          <Search className={`${path.indexOf("/search") === 0 && "tabBar-stroke"}`} />
+          <Search className={`${route === "search" && "tabBar-stroke"}`} />
         </Link>
 
         <Link to="/new" className="tabBar-link box-flex-row-center">
@@ -28,15 +34,15 @@ const TabBar = (props) => {
         </Link>
 
         <Link to="/saved" className="tabBar-link box-flex-row-center">
-          <Bookmark className={`${path.indexOf("/saved") === 0 && "box-fill-black"}`} />
+          <Bookmark className={`${route === "saved" && "box-fill-black"}`} />
         </Link>
 
-        <Link to="/account" className="tabBar-link box-flex-row-center">
-          <User className={`${path.indexOf("/account") === 0 && "tabBar-fillUser"}`} />
+        <Link to={props.user ? "/account" : "/login"} className="tabBar-link box-flex-row-center">
+          <User className={`${account && "tabBar-fillUser"}`} />
         </Link>
       </div>
     </div>
   )
 }
 
-export default TabBar
+export default connect(mapStateToProps)(TabBar)

@@ -1,12 +1,6 @@
 .login {
-  min-height: inherit;
-  height: 100%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
   box-sizing: border-box;
-  padding: 0 20px;
-}
-
-.login-marginBottom100 {
-  margin-bottom: 100px;
+  padding: 0 30px;
 }

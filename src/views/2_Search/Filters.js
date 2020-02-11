@@ -6,7 +6,12 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 
 const mapStateToProps = state => ({
-  user: state.common.user
+  search: state.search
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
 })
 
 class Filters extends React.Component {
@@ -38,4 +43,4 @@ class Filters extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Filters)
+export default connect(mapStateToProps, mapDispatchToProps)(Filters)

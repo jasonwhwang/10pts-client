@@ -3,7 +3,7 @@ import './NavBar.css'
 import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { Switch, Route, Link } from 'react-router-dom'
 import Logo from '../../../img/logo.png'
-import { ChevronLeft } from 'react-feather'
+import { ChevronLeft, Settings } from 'react-feather'
 
 import SearchNav from './SearchNav'
 import NewNav from './NewNav'
@@ -22,12 +22,14 @@ const NavBar = () => {
 
         <Route exact path='/saved/:route?' component={SavedNav} />
 
-        <Route exact path='/account' component={AccountNav} />
-        <Route exact path='/account/settings' component={TitleNav} />
+        <Route exact path='/account/settings/:route?' component={TitleNav} />
+        <Route exact path='/account/:route?' component={AccountNav} />
 
         <Route exact path='/:path*/f/:foodname/:username?' component={FoodNav} />
-        <Route exact path='/:path*/p/:foodname' component={TitleNav} />
-        <Route exact path='/:path*/a/:username' component={AccountNav} />
+        <Route exact path='/:path*/p/:foodname/:username?' component={TitleNav} />
+        <Route exact path='/:path*/c/:foodname/:username' component={TitleNav} />
+
+        <Route exact path='/:path*/a/:username/:route?' component={AccountNav} />
         <Route exact path='/:path*/m/:address' component={TitleNav} />
         <Route component={DefaultNav} />
       </Switch>
@@ -35,13 +37,23 @@ const NavBar = () => {
   )
 }
 
-const DefaultNav = () => {
+const DefaultNav = (props) => {
+  let showSettings = props.location.pathname.indexOf("/login") === 0
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <div className="nav-padding15 box-flex-row-acenter">
+        <Link to="/" className="nav-padding15 box-flex-row-acenter">
           <img src={Logo} className="defaultNav-logo" alt="10pts" />
-        </div>
+        </Link>
+
+        <div className="box-flex-1"></div>
+
+        {showSettings &&
+          <Link to="/account/settings"
+            className="box-flex-row-acenter box-flex-end nav-padding15 defaultNav-button">
+            <Settings size={18} />
+          </Link>
+        }
       </div>
     </FadeTransition>
   )
@@ -49,13 +61,13 @@ const DefaultNav = () => {
 
 const TitleNav = (props) => {
   let title = ""
-  if(props.location.pathname.indexOf("/filters") !== -1) title = "Filters"
-  else if(props.location.pathname.indexOf("/settings") !== -1) title = "Settings"
+  if (props.location.pathname.indexOf("/filters") !== -1) title = "Filters"
+  else if (props.location.pathname.indexOf("/settings") !== -1 && !props.match.params.route) title = "Settings"
 
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <button onClick={() => props.history.goBack() }
+        <button onClick={() => props.history.goBack()}
           className="box-flex-row-acenter chevron-left defaultNav-button">
           <ChevronLeft size={24} />
         </button>
@@ -70,7 +82,7 @@ const TitleNav = (props) => {
 
 const SavedNav = (props) => {
   let route = props.match.params.route
-  if(route && route !== "likes" && route !== "following") return <TitleNav {...props} />
+  if (route && route !== "likes" && route !== "following") return <TitleNav {...props} />
 
   return (
     <FadeTransition>
@@ -84,7 +96,7 @@ const SavedNav = (props) => {
           Likes
         </Link>
         <Link to="/saved/following"
-          className={`${route === "following" ? "saved-selected": "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${route === "following" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
           Following
         </Link>
       </div>

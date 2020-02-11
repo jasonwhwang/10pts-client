@@ -1,6 +1,7 @@
 import React from 'react'
 import './Login.css'
 import { connect } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
 import LoginPage from './LoginSignup/LoginPage'
 import Signup from './LoginSignup/Signup'
 import Pages from './Pages/Pages'
@@ -8,24 +9,24 @@ import ResetPassword from './Password/ResetPassword'
 import NewPassword from './Password/NewPassword'
 
 const mapStateToProps = state => ({
-  authUser: state.common.authUser
+  user: state.common.user
 })
 
 class Login extends React.Component {
   componentDidMount() {
-    if(this.props.authUser) this.props.history.push("/account")
+    if (this.props.user) this.props.history.push("/account")
   }
-  
+
   render() {
-    let pathname = this.props.location.pathname
     return (
-      <div className="page" id="home">
-        {pathname === "/login" && <LoginPage location={this.props.location} history={this.props.history}/>}
-        {pathname === "/signup" && <Signup location={this.props.location} history={this.props.history}/>}
-        {pathname === "/welcome" || pathname === "/success" ? <Pages location={this.props.location} history={this.props.history}/>:null}
-        {pathname === "/resetpassword" && <ResetPassword location={this.props.location} history={this.props.history}/>}
-        {pathname === "/newpassword" && <NewPassword location={this.props.location} history={this.props.history}/>}
-      </div>
+      <Switch>
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/login/signup' component={Signup} />
+        <Route exact path='/login/welcome' component={Pages} />
+        <Route exact path='/login/success' component={Pages} />
+        <Route exact path='/login/resetpassword' component={ResetPassword} />
+        <Route exact path='/login/newpassword' component={NewPassword} />
+      </Switch>
     )
   }
 }

@@ -17,7 +17,7 @@
 .nav-padding15 { box-sizing: border-box; padding: 0 15px;}
 .nav-buttonWidth { width: 50px; }
 
-.defaultNav-button { color: var(--black); }
+.defaultNav-button { color: var(--black); display: flex; align-items: center; }
 .defaultNav-button:hover { color: var(--mediumgray); }
 .defaultNav-logo { height: 15px; }
 

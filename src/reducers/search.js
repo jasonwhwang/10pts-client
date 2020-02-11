@@ -1,10 +1,10 @@
 const defaultState = {
-  "keywords": "",
-  "category": "",
-  "location": "",
-  "minPts": "",
-  "maxPrice": "",
-  "tags": []
+  keywords: "",
+  category: "",
+  location: "",
+  minPts: "",
+  maxPrice: "",
+  tags: []
 }
 
 export default (state = defaultState, action) => {

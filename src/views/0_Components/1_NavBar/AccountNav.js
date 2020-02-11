@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom'
 import { ChevronLeft, Settings } from 'react-feather'
 
 const mapStateToProps = state => ({
-  authUser: state.common.authUser
+  user: state.common.user
 })
 
 const AccountNav = (props) => {
-  if(props.location.pathname.indexOf("/account") === 0) return <AuthUserNav authUser={props.authUser} />
-  return <UserNav history={props.history} match={props.match} />
+  if(props.location.pathname.indexOf("/account") === 0) return <UserNav user={props.user} />
+  return <MemberNav history={props.history} match={props.match} />
 }
 
-const AuthUserNav = (props) => {
-  let username = props.authUser && props.authUser.username ? props.authUser.username : ""
+const UserNav = (props) => {
+  let username = props.user && props.user.username ? props.user.username : ""
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
@@ -30,7 +30,7 @@ const AuthUserNav = (props) => {
   )
 }
 
-const UserNav = (props) => {
+const MemberNav = (props) => {
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">

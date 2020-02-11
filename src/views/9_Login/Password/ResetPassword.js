@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import FadeTransition from '../../0_Components/10_FadeTransition/FadeTransition'
+import FadeTransition from '../../0_Components/7_FadeTransition/FadeTransition'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { forgotPassword } from '../../../services/authApi'
 import '../Login.css'
@@ -8,7 +8,7 @@ import LoadingPage from '../../0_Components/4_Loading/LoadingPage'
 
 class ResetPassword extends React.Component {
   state = {
-    "email": "",
+    email: "",
     error: "",
     loading: false
   }
@@ -30,24 +30,23 @@ class ResetPassword extends React.Component {
     if (response.error) {
       this.setState({ ...this.state, error: response.error, loading: false })
     } else {
-      this.props.history.push("/newpassword")
+      this.props.history.push("/login/newpassword")
     }
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage medium={true} />
+    if (this.state.loading) return <LoadingPage />
 
     return (
       <FadeTransition>
-        <div className="page-wrapper">
+        <div className="page box-flex-row-center box-background">
           <HelmetProvider><Helmet>
             <title>Reset Password</title>
             <meta name="description" content="Reset Password" />
           </Helmet></HelmetProvider>
 
-          <div className="login box-flex-row box-flex-acenter">
-            <form onSubmit={this.submitForm} className="login-marginBottom100 box-expand-width">
-              <h1 className="box-margin-bottom-30">Reset Password</h1>
+            <form onSubmit={this.submitForm} className="box-flex-col login box-flex-1">
+              <h2 className="box-margin-bottom-30">Reset Password</h2>
 
               <h6 className="box-text-5 box-text-nobold box-margin-bottom-20">Enter your email address. We'll send you a password verification code.</h6>
               {
@@ -65,11 +64,10 @@ class ResetPassword extends React.Component {
 
               <div className="box-flex-between box-flex-acenter box-margin-top-20">
                 <button className="box-button">Submit</button>
-                <Link to="/newpassword">Have the code?</Link>
+                <Link to="/login/newpassword" className="box-text-7">Have the code?</Link>
               </div>
             </form>
           </div>
-        </div>
       </FadeTransition>
     )
   }
