@@ -414,7 +414,7 @@ Carousel.defaultProps = {
   loop: false,
   interval: 5000,
   duration: 300,
-  minMove: 42
+  minMove: 40
 }
 
 function translateXY (el, x, y, duration = 0) {

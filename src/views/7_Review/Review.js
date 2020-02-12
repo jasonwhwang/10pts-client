@@ -13,16 +13,7 @@ class Review extends React.Component {
   state = {
     loading: true
   }
-  redirectPath = () => {
-    let path = this.props.match.params.path
-    let notValid = path && path !== "search" && path !== "saved" && path !== "account"
-    if(notValid) {
-      let redirectUrl = this.props.location.pathname.replace(`/${path}`, '')
-      this.props.history.push(redirectUrl)
-    }
-  }
   async componentDidMount() {
-    this.redirectPath()
     this.setState({ ...this.state, loading: false })
   }
 

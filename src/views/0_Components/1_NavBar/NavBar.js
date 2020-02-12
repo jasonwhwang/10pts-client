@@ -20,6 +20,8 @@ const NavBar = () => {
         <Route exact path='/search' component={SearchNav} />
         <Route exact path='/search/filters' component={TitleNav} />
 
+        <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:location' component={TitleNav} />
+
         <Route exact path='/new/:route?' component={NewNav} />
         <Route exact path='/edit/:foodname/:route?' component={NewNav} />
 
@@ -33,7 +35,6 @@ const NavBar = () => {
         <Route exact path='/:path?/c/:foodname/:username' component={TitleNav} />
 
         <Route exact path='/:path?/a/:username/:route?' component={AccountNav} />
-        <Route exact path='/:path?/m/:address' component={TitleNav} />
         <Route component={TitleNav} />
       </Switch>
     </div>
@@ -92,7 +93,7 @@ const SavedNav = (props) => {
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <Link to="/saved"
           className={`${!route ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
-          Bookmarks
+          Saved
         </Link>
         <Link to="/saved/likes"
           className={`${route === "likes" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>

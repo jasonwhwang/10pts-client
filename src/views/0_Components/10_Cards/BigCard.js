@@ -34,7 +34,7 @@ const Heading = ({ path, image, username, isFollowing }) => {
   return (
     <div className="box-flex-row box-flex-stretch">
       <Link to={`${path}/a/${username}`} className="box-flex-row-acenter box-flex-1">
-        <img className="box-img card-userImage" src={Image} alt={username} />
+        <img className="box-img bigCard-userImage" src={Image} alt={username} />
         <h6 className="box-text-bold box-margin-left-10">{username}</h6>
       </Link>
 

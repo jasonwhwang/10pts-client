@@ -29,7 +29,7 @@ class Home extends React.Component {
             <meta name="description" content="Home" />
           </Helmet></HelmetProvider>
 
-          <BigCard location={this.props.location} match={this.props.match}/>
+          <BigCard location={this.props.location} match={this.props.match} path={''}/>
 
         </div>
       </FadeTransition>

@@ -32,6 +32,8 @@ const App = (props) => {
           <Route exact path="/search" component={Search} />
           <Route exact path="/search/filters" component={Filters} />
 
+          <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:location' component={MapFrame} />
+
           <Route exact path="/new" component={Photos} />
           <Route exact path="/new/details" component={Details} />
           <Route exact path="/new/review" component={TextReview} />
@@ -39,23 +41,21 @@ const App = (props) => {
           <Route exact path="/edit/:foodname/details" component={Details} />
           <Route exact path="/edit/:foodname/review" component={TextReview} />
 
-          <Route exact path="/saved" component={Saved} />
-          <Route exact path="/saved/likes" component={Saved} />
-          <Route exact path="/saved/following" component={Saved} />
+          <Route exact path="/:path(saved|saved/likes|saved/following)" component={Saved} />
 
-          <Route exact path="/account/settings/:route?" component={Settings} />
+          <Route exact path="/account/:path(settings|settings/terms|settings/privacy)" component={Settings} />
           <Route exact path="/account/:route?" component={Account} />
-          <Route exact path="/login/:route?" component={Login} />
 
-          <Route exact path='/:path?/f/:foodname' component={Food} />
-          <Route exact path='/:path?/p/:foodname' component={Food} />
+          <Route exact path="/:path(login|login/signup|login/welcome|login/success|login/resetpassword|login/newpassword)" component={Login} />
 
-          <Route exact path='/:path?/f/:foodname/:username' component={Review} />
-          <Route exact path='/:path?/p/:foodname/:username' component={Review} />
-          <Route exact path='/:path?/c/:foodname/:username' component={Review} />
+          <Route exact path='/:path(f|search/f|saved/f|account/f)/:foodname' component={Food} />
+          <Route exact path='/:path(p|search/p|saved/p|account/p)/:foodname' component={Food} />
 
-          <Route exact path='/:path?/a/:username/:route?' component={Account} />
-          <Route exact path='/:path?/m/:address' component={MapFrame} />
+          <Route exact path='/:path(f|search/f|saved/f|account/f)/:foodname/:username' component={Review} />
+          <Route exact path='/:path(p|search/p|saved/p|account/p)/:foodname/:username' component={Review} />
+          <Route exact path='/:path(c|search/c|saved/c|account/c)/:foodname/:username' component={Review} />
+
+          <Route exact path='/:path(a|search/a|saved/a|account/a)/:username/:route?' component={Account} />
 
           <Route component={NotFound} />
         </Switch>
