@@ -12,4 +12,4 @@ Sub Ratings: Taste, Appearance, Texture, Aroma, Balance
 
 ## Client
 
-This project was build using create-react-app
+This project was made using create-react-app.

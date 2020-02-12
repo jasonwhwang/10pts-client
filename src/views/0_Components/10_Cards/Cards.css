@@ -1,0 +1,8 @@
+.card-heading {
+  box-sizing: border-box;
+}
+.card-userImage {
+  height: 30px;
+  width: 30px;
+  min-width: 30px;
+}

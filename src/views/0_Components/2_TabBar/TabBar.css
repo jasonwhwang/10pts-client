@@ -1,6 +1,6 @@
 .tabBar {
   position: fixed;
-  z-index: 10;
+  z-index: 100;
   bottom: 0;
   height: 50px;
   width: 100%;
@@ -40,7 +40,7 @@
 .tabBar-fillUser { fill: var(--black); stroke-linecap: butt; }
 .tabBar-fillHome {
   position: absolute;
-  z-index: 11;
+  z-index: 101;
   height: 12px;
   width: 4px;
   margin-top: 7px;

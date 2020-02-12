@@ -47,21 +47,21 @@ const App = (props) => {
           <Route exact path="/account/:route?" component={Account} />
           <Route exact path="/login/:route?" component={Login} />
 
-          <Route exact path='/:path*/f/:foodname' component={Food} />
-          <Route exact path='/:path*/p/:foodname' component={Food} />
+          <Route exact path='/:path?/f/:foodname' component={Food} />
+          <Route exact path='/:path?/p/:foodname' component={Food} />
 
-          <Route exact path='/:path*/f/:foodname/:username' component={Review} />
-          <Route exact path='/:path*/p/:foodname/:username' component={Review} />
-          <Route exact path='/:path*/c/:foodname/:username' component={Review} />
+          <Route exact path='/:path?/f/:foodname/:username' component={Review} />
+          <Route exact path='/:path?/p/:foodname/:username' component={Review} />
+          <Route exact path='/:path?/c/:foodname/:username' component={Review} />
 
-          <Route exact path='/:path*/a/:username/:route?' component={Account} />
-          <Route exact path='/:path*/m/:address' component={MapFrame} />
+          <Route exact path='/:path?/a/:username/:route?' component={Account} />
+          <Route exact path='/:path?/m/:address' component={MapFrame} />
 
           <Route component={NotFound} />
         </Switch>
       </ScrollTop>
 
-      <Route exact path='/:route?/:path*/' component={TabBar} />
+      <Route exact path='/:path?/:route*/' component={TabBar} />
     </div>
   )
 }

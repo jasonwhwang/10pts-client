@@ -14,6 +14,9 @@ const NavBar = () => {
   return (
     <div className="navBar">
       <Switch>
+        <Route exact path='/' component={DefaultNav} />
+        <Route path='/login/:route?' component={DefaultNav} />
+
         <Route exact path='/search' component={SearchNav} />
         <Route exact path='/search/filters' component={TitleNav} />
 
@@ -25,13 +28,13 @@ const NavBar = () => {
         <Route exact path='/account/settings/:route?' component={TitleNav} />
         <Route exact path='/account/:route?' component={AccountNav} />
 
-        <Route exact path='/:path*/f/:foodname/:username?' component={FoodNav} />
-        <Route exact path='/:path*/p/:foodname/:username?' component={TitleNav} />
-        <Route exact path='/:path*/c/:foodname/:username' component={TitleNav} />
+        <Route exact path='/:path?/f/:foodname/:username?' component={FoodNav} />
+        <Route exact path='/:path?/p/:foodname/:username?' component={TitleNav} />
+        <Route exact path='/:path?/c/:foodname/:username' component={TitleNav} />
 
-        <Route exact path='/:path*/a/:username/:route?' component={AccountNav} />
-        <Route exact path='/:path*/m/:address' component={TitleNav} />
-        <Route component={DefaultNav} />
+        <Route exact path='/:path?/a/:username/:route?' component={AccountNav} />
+        <Route exact path='/:path?/m/:address' component={TitleNav} />
+        <Route component={TitleNav} />
       </Switch>
     </div>
   )

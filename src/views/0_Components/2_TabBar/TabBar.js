@@ -9,13 +9,13 @@ const mapStateToProps = state => ({
 })
 
 const TabBar = (props) => {
-  let route = props.match.params.route
-  let newEdit = route === "new" || route === "edit"
-  let account = route === "account" || route === "login"
-  let home = route !== "search" &&
-    route !== "new" && route !== "edit" &&
-    route !== "saved" &&
-    route !== "account" && route !== "login"
+  let path = props.match.params.path
+  let newEdit = path === "new" || path === "edit"
+  let account = path === "account" || path === "login"
+  let home = path !== "search" &&
+    path !== "new" && path !== "edit" &&
+    path !== "saved" &&
+    path !== "account" && path !== "login"
 
   return (
     <div className={`tabBar ${newEdit && "tabBar-hide"}`}>
@@ -26,7 +26,7 @@ const TabBar = (props) => {
         </Link>
 
         <Link to="/search" className="tabBar-link box-flex-row-center">
-          <Search className={`${route === "search" && "tabBar-stroke"}`} />
+          <Search className={`${path === "search" && "tabBar-stroke"}`} />
         </Link>
 
         <Link to="/new" className="tabBar-link box-flex-row-center">
@@ -34,7 +34,7 @@ const TabBar = (props) => {
         </Link>
 
         <Link to="/saved" className="tabBar-link box-flex-row-center">
-          <Bookmark className={`${route === "saved" && "box-fill-black"}`} />
+          <Bookmark className={`${path === "saved" && "box-fill-black"}`} />
         </Link>
 
         <Link to={props.user ? "/account" : "/login"} className="tabBar-link box-flex-row-center">

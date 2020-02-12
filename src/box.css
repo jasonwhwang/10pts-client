@@ -112,52 +112,19 @@
 }
 .box-tab-selected:hover { color: white; }
 
-/* Image Wrappers */
-.box-img-circleWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 50%;
-  box-sizing: border-box;
-}
-.box-img-circle {
-  max-height: 100%;
-  width: auto;
+/* Image Wrapper */
+.box-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-.box-img-rectangleWrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.box-img-rectangle {
-  height: auto;
-  max-width: 100%;
-}
+/* @media only screen and (max-width: 600px) {} */
 
-.box-profileImage-sl {
-  height: 90px;
-  width: 90px;
-  min-width: 90px;
-}
-
-@media only screen and (max-width: 600px) {
-
-}
-
-
-/* Placeholder */
+/* Square */
 .box-box {
   height: min(var(--width), 100vmin);
-  box-sizing: border-box;
-  border-bottom: 1px solid var(--border);
   background-color: var(--background);
-  padding: 15px;
 }
 
 /* Input */

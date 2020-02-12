@@ -2,6 +2,7 @@
   --black: #050f23;
   --gray: #676772;
   --mediumgray: #a5a5ac;
+  --lightgray: #e8e8ef;
   --background: #fafafd;
   --border: #eceff1;
 
@@ -32,6 +33,7 @@ body {
 #root { min-height: 100%; display: flex; }
 @media only screen and (max-width: 600px) {
   body {
+    user-select: none;
     -webkit-user-select: none;
   }
 }

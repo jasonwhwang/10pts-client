@@ -11,21 +11,31 @@ const mapStateToProps = state => ({
 
 class Account extends React.Component {
   state = {
-    account: {},
+    data: null,
     loading: true
   }
+  redirectPath = () => {
+    let path = this.props.match.params.path
+    let notValid = path && path !== "search" && path !== "saved" && path !== "account"
+    if(notValid) {
+      let redirectUrl = this.props.location.pathname.replace(`/${path}`, '')
+      this.props.history.push(redirectUrl)
+    }
+  }
+
   initializeState = async () => {
     if(this.props.location.pathname === "/account" && !this.props.user) {
-      this.setState({ account: {}, loading: false })
+      this.setState({ data: null, loading: false })
       return
     }
     
-    this.setState({ account: {}, loading: true })
+    this.setState({ data: null, loading: true })
     // Get User Account
-    this.setState({ account: {}, loading: false })
+    this.setState({ data: {}, loading: false })
   }
 
   componentDidMount() {
+    this.redirectPath()
     this.initializeState()
   }
   componentDidUpdate(prevProps) {
