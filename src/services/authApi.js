@@ -87,6 +87,8 @@ async function changePassword(oldPassword, newPassword) {
 }
 
 async function uploadFile(file) {
+  // ***** Compress Image Before Upload *****
+  
   if (file.size > 500000) {
     return { error: "File exceeds max size of 500KB." }
   }

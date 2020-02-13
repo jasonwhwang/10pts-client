@@ -20,12 +20,17 @@ class MapFrame extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
+    let params = this.props.match.params
+
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
             <title>Map</title>
             <meta name="description" content="Map" />
+            {params.path !== "m" &&
+              <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/m/${params.location}`} />
+            }
           </Helmet></HelmetProvider>
 
           <div className="box-box">Map</div>

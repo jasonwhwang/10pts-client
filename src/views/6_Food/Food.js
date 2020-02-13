@@ -20,12 +20,17 @@ class Food extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
+    let params = this.props.match.params
+
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
             <title>Food</title>
             <meta name="description" content="Food" />
+            {params.path !== "f" &&
+              <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}`} />
+            }
           </Helmet></HelmetProvider>
 
           <div className="box-box">Food</div>

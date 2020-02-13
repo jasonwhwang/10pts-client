@@ -14,6 +14,7 @@ class Search extends React.Component {
     loading: true
   }
   async componentDidMount() {
+    console.log(this.props.location.search)
     this.setState({ ...this.state, loading: false })
   }
 

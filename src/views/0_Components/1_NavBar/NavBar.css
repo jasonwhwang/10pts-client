@@ -31,6 +31,3 @@
 
 .saved-border { box-sizing: border-box; border-bottom: 1px solid transparent; }
 .saved-selected { box-sizing: border-box; border-bottom: 1px solid var(--black); }
-
-.follow-blue { color: var(--lightblue); }
-.follow-blue:hover { color: var(--lightblue); }

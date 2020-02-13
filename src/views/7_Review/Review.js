@@ -20,12 +20,17 @@ class Review extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
+    let params = this.props.match.params
+
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
             <title>Review</title>
             <meta name="description" content="Review" />
+            {params.path !== "f" &&
+              <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}/${params.username}`} />
+            }
           </Helmet></HelmetProvider>
 
           <div className="box-box">Review</div>

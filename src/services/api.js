@@ -2,7 +2,7 @@ import { refresh } from './authApi'
 import AuthStore from "./authStore"
 
 let baseURL = process.env.REACT_APP_var_STAGE === 'dev' ?
-  'http://localhost:5000/api' : 'https://tenpts.com/api'
+  'http://localhost:5000/api' : `${process.env.REACT_APP_api_LINK}/api`
 
 
 // GET - Get data

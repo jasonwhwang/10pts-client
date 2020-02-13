@@ -1,21 +1,15 @@
 const defaultState = {
-  authUser: null,
-  language: null
+  isFollowing: false,
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
     case 'LOG_OUT':
       return defaultState
-    case 'AUTH_USER':
+    case 'isFollowing':
       return {
         ...state,
-        authUser: action.authUser
-      }
-    case 'LANGUAGE':
-      return {
-        ...state,
-        language: action.language
+        [action.type]: action.val
       }
     default:
       return state;

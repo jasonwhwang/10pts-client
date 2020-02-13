@@ -29,10 +29,10 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Home} />
 
-          <Route exact path="/search" component={Search} />
           <Route exact path="/search/filters" component={Filters} />
+          <Route exact path="/:path(search|search/list)" component={Search} />
 
-          <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:location' component={MapFrame} />
+          <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:address' component={MapFrame} />
 
           <Route exact path="/new" component={Photos} />
           <Route exact path="/new/details" component={Details} />

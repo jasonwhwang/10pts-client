@@ -157,7 +157,7 @@ class Carousel extends React.Component {
     this.refs.wrapper.removeEventListener('mouseup', this.onTouchEnd, {capture: true})
     this.refs.wrapper.removeEventListener('mouseleave', this.onTouchEnd, {capture: true})
 
-    setTimeout(() => this.prepareAutoSlide(), this.props.duration)
+    // setTimeout(() => this.prepareAutoSlide(), this.props.duration)
   }
 
   decideEndPosition () {

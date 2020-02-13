@@ -1,0 +1,2 @@
+.follow-blue { color: var(--lightblue); }
+.follow-blue:hover { color: var(--lightblue); opacity: 0.5; }

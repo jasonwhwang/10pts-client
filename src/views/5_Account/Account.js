@@ -41,6 +41,7 @@ class Account extends React.Component {
           <HelmetProvider><Helmet>
             <title>Account</title>
             <meta name="description" content="Account" />
+            {/* <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}/${params.username}`} /> */}
           </Helmet></HelmetProvider>
 
           <div className="box-box">Account</div>

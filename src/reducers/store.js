@@ -3,10 +3,14 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import common from './common'
+import page from './page'
+import review from './review'
 import search from './search'
 
 const rootReducer = combineReducers({
   common,
+  page,
+  review,
   search
 });
 
