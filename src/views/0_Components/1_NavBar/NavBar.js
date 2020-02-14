@@ -20,7 +20,7 @@ const NavBar = () => {
         <Route exact path='/search' component={SearchNav} />
         <Route exact path='/search/filters' component={TitleNav} />
 
-        <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:location' component={TitleNav} />
+        <Route exact path='/:path(map|search/map|new/map|edit/map|saved/map|account/map)' component={TitleNav} />
 
         <Route exact path='/new/:route?' component={NewNav} />
         <Route exact path='/edit/:foodname/:route?' component={NewNav} />

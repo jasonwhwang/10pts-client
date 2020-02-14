@@ -1,5 +1,7 @@
 import React from 'react'
 
+// https://github.com/amio/re-carousel/blob/master/src/indicator-dots.js
+
 function Dot(props) {
   return (
     <div style={{

@@ -1,5 +1,6 @@
 import React from 'react'
 
+// https://github.com/amio/re-carousel
 const styles = {
   wrapper: {
     width: '100%',
@@ -12,7 +13,6 @@ const styles = {
     position: 'absolute',
     userSelect: 'none',
     willChange: 'transform'
-    // touchAction: 'none'
   }
 }
 
@@ -31,18 +31,10 @@ class Carousel extends React.Component {
     this.onTouchMove = this.onTouchMove.bind(this)
     this.onTouchEnd = this.onTouchEnd.bind(this)
     this.onResize = this.onResize.bind(this)
-    this.autoSlide = this.autoSlide.bind(this)
-    this.prev = this.prev.bind(this)
-    this.next = this.next.bind(this)
-
-    if (props.loop === false && props.auto) {
-      console.warn('[re-carousel] Auto-slide only works in loop mode.')
-    }
   }
 
   componentDidMount () {
     this.mounted = true
-    this.prepareAutoSlide()
     this.hideFrames()
 
     this.refs.wrapper.addEventListener('touchmove', this.onTouchMove, {capture: true, passive: true})
@@ -52,7 +44,6 @@ class Carousel extends React.Component {
 
   componentWillUnmount () {
     this.mounted = false
-    this.clearAutoTimeout()
 
     this.refs.wrapper.removeEventListener('touchmove', this.onTouchMove, {capture: true})
     this.refs.wrapper.removeEventListener('touchend', this.onTouchEnd, {capture: true})
@@ -63,7 +54,6 @@ class Carousel extends React.Component {
     if (this.state.frames.length && this.state.frames.length !== prevState.frames.length) {
       // reset to default state
       this.hideFrames()
-      this.prepareAutoSlide()
     }
   }
 
@@ -95,7 +85,6 @@ class Carousel extends React.Component {
     if (this.state.total < 2) return
     // e.preventDefault()
 
-    this.clearAutoTimeout()
     this.updateFrameSize()
     this.prepareSiblingFrames()
 
@@ -114,7 +103,6 @@ class Carousel extends React.Component {
 
   onTouchMove (e) {
     if (e.touches && e.touches.length > 1) return
-    this.clearAutoTimeout()
 
     const { pageX, pageY } = (e.touches && e.touches[0]) || e
     let deltaX = pageX - this.state.startX
@@ -145,7 +133,7 @@ class Carousel extends React.Component {
       }
     }
 
-    this.moveFramesBy(deltaX, deltaY)
+    // this.moveFramesBy(deltaX, deltaY)
   }
 
   onTouchEnd () {
@@ -156,8 +144,6 @@ class Carousel extends React.Component {
     this.refs.wrapper.removeEventListener('mousemove', this.onTouchMove, {capture: true})
     this.refs.wrapper.removeEventListener('mouseup', this.onTouchEnd, {capture: true})
     this.refs.wrapper.removeEventListener('mouseleave', this.onTouchEnd, {capture: true})
-
-    // setTimeout(() => this.prepareAutoSlide(), this.props.duration)
   }
 
   decideEndPosition () {
@@ -183,90 +169,30 @@ class Carousel extends React.Component {
     }
   }
 
-  moveFramesBy (deltaX, deltaY) {
-    const { prev, current, next } = this.state.movingFrames
-    const { frameWidth, frameHeight } = this.state
+  // moveFramesBy (deltaX, deltaY) {
+  //   const { prev, current, next } = this.state.movingFrames
+  //   const { frameWidth, frameHeight } = this.state
 
-    switch (this.props.axis) {
-      case 'x':
-        translateXY(current, deltaX, 0)
-        if (deltaX < 0) {
-          translateXY(next, deltaX + frameWidth, 0)
-        } else {
-          translateXY(prev, deltaX - frameWidth, 0)
-        }
-        break
-      case 'y':
-        translateXY(current, 0, deltaY)
-        if (deltaY < 0) {
-          translateXY(next, 0, deltaY + frameHeight)
-        } else {
-          translateXY(prev, 0, deltaY - frameHeight)
-        }
-        break
-      default:
-    }
-  }
-
-  prepareAutoSlide () {
-    if (this.state.frames.length < 2) return
-
-    this.clearAutoTimeout()
-    this.updateFrameSize(() => {
-      this.prepareSiblingFrames()
-    })
-
-    // auto slide only avalible in loop mode
-    if (this.mounted && this.props.loop && this.props.auto) {
-      const slideTimeoutID = setTimeout(this.autoSlide, this.props.interval)
-      this.setState({ slider: slideTimeoutID })
-    }
-  }
-
-  // auto slide to 'next' or 'prev'
-  autoSlide (rel) {
-    this.clearAutoTimeout()
-
-    switch (rel) {
-      case 'prev':
-        this.transitFramesTowards(this.props.axis === 'x' ? 'right' : 'down')
-        break
-      case 'next':
-      default:
-        this.transitFramesTowards(this.props.axis === 'x' ? 'left' : 'up')
-    }
-
-    // prepare next move after animation
-    setTimeout(() => this.prepareAutoSlide(), this.props.duration)
-  }
-
-  next () {
-    const { current, frames } = this.state
-    if (!this.props.loop && current === frames.length - 1) return false
-    this.autoSlide('next')
-  }
-
-  prev () {
-    if (!this.props.loop && this.state.current === 0) return false
-    const { prev, next } = this.state.movingFrames
-
-    if (prev === next) {
-      // Reprepare start position of prev frame
-      // (it was positioned as "next" frame)
-      if (this.props.axis === 'x') {
-        translateXY(prev, -this.state.frameWidth, 0, 0)
-      } else {
-        translateXY(prev, 0, -this.state.frameHeight, 0)
-      }
-      prev.getClientRects() // trigger layout
-    }
-
-    this.autoSlide('prev')
-  }
-
-  clearAutoTimeout () {
-    clearTimeout(this.state.slider)
-  }
+  //   switch (this.props.axis) {
+  //     case 'x':
+  //       translateXY(current, deltaX, 0)
+  //       if (deltaX < 0) {
+  //         translateXY(next, deltaX + frameWidth, 0)
+  //       } else {
+  //         translateXY(prev, deltaX - frameWidth, 0)
+  //       }
+  //       break
+  //     case 'y':
+  //       translateXY(current, 0, deltaY)
+  //       if (deltaY < 0) {
+  //         translateXY(next, 0, deltaY + frameHeight)
+  //       } else {
+  //         translateXY(prev, 0, deltaY - frameHeight)
+  //       }
+  //       break
+  //     default:
+  //   }
+  // }
 
   updateFrameSize (cb) {
     const { width, height } = window.getComputedStyle(this.refs.wrapper)
@@ -362,18 +288,9 @@ class Carousel extends React.Component {
     this.setState({ current: newCurrentId })
   }
 
-  // debugFrames () {
-  //   console.log('>>> DEBUG-FRAMES: current', this.state.current)
-  //   const len = this.state.frames.length
-  //   for (let i = 0; i < len; ++i) {
-  //     const ref = this.refs['f' + i]
-  //     console.info(ref.innerText.trim(), ref.style.transform)
-  //   }
-  // }
-
   render () {
     const { frames, current } = this.state
-    const { widgets, axis, loop, auto, interval } = this.props
+    const { widgets, axis, loop, interval } = this.props
     const wrapperStyle = objectAssign(styles.wrapper, this.props.style)
 
     return (
@@ -398,9 +315,8 @@ class Carousel extends React.Component {
               key={i}
               index={current}
               total={frames.length}
-              prevHandler={this.prev}
-              nextHandler={this.next}
-              axis={axis} loop={loop} auto={auto} interval={interval} />
+              axis={axis} loop={loop}
+              interval={interval} />
           ))
         }
       </div>
@@ -410,7 +326,6 @@ class Carousel extends React.Component {
 
 Carousel.defaultProps = {
   axis: 'x',
-  auto: false,
   loop: false,
   interval: 5000,
   duration: 300,

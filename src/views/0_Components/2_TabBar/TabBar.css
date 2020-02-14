@@ -15,8 +15,6 @@
 .tabBar-hide {
   transform: translateY(50px);
   -webkit-transform: translateY(50px);
-  transition: 150ms;
-  will-change: transform;
 }
 .tabBar-wrapper {
   height: 100%;

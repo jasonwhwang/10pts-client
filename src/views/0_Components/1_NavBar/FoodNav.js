@@ -8,6 +8,7 @@ import ShareButton from '../8_Buttons/ShareButton'
 import LikeButton from '../8_Buttons/LikeButton'
 import SaveButton from '../8_Buttons/SaveButton'
 import CommentButton from '../8_Buttons/CommentButton'
+import ReviewButton from '../8_Buttons/ReviewButton'
 
 const mapStateToProps = state => ({
   user: state.common.user,
@@ -60,7 +61,8 @@ const FoodNav = (props) => {
 
         <div className="box-flex-1 box-flex-row-center box-text-bold"></div>
 
-        <ShareButton foodname={foodname} username={username} />
+        <ShareButton foodname={foodname} />
+        <ReviewButton />
         <SaveButton className="box-margin-right-5"/>
       </div>
     </FadeTransition>

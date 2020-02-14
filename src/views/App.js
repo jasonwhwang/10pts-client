@@ -32,7 +32,7 @@ const App = (props) => {
           <Route exact path="/search/filters" component={Filters} />
           <Route exact path="/:path(search|search/list)" component={Search} />
 
-          <Route exact path='/:path(m|search/m|new/m|edit/m|saved/m|account/m)/:address' component={MapFrame} />
+          <Route exact path='/:path(map|search/map|new/map|edit/map|saved/map|account/map)' component={MapFrame} />
 
           <Route exact path="/new" component={Photos} />
           <Route exact path="/new/details" component={Details} />

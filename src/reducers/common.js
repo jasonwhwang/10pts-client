@@ -1,5 +1,5 @@
 const defaultState = {
-  authUser: null,
+  user: null,
   language: null
 }
 
@@ -7,10 +7,10 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case 'LOG_OUT':
       return defaultState
-    case 'AUTH_USER':
+    case 'USER':
       return {
         ...state,
-        authUser: action.authUser
+        user: action.user
       }
     case 'LANGUAGE':
       return {

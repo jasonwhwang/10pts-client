@@ -1,24 +1,24 @@
-.bigCard-userHeading {
+.card-userHeading {
   height: 50px;
   box-sizing: border-box;
   padding: 0 5px;
 }
-.bigCard-buttons {
+.card-buttons {
   height: 40px;
   position: relative;
   z-index: 21;
   box-sizing: border-box;
   padding: 0 5px;
 }
-.bigCard-userImage {
+.card-userImage {
   height: 30px;
   width: 30px;
   min-width: 30px;
 }
-.bigCard-foodHeading { box-sizing: border-box; padding: 0 15px; }
-.bigCard-subText { display: inline-block; box-sizing: border-box; padding-bottom: 10px; padding-right: 10px; }
+.card-foodHeading { box-sizing: border-box; padding: 0 15px; }
+.card-subText { display: inline-block; box-sizing: border-box; padding-bottom: 10px; padding-right: 10px; }
 
-.bigCard-pts {
+.card-pts {
   height: 40px;
   width: 40px;
   /* background-color: var(--background); */
@@ -27,7 +27,7 @@
   box-sizing: border-box;
   border: 1px solid var(--black);
 }
-.bigCard-pts:hover {
+.card-pts:hover {
   color: white;
 }
-.bigCard-stats { box-sizing: border-box; padding: 0 15px 20px 15px; }
+.card-stats { box-sizing: border-box; padding: 0 15px 20px 15px; }

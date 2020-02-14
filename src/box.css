@@ -122,10 +122,7 @@
 /* @media only screen and (max-width: 600px) {} */
 
 /* Square */
-.box-box {
-  height: min(var(--width), 100vmin);
-  background-color: var(--background);
-}
+.box-box { height: min(var(--width), 100vmin); background-color: var(--background); }
 
 /* Input */
 .box-input {
@@ -185,7 +182,7 @@
   justify-content: center;
   align-items: center;
 }
-.box-flex-jcenter { justify-content: center; }
+.box-flex-jcenter { display: flex; justify-content: center; }
 .box-flex-stretch { display: flex; align-items: stretch; }
 .box-flex-between { display: flex; justify-content: space-between; }
 .box-flex-1 { flex: 1; }

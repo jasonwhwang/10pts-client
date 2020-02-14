@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
-import BigCard from '../0_Components/10_Cards/BigCard'
+import List from '../0_Components/11_List/List'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -29,7 +29,7 @@ class Home extends React.Component {
             <meta name="description" content="Home" />
           </Helmet></HelmetProvider>
 
-          <BigCard location={this.props.location} match={this.props.match} path={''}/>
+          <List tab={''} params={this.props.match.params} />
 
         </div>
       </FadeTransition>
