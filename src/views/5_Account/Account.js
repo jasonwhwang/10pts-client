@@ -26,6 +26,7 @@ class Account extends React.Component {
   }
 
   componentDidMount() {
+    // if(!this.props.user) this.props.history.push("/login")
     this.initializeState()
   }
   componentDidUpdate(prevProps) {
@@ -35,13 +36,19 @@ class Account extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
+    // let params = this.props.match.params
+    // let linkUsername = params.username ? params.username : this.props.user.username
+    // let route = params.route ? `/${params.route}` : ""
+    // let cLink = `${process.env.REACT_APP_url_LINK}/a/${linkUsername}${route}`
+    let cLink = `${process.env.REACT_APP_url_LINK}/account`
+
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
             <title>Account</title>
             <meta name="description" content="Account" />
-            {/* <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}/${params.username}`} /> */}
+            <link rel="canonical" href={cLink} />
           </Helmet></HelmetProvider>
 
           <div className="box-box">Account</div>

@@ -27,27 +27,35 @@ class Carousel extends React.Component {
 
     this.mounted = false
     this.debounceTimeoutId = null
-    this.onTouchStart = this.onTouchStart.bind(this)
-    this.onTouchMove = this.onTouchMove.bind(this)
-    this.onTouchEnd = this.onTouchEnd.bind(this)
-    this.onResize = this.onResize.bind(this)
+    this.drag = false
   }
 
   componentDidMount () {
     this.mounted = true
     this.hideFrames()
+    this.updateFrameSize(() => {
+      this.prepareSiblingFrames()
+    })
+
+    this.refs.wrapper.addEventListener('mousedown', () => this.drag = false, {capture: true})
+    this.refs.wrapper.addEventListener('mousemove', () => this.drag = true, {capture: true})
+    this.refs.wrapper.addEventListener('click', this.stopLink, {capture: true})
 
     this.refs.wrapper.addEventListener('touchmove', this.onTouchMove, {capture: true, passive: true})
     this.refs.wrapper.addEventListener('touchend', this.onTouchEnd, {capture: true})
-    window.addEventListener('resize', this.onResize);
+    window.addEventListener('resize', this.onResize)
   }
 
   componentWillUnmount () {
     this.mounted = false
 
-    this.refs.wrapper.removeEventListener('touchmove', this.onTouchMove, {capture: true})
+    this.refs.wrapper.removeEventListener('mousedown', () => this.drag = false, {capture: true})
+    this.refs.wrapper.removeEventListener('mousemove', () => this.drag = true, {capture: true})
+    this.refs.wrapper.removeEventListener('click', this.stopLink, {capture: true})
+
+    this.refs.wrapper.removeEventListener('touchmove', this.onTouchMove, {capture: true, passive: true})
     this.refs.wrapper.removeEventListener('touchend', this.onTouchEnd, {capture: true})
-    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('resize', this.onResize)
   }
 
   componentDidUpdate(_, prevState) {
@@ -66,24 +74,30 @@ class Carousel extends React.Component {
     return nextState
   }
 
+  stopLink = (e) => {
+    if(this.drag) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+  }
+
   hideFrames () {
     for (let i = 1; i < this.state.frames.length; i++) {
       this.refs['f' + i].style.opacity = 0
     }
   }
 
-  onResize() {
-    clearTimeout(this.debounceTimeoutId);
+  onResize = () => {
+    clearTimeout(this.debounceTimeoutId)
     this.debounceTimeoutId = setTimeout(() => {
       this.updateFrameSize(() => {
-        this.prepareSiblingFrames();
-      });
-    }, 25);
+        this.prepareSiblingFrames()
+      })
+    }, 25)
   }
 
-  onTouchStart (e) {
+  onTouchStart = (e) => {
     if (this.state.total < 2) return
-    // e.preventDefault()
 
     this.updateFrameSize()
     this.prepareSiblingFrames()
@@ -101,7 +115,7 @@ class Carousel extends React.Component {
     this.refs.wrapper.addEventListener('mouseleave', this.onTouchEnd, {capture: true})
   }
 
-  onTouchMove (e) {
+  onTouchMove = (e) => {
     if (e.touches && e.touches.length > 1) return
 
     const { pageX, pageY } = (e.touches && e.touches[0]) || e
@@ -136,7 +150,7 @@ class Carousel extends React.Component {
     // this.moveFramesBy(deltaX, deltaY)
   }
 
-  onTouchEnd () {
+  onTouchEnd = () => {
     const direction = this.decideEndPosition()
     direction && this.transitFramesTowards(direction)
 

@@ -77,6 +77,10 @@ a {
   text-decoration: none;
   color: var(--mediumgray);
   transition: 150ms;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 a:hover { color: var(--black); }
 a:focus { outline:none; }
@@ -104,4 +108,12 @@ button::-moz-focus-inner { border: 0; }
 label {
   cursor: pointer;
   transition: 150ms ease-in-out;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }

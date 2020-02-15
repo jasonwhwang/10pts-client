@@ -15,44 +15,50 @@ import Ago from '../Other/Ago'
 import ErrorBoundary from '../3_ErrorBoundary/ErrorBoundary'
 
 const Card = (props) => {
-  let isFoodPage = props.params.foodname && props.params.username
   return (
     <ErrorBoundary>
       <FadeTransition>
         <div id={props.foodname}>
-          <UserHeading {...props.user} tab={props.tab} isFoodPage={isFoodPage} />
+          <UserHeading user={props.user} tab={props.tab} />
 
           <Photos {...props} />
 
-          <Buttons isLiked={props.isLiked} isSaved={props.isSaved} isFoodPage={isFoodPage}
-            foodname={props.foodname} username={props.user.username} />
+          <Buttons
+            isLiked={props.isLiked} isSaved={props.isSaved}
+            hasReviewed={props.hasReviewed}
+            foodname={props.foodname} user={props.user} />
 
           <FoodHeading {...props} />
 
-          <StatsHeading likesCount={props.likesCount} commentsCount={props.commentsCount}
-            time={props.updatedAt} params={props.params} />
+          <StatsHeading
+            likesCount={props.likesCount} commentsCount={props.commentsCount}
+            savedCount={props.savedCount} reviewsCount={props.reviewsCount}
+            time={props.updatedAt} params={props.params} user={props.user} />
         </div>
       </FadeTransition>
     </ErrorBoundary>
   )
 }
 
-const UserHeading = ({ tab, image, username, isFollowing, isFoodPage }) => {
-  if (isFoodPage) return null
+const UserHeading = ({ tab, user }) => {
+  if (!user) return null
   return (
     <div className="box-flex-row box-flex-stretch card-userHeading">
-      <Link to={`${tab}/a/${username}`} className="box-flex-row-acenter box-flex-1 box-margin-left-10">
-        <img className="box-img card-userImage" src={image ? image : Image} alt={username} />
-        <h6 className="box-text-bold box-margin-left-10 box-color-black">{username}</h6>
+      <Link to={`${tab}/a/${user.username}`} className="box-flex-row-acenter box-flex-1 box-margin-left-10">
+        <img className="box-img card-userImage"
+          src={user.image ? user.image : Image}
+          alt={user.username} />
+        <h6 className="box-text-bold box-margin-left-10 box-color-black">{user.username}</h6>
       </Link>
 
-      <FollowButton className="" username={username} isFollowing={isFollowing} />
+      <FollowButton className="" username={user.username} isFollowing={user.isFollowing} />
     </div>
   )
 }
 
 const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => {
   let pathLetter = params.path && params.path.indexOf("/f/") !== -1 ? 'p' : 'f'
+  let username = user && user.username ? `/${user.username}` : ""
   return (
     <div className="box-box">
       <Carousel widgets={[Dots]}>
@@ -60,13 +66,15 @@ const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => 
           let altTxt = `${foodTitle}, ${address}, Image ${index}`
           if (!fImg) {
             return (
-              <Link key={altTxt} className="box-img"
-                to={`${tab}/${pathLetter}/${foodname}/${user.username}`}></Link>
+              <Link key={altTxt} className="box-img box-display-block"
+                to={`${tab}/${pathLetter}/${foodname}${username}`}>
+                <img className="box-img" src={Image} alt={altTxt} key={altTxt} />
+              </Link>
             )
           } else {
             return (
-              <Link key={altTxt} className="box-img"
-                to={`${tab}/${pathLetter}/${foodname}/${user.username}`}>
+              <Link key={altTxt} className="box-img box-display-block"
+                to={`${tab}/${pathLetter}/${foodname}${username}`}>
                 <img className="box-img" src={fImg} alt={altTxt} key={altTxt} />
               </Link>
             )
@@ -77,17 +85,18 @@ const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => 
   )
 }
 
-const Buttons = ({ isLiked, isSaved, isFoodPage, foodname, username }) => {
+const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, user }) => {
+  let username = user && user.username ? user.username : null
   return (
     <div className="card-buttons box-flex-row box-flex-stretch">
-      {!isFoodPage &&
+      {user &&
         <React.Fragment>
           <LikeButton isLiked={isLiked} foodname={foodname} username={username} />
           <CommentButton foodname={foodname} username={username} />
         </React.Fragment>
       }
       <ShareButton foodname={foodname} username={username} />
-      {isFoodPage && <ReviewButton />}
+      {!user && <ReviewButton hasReviewed={hasReviewed} />}
       <div className="box-flex-1"></div>
       <SaveButton isSaved={isSaved} foodname={foodname} />
     </div>
@@ -101,9 +110,10 @@ const FoodHeading = (props) => {
   let addressTxt = addressURL.join(", ")
   addressURL = props.address.replace(/, /g, ",").replace(/\s/g, '+')
   // console.log(addressURL)
+  let username = props.user && props.user.username ? `/${props.user.username}` : ""
 
   let foodLink = `${props.tab}/f/${props.foodname}`
-  let reviewLink = `${props.tab}/f/${props.foodname}/${props.user.username}`
+  let reviewLink = `${props.tab}/f/${props.foodname}${username}`
   let searchLink = `/search?q=${addressURL}`
   let mapLink = `${props.tab}/map?q=${addressURL}`
 
@@ -127,22 +137,30 @@ const FoodHeading = (props) => {
   )
 }
 
-const StatsHeading = ({ likesCount, commentsCount, time, params }) => {
-  let likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
-  let commentsString = commentsCount === 1 ? '1 comment' : `${commentsCount} comments`
-  if(params.foodname) return null
+const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, time, params, user }) => {
+  let likesString, commentsString, savedString, reviewsString
+  if (user) {
+    likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
+    commentsString = commentsCount === 1 ? '1 comment' : `${commentsCount} comments`
+  } else {
+    savedString = savedCount === 1 ? '1 save' : `${savedCount} saves`
+    reviewsString = reviewsCount === 1 ? '1 review' : `${reviewsCount} reviews`
+  }
+  let statsString = user ? likesString + ', ' + commentsString : savedString + ', ' + reviewsString
+  
+  if (params.foodname) return null
   return (
     <h6 className="card-stats box-text-7 box-border-bottom box-color-gray box-text-nobold">
-      {likesString + ', ' + commentsString + ', '}
-      <Ago time={time} />
+      {statsString}
+      {time && ', '}
+      {time && <Ago time={time} />}
     </h6>
   )
 }
 
 Card.defaultProps = {
   tab: "",
-  user: { image: null, username: "username", isFollowing: false },
-  photos: [Image, null, null],
+  photos: [null, null, null],
   foodname: "food-name",
   foodTitle: "Food Name",
   address: "City Hall, New York, NY",
@@ -151,7 +169,10 @@ Card.defaultProps = {
   isSaved: false,
   likesCount: 3,
   commentsCount: 5,
-  updatedAt: new Date()
+  savedCount: 7,
+  reviewsCount: 9,
+  hasReviewed: false,
+  updatedAt: ""
 }
 
 export default Card

@@ -29,12 +29,58 @@ class Home extends React.Component {
             <meta name="description" content="Home" />
           </Helmet></HelmetProvider>
 
-          <List tab={''} params={this.props.match.params} />
+          <List
+            tab={''}
+            data={data}
+            match={this.props.match}
+            location={this.props.location} />
 
         </div>
       </FadeTransition>
     )
   }
 }
+
+let data = [
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name1",
+    foodTitle: "Food Name1",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name2",
+    foodTitle: "Food Name2",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name3",
+    foodTitle: "Food Name3",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  }
+]
 
 export default connect(mapStateToProps)(Home)

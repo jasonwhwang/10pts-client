@@ -30,7 +30,10 @@ const SearchNav = (props) => {
         <button
           className={`box-flex-row-center defaultNav-button searchNav-xButton
           ${props.keywords ? "box-show" : "box-hide"}`}
-          onClick={() => props.changeVal("keywords", "")}>
+          onClick={() => {
+            props.changeVal("keywords", "")
+            props.history.push("/search")
+          }}>
           <XCircle size={16} />
         </button>
 

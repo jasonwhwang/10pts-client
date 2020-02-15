@@ -117,6 +117,9 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  background-color: var(--background);
 }
 
 /* @media only screen and (max-width: 600px) {} */

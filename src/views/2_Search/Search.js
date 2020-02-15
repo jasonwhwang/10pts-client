@@ -6,8 +6,9 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 
-const mapStateToProps = state => ({
-  user: state.common.user
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
 })
 
 class Search extends React.Component {
@@ -15,7 +16,21 @@ class Search extends React.Component {
     loading: true
   }
   async componentDidMount() {
-    // console.log(this.props.location.search)
+    this.initializeState()
+  }
+  componentDidUpdate(prevProps) {
+    if(prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
+  }
+  componentWillUnmount() {
+    this.props.changeVal("keywords", "")
+  }
+
+  initializeState = () => {
+    let query = this.props.location.search
+    if(query) {
+      query = this.props.location.search.replace("?q=","").replace(/,/g, ", ").replace(/\+/g, ' ')
+      this.props.changeVal("keywords", query)
+    }
     this.setState({ ...this.state, loading: false })
   }
 
@@ -30,7 +45,11 @@ class Search extends React.Component {
             <meta name="description" content="Search" />
           </Helmet></HelmetProvider>
 
-          <List tab={'/search'} params={this.props.match.params} col={2} />
+          <List
+            tab={'/search'}
+            data={data}
+            match={this.props.match}
+            location={this.props.location} />
 
         </div>
       </FadeTransition>
@@ -38,4 +57,40 @@ class Search extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Search)
+let data = [
+  {
+    photos: [null, null, null],
+    foodname: "food-name1",
+    foodTitle: "Food Name1",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  },
+  {
+    photos: [null, null, null],
+    foodname: "food-name2",
+    foodTitle: "Food Name2",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  },
+  {
+    photos: [null, null, null],
+    foodname: "food-name3",
+    foodTitle: "Food Name3",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  }
+]
+
+export default connect(null, mapDispatchToProps)(Search)
