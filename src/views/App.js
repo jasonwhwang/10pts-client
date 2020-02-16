@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import { Switch, Route } from 'react-router-dom'
 
-import ScrollTop from './0_Components/0_ScrollTop/ScrollTop'
+import ScrollTop from './0_Components/Other/ScrollTop'
 import NotFound from './8_Other/NotFound'
 import NavBar from './0_Components/1_NavBar/NavBar'
 import TabBar from './0_Components/2_TabBar/TabBar'
@@ -43,8 +43,8 @@ const App = (props) => {
 
           <Route exact path="/:path(saved|saved/likes|saved/following)" component={Saved} />
 
-          <Route exact path="/account/:path(settings|settings/terms|settings/privacy)" component={Settings} />
-          <Route exact path="/account/:route?" component={Account} />
+          <Route exact path="/:path(account)/:route(settings|settings/terms|settings/privacy)" component={Settings} />
+          <Route exact path="/:path(account)/:route?" component={Account} />
 
           <Route exact path="/:path(login|login/signup|login/welcome|login/success|login/resetpassword|login/newpassword)" component={Login} />
 

@@ -4,6 +4,7 @@ import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Search, Filter, XCircle } from 'react-feather'
+import HideTabBar from '../Other/HideTabBar'
 
 const mapStateToProps = state => ({
   keywords: state.search.keywords,
@@ -15,34 +16,49 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type, val })
 })
 
-const SearchNav = (props) => {
-  let searchPlaceholder = props.category ? `Search ${props.category}...` : "Search..."
-  return (
-    <FadeTransition>
-      <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <Search size={18} className="searchNav-searchIconPadding box-expand-height" />
+class SearchNav extends React.Component {
+  onChangeKeywords = (e) => {
+    this.props.changeVal("keywords", e.target.value)
+  }
+  removeKeywords = () => {
+    this.props.changeVal("keywords", "")
+    this.props.history.push("/search")
+  }
+  submitSearch = (e) => {
+    e.preventDefault()
+    console.log("Search")
+    document.getElementById("searchInput").blur()
+  }
+  render() {
+    let searchPlaceholder = this.props.category ? `Search ${this.props.category}...` : "Search..."
+    return (
+      <FadeTransition>
+        <div className="navBar-wrapper box-expand-height box-flex-stretch">
+          <Search size={18} className="searchNav-searchIconPadding box-expand-height" />
 
-        <input placeholder={searchPlaceholder}
-          className="searchNav-searchInput box-flex-1 box-text-5"
-          value={props.keywords}
-          onChange={e => props.changeVal("keywords", e.target.value)} />
+          <HideTabBar>
+            <form id="inputContainer" className="box-flex-1 box-flex-row" onSubmit={this.submitSearch}>
+              <input placeholder={searchPlaceholder} id="searchInput"
+                className="searchNav-searchInput box-flex-1 box-text-5"
+                value={this.props.keywords}
+                onChange={this.onChangeKeywords} />
+            </form>
+          </HideTabBar>
 
-        <button
-          className={`box-flex-row-center defaultNav-button searchNav-xButton
-          ${props.keywords ? "box-show" : "box-hide"}`}
-          onClick={() => {
-            props.changeVal("keywords", "")
-            props.history.push("/search")
-          }}>
-          <XCircle size={16} />
-        </button>
+          <button type="button"
+            className={`box-flex-row-center defaultNav-button searchNav-xButton
+            ${this.props.keywords ? "box-show" : "box-hide"}`}
+            onClick={this.removeKeywords}>
+            <XCircle size={16} />
+          </button>
 
-        <Link to="/search/filters" className="box-flex-row-center searchNav-filterIconPadding defaultNav-button">
-          <Filter size={18} />
-        </Link>
-      </div>
-    </FadeTransition>
-  )
+          <Link to="/search/filters" className="box-flex-row-center searchNav-filterIconPadding defaultNav-button">
+            <Filter size={18} />
+          </Link>
+        </div>
+      </FadeTransition>
+    )
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchNav)

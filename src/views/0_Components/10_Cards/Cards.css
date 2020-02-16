@@ -14,6 +14,7 @@
   height: 30px;
   width: 30px;
   min-width: 30px;
+  border-radius: 50%;
 }
 .card-foodHeading { box-sizing: border-box; padding: 0 15px; }
 .card-subText { display: inline-block; box-sizing: border-box; padding-bottom: 10px; padding-right: 10px; }
@@ -26,8 +27,5 @@
   border-radius: 15px;
   box-sizing: border-box;
   border: 1px solid var(--black);
-}
-.card-pts:hover {
-  color: white;
 }
 .card-stats { box-sizing: border-box; padding: 0 15px 20px 15px; }

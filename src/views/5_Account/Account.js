@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
+import List from '../0_Components/11_List/List'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -51,14 +52,57 @@ class Account extends React.Component {
             <link rel="canonical" href={cLink} />
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Account</div>
-          <div className="box-box">Account</div>
-          <div className="box-box">Account</div>
+          <List
+            data={data}
+            match={this.props.match}
+            location={this.props.location} />
 
         </div>
       </FadeTransition>
     )
   }
 }
+
+let data = [
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name1",
+    foodTitle: "Food Name1",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name2",
+    foodTitle: "Food Name2",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name3",
+    foodTitle: "Food Name3",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  }
+]
 
 export default connect(mapStateToProps)(Account)

@@ -28,13 +28,13 @@ const NavBar = () => {
         <Route exact path='/saved/:route?' component={SavedNav} />
 
         <Route exact path='/account/settings/:route?' component={TitleNav} />
-        <Route exact path='/account/:route?' component={AccountNav} />
+        <Route exact path='/:path(account)/:route?' component={AccountNav} />
 
         <Route exact path='/:path?/f/:foodname/:username?' component={FoodNav} />
         <Route exact path='/:path?/p/:foodname/:username?' component={TitleNav} />
         <Route exact path='/:path?/c/:foodname/:username' component={TitleNav} />
 
-        <Route exact path='/:path?/a/:username/:route?' component={AccountNav} />
+        <Route exact path='/:path(a|search/a|saved/a|account/a)/:username/:route?' component={AccountNav} />
         <Route component={TitleNav} />
       </Switch>
     </div>

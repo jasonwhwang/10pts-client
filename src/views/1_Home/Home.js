@@ -30,7 +30,6 @@ class Home extends React.Component {
           </Helmet></HelmetProvider>
 
           <List
-            tab={''}
             data={data}
             match={this.props.match}
             location={this.props.location} />

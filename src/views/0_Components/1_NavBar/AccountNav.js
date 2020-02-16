@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 })
 
 const AccountNav = (props) => {
-  if(props.location.pathname.indexOf("/account") === 0) return <UserNav user={props.user} />
+  if(props.match.params.path === 'account') return <UserNav user={props.user} />
   return <MemberNav history={props.history} match={props.match} />
 }
 

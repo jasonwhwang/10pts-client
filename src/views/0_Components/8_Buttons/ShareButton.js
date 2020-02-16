@@ -6,7 +6,7 @@ const onShare = (foodname, username) => {
   let fName = foodname.replace(/-/g, ' ')
     .replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase() })
 
-  let shareText = username ? `Food review by ${username}.` : `${fName}, food on 10pts.`
+  let shareText = username ? `Food review by ${username}.` : `${fName}, view on 10pts.`
 
   if (navigator.share) {
     navigator.share({

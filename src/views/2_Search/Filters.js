@@ -34,8 +34,6 @@ class Filters extends React.Component {
           </Helmet></HelmetProvider>
 
           <div className="box-box">Filters</div>
-          <div className="box-box">Filters</div>
-          <div className="box-box">Filters</div>
 
         </div>
       </FadeTransition>

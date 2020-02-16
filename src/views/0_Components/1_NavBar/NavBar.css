@@ -19,6 +19,7 @@
 
 .defaultNav-button { color: var(--black); display: flex; align-items: center; }
 .defaultNav-button:hover { color: var(--mediumgray); }
+@media only screen and (max-width: 600px) {.defaultNav-button:hover { color: var(--black); }}
 .defaultNav-logo { height: 15px; }
 
 .searchNav-xButton { padding: 0 10px;}

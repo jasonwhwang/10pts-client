@@ -18,27 +18,27 @@ const TabBar = (props) => {
     path !== "account" && path !== "login"
 
   return (
-    <div className={`tabBar ${newEdit && "tabBar-hide"}`}>
+    <div className={`tabBar ${newEdit ? "tabBar-hide" : ''}`} id="TabBar">
       <div className="tabBar-wrapper">
         <Link to="/" className="tabBar-link box-flex-row-center">
-          <Home className={`${home && "box-fill-black"}`} />
-          <div className={`tabBar-fillHome ${home && "tabBar-homeWidth"}`}></div>
+          <Home className={`${home ? "box-fill-black" : null}`} />
+          <div className={`tabBar-fillHome ${home ? "tabBar-homeWidth" : ''}`}></div>
         </Link>
 
         <Link to="/search" className="tabBar-link box-flex-row-center">
-          <Search className={`${path === "search" && "tabBar-stroke"}`} />
+          <Search className={`${path === "search" ? "tabBar-stroke" : ''}`} />
         </Link>
 
         <Link to="/new" className="tabBar-link box-flex-row-center">
-          <PlusSquare className={`${newEdit && "tabBar-stroke"}`} />
+          <PlusSquare className={`${newEdit ? "tabBar-stroke" : ''}`} />
         </Link>
 
         <Link to="/saved" className="tabBar-link box-flex-row-center">
-          <Bookmark className={`${path === "saved" && "box-fill-black"}`} />
+          <Bookmark className={`${path === "saved" ? "box-fill-black" : ''}`} />
         </Link>
 
         <Link to={props.user ? "/account" : "/login"} className="tabBar-link box-flex-row-center">
-          <User className={`${account && "tabBar-fillUser"}`} />
+          <User className={`${account ? "tabBar-fillUser" : ''}`} />
         </Link>
       </div>
     </div>

@@ -15,10 +15,11 @@ import Ago from '../Other/Ago'
 import ErrorBoundary from '../3_ErrorBoundary/ErrorBoundary'
 
 const Card = (props) => {
+  let divID = props.user ? props.foodname+"-"+props.user.username : props.foodname
   return (
     <ErrorBoundary>
       <FadeTransition>
-        <div id={props.foodname}>
+        <div id={divID}>
           <UserHeading user={props.user} tab={props.tab} />
 
           <Photos {...props} />
@@ -138,6 +139,8 @@ const FoodHeading = (props) => {
 }
 
 const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, time, params, user }) => {
+  if (params.foodname) return null
+  
   let likesString, commentsString, savedString, reviewsString
   if (user) {
     likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
@@ -148,7 +151,6 @@ const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, tim
   }
   let statsString = user ? likesString + ', ' + commentsString : savedString + ', ' + reviewsString
   
-  if (params.foodname) return null
   return (
     <h6 className="card-stats box-text-7 box-border-bottom box-color-gray box-text-nobold">
       {statsString}
@@ -161,16 +163,16 @@ const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, tim
 Card.defaultProps = {
   tab: "",
   photos: [null, null, null],
-  foodname: "food-name",
-  foodTitle: "Food Name",
-  address: "City Hall, New York, NY",
-  pts: 5,
+  foodname: "",
+  foodTitle: "",
+  address: "",
+  pts: 0,
   isLiked: false,
   isSaved: false,
-  likesCount: 3,
-  commentsCount: 5,
-  savedCount: 7,
-  reviewsCount: 9,
+  likesCount: 0,
+  commentsCount: 0,
+  savedCount: 0,
+  reviewsCount: 0,
   hasReviewed: false,
   updatedAt: ""
 }

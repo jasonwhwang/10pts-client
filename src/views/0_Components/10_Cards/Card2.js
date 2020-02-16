@@ -23,10 +23,10 @@ const Card2 = ({ tab, photos, foodname, foodTitle, address, pts }) => {
 Card2.defaultProps = {
   tab: "/search",
   photos: [null],
-  foodname: "food-name",
-  foodTitle: "Food Name",
-  address: "City Hall, New York, NY",
-  pts: 5
+  foodname: "",
+  foodTitle: "",
+  address: "",
+  pts: 0
 }
 
 export default Card2

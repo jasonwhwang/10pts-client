@@ -46,7 +46,6 @@ class Search extends React.Component {
           </Helmet></HelmetProvider>
 
           <List
-            tab={'/search'}
             data={data}
             match={this.props.match}
             location={this.props.location} />

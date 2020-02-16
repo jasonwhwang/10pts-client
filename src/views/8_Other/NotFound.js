@@ -13,8 +13,8 @@ const NotFound = () => {
         </Helmet></HelmetProvider>
 
         <div className="box-flex-row-center box-flex-1">
-          <div className="box-margin-bottom-60">
-            <h1 className="box-flex-row-center box-margin-bottom-20">404</h1>
+          <div className="">
+            <h1 className="box-flex-row-center box-margin-bottom-10">404</h1>
             <h6 className="box-flex-row-center box-text-nobold">
               Not Found
             </h6>
