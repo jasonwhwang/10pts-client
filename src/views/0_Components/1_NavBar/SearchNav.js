@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 class SearchNav extends React.Component {
   onChangeKeywords = (e) => {
-    this.props.changeVal("keywords", e.target.value)
+    this.props.changeVal(e.target.id, e.target.value)
   }
   removeKeywords = () => {
     this.props.changeVal("keywords", "")
@@ -26,8 +26,7 @@ class SearchNav extends React.Component {
   }
   submitSearch = (e) => {
     e.preventDefault()
-    console.log("Search")
-    document.getElementById("searchInput").blur()
+    document.getElementById("keywords").blur()
   }
   render() {
     let searchPlaceholder = this.props.category ? `Search ${this.props.category}...` : "Search..."
@@ -38,7 +37,7 @@ class SearchNav extends React.Component {
 
           <HideTabBar>
             <form id="inputContainer" className="box-flex-1 box-flex-row" onSubmit={this.submitSearch}>
-              <input placeholder={searchPlaceholder} id="searchInput"
+              <input placeholder={searchPlaceholder} id="keywords"
                 className="searchNav-searchInput box-flex-1 box-text-5"
                 value={this.props.keywords}
                 onChange={this.onChangeKeywords} />

@@ -4,9 +4,15 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
+import AutoSearch from '../0_Components/Other/AutoSearch'
 
 const mapStateToProps = state => ({
-  user: state.common.user
+  review: state.review
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
 })
 
 class Details extends React.Component {
@@ -16,6 +22,8 @@ class Details extends React.Component {
   async componentDidMount() {
     this.setState({ ...this.state, loading: false })
   }
+  changeInput = (e) => { this.props.changeVal(e.target.id, e.target.value) }
+  changeAddress = (val) => { this.props.changeVal('address', val) }
 
   render() {
     if (this.state.loading) return <LoadingPage />
@@ -28,9 +36,10 @@ class Details extends React.Component {
             <meta name="description" content="Details" />
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Details</div>
-          <div className="box-box">Details</div>
-          <div className="box-box">Details</div>
+          <AutoSearch
+            address={this.props.review.address}
+            changeInput={this.changeInput}
+            changeAddress={this.changeAddress} />
 
         </div>
       </FadeTransition>
@@ -38,4 +47,4 @@ class Details extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Details)
+export default connect(mapStateToProps, mapDispatchToProps)(Details)

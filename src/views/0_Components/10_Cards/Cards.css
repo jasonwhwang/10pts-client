@@ -17,7 +17,15 @@
   border-radius: 50%;
 }
 .card-foodHeading { box-sizing: border-box; padding: 0 15px; }
-.card-subText { display: inline-block; box-sizing: border-box; padding-bottom: 10px; padding-right: 10px; }
+.card-subText {
+  max-width: 175px;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+.address-top {
+  margin-top: 1px;
+}
 
 .card-pts {
   height: 40px;

@@ -122,9 +122,9 @@ const FoodHeading = (props) => {
     <div className="card-foodHeading box-flex-row">
       <div className="box-flex-1 box-flex-col">
         <Link to={foodLink} className="box-text-4 box-text-bold box-color-black">{props.foodTitle}</Link>
-        <div className="">
+        <div className="box-flex-stretch">
           <Link to={searchLink} className="box-color-black box-text-5 card-subText">{place}</Link>
-          <Link to={mapLink} className="box-color-black box-text-6 card-subText">{addressTxt}</Link>
+          <Link to={mapLink} className="box-color-black box-text-6 card-subText address-top">{addressTxt}</Link>
         </div>
       </div>
 

@@ -95,17 +95,13 @@
 .box-border-bottom { box-sizing: border-box; border-bottom: 1px solid var(--border); }
 
 /* Tabs */
-.box-tabs { height: 45px; }
+.box-tabs { height: 30px; }
 .box-tab {
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 4px 10px;
   font-weight: 500;
+  color: var(--black);
 }
 .box-tab-selected {
+  font-weight: 500;
   background-color: var(--black);
   border-radius: 5px;
   color: white;

@@ -22,6 +22,12 @@ class Filters extends React.Component {
     this.setState({ ...this.state, loading: false })
   }
 
+  changeCategory = (e) => {
+    if (e.target.id === 'food') this.props.changeVal('category', '')
+    else this.props.changeVal('category', 'accounts')
+  }
+  changeInput = (e) => { this.props.changeVal(e.target.id, e.target.value) }
+
   render() {
     if (this.state.loading) return <LoadingPage />
 
@@ -31,9 +37,19 @@ class Filters extends React.Component {
           <HelmetProvider><Helmet>
             <title>Filters</title>
             <meta name="description" content="Filters" />
+            <script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_g_API_KEY}&libraries=places`} />
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Filters</div>
+          <div className="box-flex-stretch box-tabs filters-margin">
+            <button id="food" onClick={this.changeCategory}
+              className={`${this.props.search.category ? "box-tab" : "box-tab-selected"} box-flex-1`}>
+              Food
+            </button>
+            <button id="accounts" onClick={this.changeCategory}
+              className={`${this.props.search.category ? "box-tab-selected" : "box-tab"} box-flex-1`}>
+              Accounts
+            </button>
+          </div>
 
         </div>
       </FadeTransition>
