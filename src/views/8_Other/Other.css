@@ -1,0 +1,18 @@
+.mapFrame {
+  height: calc(100% - 100px);
+  width: min(600px, 100vmin);
+  margin: 0 auto;
+  border: none;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 10;
+  overflow: hidden;
+}
+.map-loading {
+  height: calc(100% - 100px);
+  width: min(600px, 100vmin);
+  margin: 0 auto;
+  position: absolute;
+  z-index: 9;
+  overflow: hidden;
+}

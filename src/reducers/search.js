@@ -1,8 +1,8 @@
 const defaultState = {
   keywords: "",
   category: "",
-  minPts: "",
-  maxPrice: "",
+  minPts: 5,
+  maxPrice: 50,
   tags: []
 }
 

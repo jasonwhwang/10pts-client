@@ -1,41 +1,40 @@
 import React from 'react'
 import './Other.css'
-import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
-import LoadingPage from '../0_Components/4_Loading/LoadingPage'
-
-const mapStateToProps = state => ({
-  user: state.common.user
-})
+import Loading from '../0_Components/4_Loading/Loading'
 
 class MapFrame extends React.Component {
-  state = {
-    loading: true
-  }
-  async componentDidMount() {
-    this.setState({ ...this.state, loading: false })
-  }
-
   render() {
-    if (this.state.loading) return <LoadingPage />
-
-    let params = this.props.match.params
+    let title = this.props.location.search
+    let query = ""
+    if(title) {
+      query = title.replace("?q=","")
+      title = query.replace(/,/g, ", ").replace(/\+/g, ' ')
+    }
 
     return (
       <FadeTransition>
-        <div className="page">
+        <div className="page box-flex-col">
           <HelmetProvider><Helmet>
-            <title>Map</title>
-            <meta name="description" content="Map" />
-            {params.path !== "m" &&
-              <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/m/${params.location}`} />
+            <title>{title}</title>
+            <meta name="description" content={title} />
+            {this.props.match.params.path !== "map" &&
+              <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/map${this.props.location.search}`} />
             }
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Map</div>
-          <div className="box-box">Map</div>
-          <div className="box-box">Map</div>
+          <div className="map-loading box-flex-row-center">
+            <Loading />
+          </div>
+
+          <div className="box-flex-1 box-flex-col">
+            <iframe className="box-expand-width box-flex-1 mapFrame"
+              title={title}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_g_API_KEY}&q=${query}`}
+              allowFullScreen
+              />
+          </div>
 
         </div>
       </FadeTransition>
@@ -43,4 +42,4 @@ class MapFrame extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(MapFrame)
+export default MapFrame
