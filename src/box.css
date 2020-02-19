@@ -222,6 +222,9 @@ p, h1, h2, h3, h4, h5, h6 { margin: 0; }
 
 
 /* Margins */
+.box-margin-15 { margin: 15px; }
+.box-padding-15 { box-sizing: border-box; padding: 15px; }
+
 .box-margin-left-60 { margin-left: 60px; }
 .box-margin-right-60 { margin-right: 60px; }
 .box-margin-top-60 { margin-top: 60px; }

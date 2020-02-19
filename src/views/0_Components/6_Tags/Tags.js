@@ -19,12 +19,14 @@ class Tags extends React.Component {
   async componentDidMount() {
     // let newSuggestions = await getTags()
     // this.setState({ ...this.state, suggestions: newSuggestions.tags })
+    let input = document.getElementsByClassName('react-tags__search-input')
+    if(input && input[0]) input[0].setAttribute('maxlength', 30)
   }
 
   onDelete = (i) => {
     const newTags = this.props.tags.slice(0)
     newTags.splice(i, 1)
-    this.props.changeVal("tags", newTags)
+    this.props.changeVal(this.props.type, newTags)
   }
 
   onAddition = (tag) => {
@@ -32,12 +34,12 @@ class Tags extends React.Component {
       _id: tag._id ? tag._id : null,
       name: tag.name
         .replace(/[^A-Za-z0-9& ]/gi, '').toLowerCase()
-        .replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase() })
+        .replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase() }).substring(0, 30)
     }
     let duplicate = this.props.tags.filter(tagItem => tagItem.name === tag.name)
     if(duplicate.length >= 1) return
     const newTags = [].concat(this.props.tags, tag)
-    this.props.changeVal("tags", newTags)
+    this.props.changeVal(this.props.type, newTags)
     console.log(newTags)
   }
 
@@ -54,10 +56,11 @@ class Tags extends React.Component {
         onDelete={this.onDelete}
         onAddition={this.onAddition}
         // onInput={this.onInput}
-        placeholderText="Add a community"
+        placeholderText="Add tags..."
         allowNew={this.props.allowNew}
+        autoresize={false}
         minQueryLength={1}
-        maxSuggestionsLength={7}
+        maxSuggestionsLength={5}
         removeButtonText={""} />
     )
   }

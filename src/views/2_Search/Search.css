@@ -1,10 +1,5 @@
-.filters-margin {
-  margin: 15px;
+.tags-margin {
+  margin: 20px;
+  box-sizing: border-box;
+  padding-bottom: 200px;
 }
-
-.filters-slider {
-  margin: 30px 20px;
-}
-.pts-scale { margin-right: -8px; }
-.pts-not { font-size: 12px; font-weight: 400; color: var(--mediumgray); }
-.pts-selected { font-size: 12px; font-weight: 700; color: var(--black); }

@@ -1,0 +1,9 @@
+#photoUpload {
+  display: none;
+}
+.photos-label {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  bottom: 10%;
+}

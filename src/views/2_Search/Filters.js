@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
-import Slider from 'rc-slider/lib/Slider'
-import '../0_Components/Other/Slider.css'
+import { SearchPtsSlider, SearchPriceSlider } from '../0_Components/Other/Sliders'
+import Tags from '../0_Components/6_Tags/Tags'
 
 const mapStateToProps = state => ({
   search: state.search
@@ -28,12 +28,9 @@ class Filters extends React.Component {
     if (e.target.id === 'food') this.props.changeVal('category', '')
     else this.props.changeVal('category', 'accounts')
   }
-  changeVal = (type, val) => { this.props.changeVal(type, val) }
 
   render() {
     if (this.state.loading) return <LoadingPage />
-
-    let scale = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     return (
       <FadeTransition>
@@ -44,7 +41,7 @@ class Filters extends React.Component {
             <script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_g_API_KEY}&libraries=places`} />
           </Helmet></HelmetProvider>
 
-          <div className="box-flex-stretch box-tabs filters-margin">
+          <div className="box-flex-stretch box-tabs box-margin-15">
             <button id="food" onClick={this.changeCategory}
               className={`${this.props.search.category ? "box-tab" : "box-tab-selected"} box-flex-1`}>
               Food
@@ -55,25 +52,23 @@ class Filters extends React.Component {
             </button>
           </div>
 
-          <div className="filters-slider">
-            <div className="box-flex-row-center box-position-relative box-margin-bottom-5">
-              <h3>{this.props.search.minPts}</h3>
-            </div>
+          <SearchPtsSlider
+            minPts={this.props.search.minPts}
+            maxPts={this.props.search.maxPts}
+            changeVal={this.props.changeVal} />
 
-            <Slider min={0} max={10}
-              value={this.props.search.minPts}
-              onChange={(val) => this.changeVal('minPts', val)} />
+          <SearchPriceSlider
+            minPrice={this.props.search.minPrice}
+            maxPrice={this.props.search.maxPrice}
+            changeVal={this.props.changeVal} />
 
-            <div className="box-flex-between box-margin-top-10 pts-scale">
-              {scale.map((val, index) => {
-                return (
-                  <h6 key={index}
-                    className={`box-flex-row-center ${this.props.search.minPts === index ? 'pts-selected' : 'pts-not'}`}>
-                    {index}
-                  </h6>
-                )
-              })}
-            </div>
+          <div className="tags-margin box-position-relative">
+            <h6 className="box-text-nobold box-text-uppercase box-text-7 box-margin-bottom-10">Tags</h6>
+            <Tags
+              tags={this.props.search.searchTags}
+              changeVal={this.props.changeVal}
+              allowNew={false}
+              type={'searchTags'} />
           </div>
 
         </div>

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "aws-amplify": "^2.2.5",
     "crypto-js": "^4.0.0",
+    "jpegasus": "^1.11.6",
     "nanoid": "^2.1.11",
     "rc-slider": "^9.2.1",
     "react": "^16.12.0",

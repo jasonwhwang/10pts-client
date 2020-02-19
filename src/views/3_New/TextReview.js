@@ -4,9 +4,15 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
+import { ReviewPtsSlider } from '../0_Components/Other/Sliders'
 
 const mapStateToProps = state => ({
-  user: state.common.user
+  review: state.review
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
 })
 
 class Review extends React.Component {
@@ -28,9 +34,7 @@ class Review extends React.Component {
             <meta name="description" content="Review" />
           </Helmet></HelmetProvider>
 
-          <div className="box-box">Review</div>
-          <div className="box-box">Review</div>
-          <div className="box-box">Review</div>
+          <ReviewPtsSlider pts={this.props.review.pts} changeVal={this.props.changeVal} type={'pts'} />
 
         </div>
       </FadeTransition>
@@ -38,4 +42,4 @@ class Review extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Review)
+export default connect(mapStateToProps, mapDispatchToProps)(Review)
