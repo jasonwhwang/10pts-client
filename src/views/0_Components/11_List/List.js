@@ -3,6 +3,7 @@ import './List.css'
 import Card from '../10_Cards/Card'
 import Card2 from '../10_Cards/Card2'
 import Card3 from '../10_Cards/Card3'
+import ErrorBoundary from '../3_ErrorBoundary/ErrorBoundary'
 
 class List extends React.Component {
   async componentDidMount() {
@@ -28,7 +29,7 @@ class List extends React.Component {
   render() {
     let params = this.props.match.params
     let tab = ''
-    if(params.path) {
+    if (params.path) {
       if (params.path.indexOf('search') === 0) tab = '/search'
       else if (params.path.indexOf('saved') === 0) tab = '/saved'
       else if (params.path.indexOf('account') === 0) tab = '/account'
@@ -48,34 +49,40 @@ class List extends React.Component {
 
 const List1 = ({ data, tab, params }) => {
   return (
-    <React.Fragment>
-      {data.map((foodItem, index) => {
-        if (foodItem) return <Card {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
-        else return <Card key={'index' + index} tab={tab} params={params} />
-      })}
-    </React.Fragment>
+    <ErrorBoundary>
+      <React.Fragment>
+        {data.map((foodItem, index) => {
+          if (foodItem) return <Card {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+          else return <Card key={'index' + index} tab={tab} params={params} />
+        })}
+      </React.Fragment>
+    </ErrorBoundary>
   )
 }
 
 const List2 = ({ data, tab, params }) => {
   return (
-    <div className="list-grid-2 box-flex-1">
-      {data.map((foodItem, index) => {
-        if (foodItem) return <Card2 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
-        else return <Card2 key={'index' + index} tab={tab} params={params} />
-      })}
-    </div>
+    <ErrorBoundary>
+      <div className="list-grid-2 box-flex-1">
+        {data.map((foodItem, index) => {
+          if (foodItem) return <Card2 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+          else return <Card2 key={'index' + index} tab={tab} params={params} />
+        })}
+      </div>
+    </ErrorBoundary>
   )
 }
 
 const List3 = ({ data, tab, params }) => {
   return (
-    <div className="list-grid-3 box-flex-1">
-      {data.map((foodItem, index) => {
-        if (foodItem) return <Card3 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
-        else return <Card3 key={'index' + index} tab={tab} params={params} />
-      })}
-    </div>
+    <ErrorBoundary>
+      <div className="list-grid-3 box-flex-1">
+        {data.map((foodItem, index) => {
+          if (foodItem) return <Card3 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+          else return <Card3 key={'index' + index} tab={tab} params={params} />
+        })}
+      </div>
+    </ErrorBoundary>
   )
 }
 

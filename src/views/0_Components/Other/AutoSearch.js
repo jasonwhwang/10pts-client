@@ -41,7 +41,7 @@ class AutoSearch extends React.Component {
 
   render() {
     return (
-      <div className="filters-margin box-position-relative" id="inputContainer">
+      <div className="box-margin-15 box-position-relative" id="inputContainer">
         <Script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_g_API_KEY}&libraries=places`}
           onLoad={this.load} />
 

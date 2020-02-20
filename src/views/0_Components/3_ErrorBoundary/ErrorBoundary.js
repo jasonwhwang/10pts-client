@@ -24,11 +24,7 @@ class ErrorBoundary extends React.Component {
     render() {
       if (this.state.errorInfo) {
         // Error path
-        return (
-          <div>
-            <h2>Something went wrong.</h2>
-          </div>
-        );
+        return <h4 className="box-margin-15">Something went wrong.</h4>
       }
       // Normally, just render children
       return this.props.children;

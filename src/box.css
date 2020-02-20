@@ -91,6 +91,7 @@
 .box-list { min-height: 100px; transition: 150ms; }
 .box-list:hover { background-color: #0015b303; }
 .box-border { box-sizing: border-box; border: 1px solid var(--border); }
+.box-border-lite { box-sizing: border-box; border: 1px solid var(--background); }
 .box-border-top { box-sizing: border-box; border-top: 1px solid var(--border); }
 .box-border-bottom { box-sizing: border-box; border-bottom: 1px solid var(--border); }
 

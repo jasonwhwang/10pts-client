@@ -4,6 +4,36 @@
 .photos-label {
   height: 50px;
   width: 50px;
-  position: absolute;
+  position: fixed;
   bottom: 10%;
+  background-color: white;
+  border-radius: 17px;
+  z-index: 1;
+}
+.photos-xButton {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: white;
+  color: var(--black);
+  border-radius: 10px;
+}
+
+.photoPreviews {
+  height: min(100vmin/5, 600px/5);
+  max-height: min(100vmin/5, 600px/5);
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+}
+.photoPreviews > div { border-right: 1px solid var(--border);}
+.photoPreviews div:last-child {
+  border: none;
 }

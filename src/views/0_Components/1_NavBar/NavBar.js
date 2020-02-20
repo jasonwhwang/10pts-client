@@ -12,7 +12,7 @@ import FoodNav from './FoodNav'
 
 const NavBar = () => {
   return (
-    <div className="navBar">
+    <div id="navBar">
       <Switch>
         <Route exact path='/' component={DefaultNav} />
         <Route path='/login/:route?' component={DefaultNav} />

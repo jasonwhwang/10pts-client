@@ -8,8 +8,6 @@
   border-top: 1px solid var(--border);
   background-color: white;
   transition: 150ms;
-  transform: none;
-  -webkit-transform: none;
   will-change: transform;
 }
 .tabBar-hide {
