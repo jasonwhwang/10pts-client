@@ -1,7 +1,9 @@
 const defaultState = {
   photos: [],
   address: '',
+  suggestions: [],
   foodTitle: '',
+  foodname: '',
   price: '',
   description: '',
   tags: [],
@@ -18,7 +20,9 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case 'photos':
     case 'address':
+    case 'suggestions':
     case 'foodTitle':
+    case 'foodname':
     case 'price':
     case 'description':
     case 'tags':

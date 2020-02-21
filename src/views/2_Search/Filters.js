@@ -22,7 +22,9 @@ class Filters extends React.Component {
     loading: true
   }
   async componentDidMount() {
-    this.setState({ ...this.state, loading: false })
+    await this.setState({ ...this.state, loading: false })
+    let container = document.getElementsByClassName('react-tags')[0]
+    if(container) container.style.border = '2px solid var(--black)'
   }
 
   changeCategory = (e) => {
@@ -67,6 +69,7 @@ class Filters extends React.Component {
             <div className="tags-margin box-position-relative">
               <h6 className="box-text-nobold box-text-uppercase box-text-7 box-margin-bottom-10">Tags</h6>
               <Tags
+                borderColor={'black'}
                 tags={this.props.search.searchTags}
                 changeVal={this.props.changeVal}
                 allowNew={false}

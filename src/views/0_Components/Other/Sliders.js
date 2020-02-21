@@ -85,8 +85,8 @@ const ReviewPtsSlider = ({ pts, changeVal, type }) => {
         <PtsLabel pts={pts} />
       </div>
 
-      <div className="box-flex-row-center box-position-relative box-margin-bottom-5">
-        <h3>{pts}</h3>
+      <div className="box-flex-row-center box-position-relative box-margin-bottom-10">
+        <h3 className="card-pts box-flex-row-center">{pts}</h3>
       </div>
 
       <Slider min={0} max={10}

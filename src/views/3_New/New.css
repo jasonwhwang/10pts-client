@@ -37,3 +37,6 @@
 .photoPreviews div:last-child {
   border: none;
 }
+
+.review-price { width: 75px; }
+.review-margin15 { margin-right: 15px; }
