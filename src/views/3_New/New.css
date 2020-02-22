@@ -22,8 +22,8 @@
 }
 
 .photoPreviews {
-  height: min(100vmin/5, 600px/5);
-  max-height: min(100vmin/5, 600px/5);
+  height: min(100vmin/5, var(--width)/5);
+  max-height: min(100vmin/5, var(--width)/5);
   width: 100%;
   box-sizing: border-box;
   border-left: 1px solid var(--border);
@@ -40,3 +40,15 @@
 
 .review-price { width: 75px; }
 .review-margin15 { margin-right: 15px; }
+
+.review-heading {
+  display: inline-block;
+  width: min(100vmin, var(--width));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  padding: 15px 15px 0 15px;
+}
+
+.review-spacing { margin-top: 40px; }

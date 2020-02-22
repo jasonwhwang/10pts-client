@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
+import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 
 const mapDispatchToProps = dispatch => ({
   changeVal: (type, val) =>
@@ -19,7 +20,7 @@ class Search extends React.Component {
     this.initializeState()
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
+    if (prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
   }
   componentWillUnmount() {
     this.props.changeVal("keywords", "")
@@ -27,8 +28,8 @@ class Search extends React.Component {
 
   initializeState = () => {
     let query = this.props.location.search
-    if(query) {
-      query = this.props.location.search.replace("?q=","").replace(/,/g, ", ").replace(/\+/g, ' ')
+    if (query) {
+      query = this.props.location.search.replace("?q=", "").replace(/,/g, ", ").replace(/\+/g, ' ')
       this.props.changeVal("keywords", query)
     }
     this.setState({ ...this.state, loading: false })
@@ -44,12 +45,14 @@ class Search extends React.Component {
             <title>Search</title>
             <meta name="description" content="Search" />
           </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
-          <List
-            data={data}
-            match={this.props.match}
-            location={this.props.location} />
+            <List
+              data={data}
+              match={this.props.match}
+              location={this.props.location} />
 
+          </ErrorBoundary>
         </div>
       </FadeTransition>
     )

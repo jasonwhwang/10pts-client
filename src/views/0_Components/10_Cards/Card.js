@@ -45,7 +45,7 @@ const UserHeading = ({ tab, user }) => {
   if (!user) return null
   return (
     <div className="box-flex-row box-flex-stretch card-userHeading">
-      <Link to={`${tab}/a/${user.username}`} className="box-flex-row-acenter box-flex-1 box-margin-left-10">
+      <Link to={`${tab}/a/${user.username}`} className="box-flex-acenter box-flex-1 box-margin-left-10">
         <img className="box-img card-userImage"
           src={user.image ? user.image : Image}
           alt={user.username} />

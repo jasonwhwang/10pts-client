@@ -24,7 +24,7 @@ class Filters extends React.Component {
   async componentDidMount() {
     await this.setState({ ...this.state, loading: false })
     let container = document.getElementsByClassName('react-tags')[0]
-    if(container) container.style.border = '2px solid var(--black)'
+    if (container) container.style.border = '2px solid var(--black)'
   }
 
   changeCategory = (e) => {
@@ -36,14 +36,14 @@ class Filters extends React.Component {
     if (this.state.loading) return <LoadingPage />
 
     return (
-      <ErrorBoundary>
-        <FadeTransition>
-          <div className="page">
-            <HelmetProvider><Helmet>
-              <title>Filters</title>
-              <meta name="description" content="Filters" />
-              <script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_g_API_KEY}&libraries=places`} />
-            </Helmet></HelmetProvider>
+      <FadeTransition>
+        <div className="page">
+          <HelmetProvider><Helmet>
+            <title>Filters</title>
+            <meta name="description" content="Filters" />
+            <script url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_g_API_KEY}&libraries=places`} />
+          </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
             <div className="box-flex-stretch box-tabs box-margin-15">
               <button id="food" onClick={this.changeCategory}
@@ -75,10 +75,10 @@ class Filters extends React.Component {
                 allowNew={false}
                 type={'searchTags'} />
             </div>
-
-          </div>
-        </FadeTransition>
-      </ErrorBoundary>
+            
+          </ErrorBoundary>
+        </div>
+      </FadeTransition>
     )
   }
 }

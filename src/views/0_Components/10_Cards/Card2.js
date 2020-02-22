@@ -14,7 +14,7 @@ const Card2 = ({ tab, photos, foodname, foodTitle, address, pts }) => {
           <h6 className="box-text-bold">{foodTitle}</h6>
           <h6 className="box-text-nobold box-text-7">{address}</h6>
         </div>
-        <h6 className="box-margin-left-10 box-margin-right-3">{pts}</h6>
+        <h6 className="box-margin-left-10 card-pts-small box-flex-row-center box-text-7">{pts}</h6>
       </div>
     </Link>
   )

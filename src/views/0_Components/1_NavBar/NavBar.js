@@ -46,7 +46,7 @@ const DefaultNav = (props) => {
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <Link to="/" className="nav-padding15 box-flex-row-acenter">
+        <Link to="/" className="nav-padding15 box-flex-acenter">
           <img src={Logo} className="defaultNav-logo" alt="10pts" />
         </Link>
 
@@ -54,7 +54,7 @@ const DefaultNav = (props) => {
 
         {showSettings &&
           <Link to="/account/settings"
-            className="box-flex-row-acenter box-flex-end nav-padding15 defaultNav-button">
+            className="box-flex-acenter box-flex-end nav-padding15 defaultNav-button">
             <Settings size={18} />
           </Link>
         }
@@ -72,7 +72,7 @@ const TitleNav = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter chevron-left defaultNav-button">
+          className="box-flex-acenter chevron-left defaultNav-button">
           <ChevronLeft size={24} />
         </button>
 
@@ -92,15 +92,15 @@ const SavedNav = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <Link to="/saved"
-          className={`${!route ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${!route ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-7 box-text-bold`}>
           Saved
         </Link>
         <Link to="/saved/likes"
-          className={`${route === "likes" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${route === "likes" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-7 box-text-bold`}>
           Likes
         </Link>
         <Link to="/saved/following"
-          className={`${route === "following" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-6 box-text-bold`}>
+          className={`${route === "following" ? "saved-selected" : "saved-border"} box-color-black box-flex-row-center box-flex-1 box-text-7 box-text-bold`}>
           Following
         </Link>
       </div>

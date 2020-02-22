@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
+import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -28,12 +29,14 @@ class Home extends React.Component {
             <title>Home</title>
             <meta name="description" content="Home" />
           </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
-          <List
-            data={data}
-            match={this.props.match}
-            location={this.props.location} />
-
+            <List
+              data={data}
+              match={this.props.match}
+              location={this.props.location} />
+              
+          </ErrorBoundary>
         </div>
       </FadeTransition>
     )

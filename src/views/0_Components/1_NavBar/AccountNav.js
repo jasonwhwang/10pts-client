@@ -20,10 +20,10 @@ const UserNav = (props) => {
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <h5 className="box-flex-row-acenter box-flex-1 nav-padding15">{username}</h5>
+        <h5 className="box-flex-acenter box-flex-1 nav-padding15">{username}</h5>
 
         <Link to="/account/settings"
-          className="box-flex-row-acenter box-flex-end nav-padding15 defaultNav-button">
+          className="box-flex-acenter box-flex-end nav-padding15 defaultNav-button">
           <Settings size={18} />
         </Link>
       </div>
@@ -36,9 +36,9 @@ const MemberNav = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter defaultNav-button nav-padding10">
+          className="box-flex-acenter defaultNav-button nav-padding10">
           <ChevronLeft size={24} />
-          <h5 className="box-flex-row-acenter box-margin-left-5">{props.match.params.username}</h5>
+          <h5 className="box-flex-acenter box-margin-left-5">{props.match.params.username}</h5>
         </button>
 
         <div className="box-flex-1"></div>

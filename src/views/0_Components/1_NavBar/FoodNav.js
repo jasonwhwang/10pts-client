@@ -25,12 +25,12 @@ const FoodNav = (props) => {
       <FadeTransition>
         <div className="navBar-wrapper box-expand-height box-flex-stretch">
           <button onClick={() => props.history.goBack()}
-            className="box-flex-row-acenter chevron-left defaultNav-button">
+            className="box-flex-acenter chevron-left defaultNav-button">
             <ChevronLeft size={24} />
           </button>
 
           {username !== authUsername &&
-            <div className="box-flex-1 box-flex-row-acenter box-flex-end box-margin-right-5">
+            <div className="box-flex-1 box-flex-acenter box-flex-end box-margin-right-5">
               <LikeButton />
               <CommentButton foodname={foodname} username={username} />
               <ShareButton foodname={foodname} username={username} />
@@ -38,7 +38,7 @@ const FoodNav = (props) => {
           }
 
           {username === authUsername &&
-            <div className="box-flex-1 box-flex-row-acenter box-flex-end box-margin-right-5">
+            <div className="box-flex-1 box-flex-acenter box-flex-end box-margin-right-5">
               <Link to={`/edit/${foodname}`}
                 className="defaultNav-button nav-padding10">
                 <Edit size={18} />
@@ -55,7 +55,7 @@ const FoodNav = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter chevron-left defaultNav-button">
+          className="box-flex-acenter chevron-left defaultNav-button">
           <ChevronLeft size={24} />
         </button>
 

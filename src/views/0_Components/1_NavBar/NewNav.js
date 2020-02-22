@@ -16,7 +16,7 @@ const PhotosNew = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter nav-padding15 nav-buttonWidth defaultNav-button">
+          className="box-flex-acenter nav-padding15 nav-buttonWidth defaultNav-button">
           {!props.route ?
             <X size={20} /> :
             <ChevronLeft size={24} />
@@ -28,7 +28,7 @@ const PhotosNew = (props) => {
             <h6 className="box-text-bold box-flex-1 box-flex-row-center">Photos</h6>
 
             <Link to={`${props.path}/details`}
-              className="box-flex-row-acenter box-flex-end chevron-right defaultNav-button">
+              className="box-flex-acenter box-flex-end chevron-right defaultNav-button">
               <ChevronRight size={24} />
             </Link>
           </React.Fragment>
@@ -43,14 +43,14 @@ const DetailsNew = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter chevron-left defaultNav-button">
+          className="box-flex-acenter chevron-left defaultNav-button">
           <ChevronLeft size={24} />
         </button>
 
         <h6 className="box-text-bold box-flex-1 box-flex-row-center">Details</h6>
 
         <Link to={`${props.path}/review`}
-          className="box-flex-row-acenter box-flex-end chevron-right defaultNav-button">
+          className="box-flex-acenter box-flex-end chevron-right defaultNav-button">
           <ChevronRight size={24} />
         </Link>
       </div>
@@ -63,7 +63,7 @@ const ReviewNew = (props) => {
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <button onClick={() => props.history.goBack()}
-          className="box-flex-row-acenter chevron-left defaultNav-button">
+          className="box-flex-acenter chevron-left defaultNav-button">
           <ChevronLeft size={24} />
         </button>
 

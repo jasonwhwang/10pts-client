@@ -94,14 +94,14 @@ class Photos extends React.Component {
     let hideButton = this.state.scale || this.props.review.photos.length >= 5
 
     return (
-      <ErrorBoundary>
-        <FadeTransition>
-          <div className="page">
-            <HelmetProvider><Helmet>
-              <title>Photos</title>
-              <meta name="description" content="Photos" />
-              <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=5, user-scalable=yes"></meta>
-            </Helmet></HelmetProvider>
+      <FadeTransition>
+        <div className="page">
+          <HelmetProvider><Helmet>
+            <title>Photos</title>
+            <meta name="description" content="Photos" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=5, user-scalable=yes"></meta>
+          </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
             {this.state.error &&
               <h6 className="box-text-nobold box-padding-15 box-color-red">{this.state.error}</h6>
@@ -126,9 +126,9 @@ class Photos extends React.Component {
               )
             })}
 
-          </div>
-        </FadeTransition>
-      </ErrorBoundary>
+          </ErrorBoundary>
+        </div>
+      </FadeTransition>
     )
   }
 }

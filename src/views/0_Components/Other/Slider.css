@@ -1,10 +1,13 @@
 .slider-wrapper {
-  margin: 30px 20px;
+  margin: 30px 15px;
 }
-.pts-scale { margin-right: -8px; }
 .pts-not { font-size: 12px; font-weight: 400; color: var(--mediumgray); }
 .pts-selected { font-size: 12px; font-weight: 700; color: var(--black); }
 .slider-labels > h6 { font-size: 12px; font-weight: 400; }
+.scale-margin { margin-left: 8px; }
+
+.reviewLabel-width { width: 65px; }
+.reviewLabel-pts { width: 18px; }
 
 .rc-slider {
   position: relative;

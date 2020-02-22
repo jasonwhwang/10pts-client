@@ -71,6 +71,7 @@ textarea {
   transition: 150ms;
 }
 textarea:focus { outline: none; }
+textarea:focus::placeholder { color: transparent; }
 textarea:disabled { border: none; background-color: transparent; }
 
 a {

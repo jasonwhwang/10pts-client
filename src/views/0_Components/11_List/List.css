@@ -30,3 +30,8 @@
   height: min(var(--width)/3, 100vmin/3);
   width: 1fr;
 }
+
+.list-saved-image {
+  height: min(var(--width)/3, 100vmin/3);
+  width: min(var(--width)/3, 100vmin/3);
+}
