@@ -105,12 +105,10 @@ const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, user }) => {
 }
 
 const FoodHeading = (props) => {
-  // let addressURL = props.address.replace(/, /g, ",").replace(/\s/g, '+')
   let addressURL = props.address.split(", ")
   let place = addressURL.shift()
   let addressTxt = addressURL.join(", ")
   addressURL = props.address.replace(/, /g, ",").replace(/\s/g, '+')
-  // console.log(addressURL)
   let username = props.user && props.user.username ? `/${props.user.username}` : ""
 
   let foodLink = `${props.tab}/f/${props.foodname}`

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
+import ListRow from '../0_Components/11_List/ListRow'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -20,6 +21,10 @@ class Saved extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
+    let dataSource = data
+    if(this.props.match.params.path === 'saved/likes') dataSource = data2
+    else if(this.props.match.params.path === 'saved/following') dataSource = data3
+
     return (
       <FadeTransition>
         <div className="page">
@@ -28,29 +33,149 @@ class Saved extends React.Component {
             <meta name="description" content="Saved" />
           </Helmet></HelmetProvider>
 
-          <div className="box-flex-row">
-            <div className="list-saved-image box-background">Box</div>
-
-            <div className="box-flex-col box-flex-1 box-padding-15">
-              <div className="box-flex-row box-flex-1">
-                <div className="box-flex-1">
-                  <h6 className="box-text-bold">Title</h6>
-                  <h6 className="box-text-nobold box-text-7">Address</h6>
-                </div>
-                <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">5</h6>
-              </div>
-
-              <div className="box-flex-row">
-                <h6 className="box-text-nobold box-text-7 box-flex-1">username</h6>
-                <button>Button</button>
-              </div>
-            </div>
-          </div>
+          <ListRow
+            data={dataSource}
+            location={this.props.location}
+            match={this.props.match}
+            />
 
         </div>
       </FadeTransition>
     )
   }
 }
+
+let data = [
+  {
+    photos: [null, null, null],
+    foodname: "food-name1",
+    foodTitle: "Food Name1",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  },
+  {
+    photos: [null, null, null],
+    foodname: "food-name2",
+    foodTitle: "Food Name2",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  },
+  {
+    photos: [null, null, null],
+    foodname: "food-name3",
+    foodTitle: "Food Name3",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isSaved: false,
+    savedCount: 7,
+    reviewsCount: 9,
+    hasReviewed: false
+  }
+]
+
+let data2 = [
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name1",
+    foodTitle: "Food Name1",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name2",
+    foodTitle: "Food Name2",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  },
+  {
+    user: { image: null, username: "username", isFollowing: false },
+    photos: [null, null, null],
+    foodname: "food-name3",
+    foodTitle: "Food Name3",
+    address: "City Hall, New York, NY",
+    pts: 5,
+    isLiked: false,
+    isSaved: false,
+    likesCount: 3,
+    commentsCount: 5,
+    updatedAt: new Date()
+  }
+]
+
+let data3 = [
+  {
+    _id: '1',
+    user: {
+      username: 'username',
+      image: null
+    },
+    notification: 'liked your review',
+    review: {
+      foodname: 'food-name',
+      foodTitle: 'Beef Noodle Soup',
+      username: 'username'
+    },
+    updatedAt: new Date()
+  },
+  {
+    _id: '2',
+    user: {
+      username: 'username',
+      image: null
+    },
+    notification: 'commented on your review',
+    review: {
+      foodname: 'food-name',
+      foodTitle: 'A Long Foody Food Name',
+      username: 'username'
+    },
+    updatedAt: new Date()
+  },
+  {
+    _id: '3',
+    user: {
+      username: 'username',
+      image: null
+    },
+    notification: 'is following you',
+    review: null,
+    updatedAt: new Date()
+  },
+  {
+    _id: '4',
+    user: {
+      username: 'username',
+      image: null
+    },
+    notification: 'has a new review',
+    review: {
+      foodname: 'food-name',
+      foodTitle: 'Food Name',
+      username: 'username'
+    },
+    updatedAt: new Date()
+  }
+]
 
 export default connect(mapStateToProps)(Saved)

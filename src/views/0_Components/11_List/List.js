@@ -30,7 +30,6 @@ class List extends React.Component {
     let tab = ''
     if (params.path) {
       if (params.path.indexOf('search') === 0) tab = '/search'
-      else if (params.path.indexOf('saved') === 0) tab = '/saved'
       else if (params.path.indexOf('account') === 0) tab = '/account'
     }
 

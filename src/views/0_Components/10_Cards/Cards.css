@@ -16,6 +16,12 @@
   min-width: 30px;
   border-radius: 50%;
 }
+.card-userImage-s {
+  height: 25px;
+  width: 25px;
+  min-width: 25px;
+  border-radius: 50%;
+}
 .card-foodHeading { box-sizing: border-box; padding: 0 15px; }
 .card-subText {
   max-width: 175px;
@@ -52,4 +58,9 @@
   border-radius: 9px;
   box-sizing: border-box;
   border: 1px solid var(--black);
+}
+
+.card-list-bottom {
+  box-sizing: border-box;
+  padding: 0 5px 15px 15px;
 }
