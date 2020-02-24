@@ -38,3 +38,13 @@
 
 .saved-border { box-sizing: border-box; border-bottom: 1px solid transparent; }
 .saved-selected { box-sizing: border-box; border-bottom: 1px solid var(--black); }
+
+.nav-badge {
+  margin-right: 15px;
+  background-color: var(--black);
+  color: white;
+  font-size: 10px;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  border-radius: 5px;
+}

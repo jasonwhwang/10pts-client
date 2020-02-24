@@ -52,7 +52,7 @@ const UserHeading = ({ tab, user }) => {
         <h6 className="box-text-bold box-margin-left-10 box-color-black">{user.username}</h6>
       </Link>
 
-      <FollowButton className="" username={user.username} isFollowing={user.isFollowing} />
+      <FollowButton className="follow-blue" username={user.username} isFollowing={user.isFollowing} />
     </div>
   )
 }

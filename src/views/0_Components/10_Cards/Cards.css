@@ -64,3 +64,7 @@
   box-sizing: border-box;
   padding: 0 5px 15px 15px;
 }
+
+.card-follow-margin {
+  margin: 15px 5px 20px 15px;
+}

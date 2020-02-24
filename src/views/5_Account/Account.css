@@ -1,0 +1,15 @@
+.account-image {
+  height: 100px;
+  width: 100px;
+  min-width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.account-tabs { height: 40px; }
+.settings-margin15 {
+  margin: 0 15px 15px 15px;
+}
+.settings-labelMargin {
+  margin: 0 0 3px 15px;
+}
+.settingss-padding-10 { box-sizing: border-box; padding: 10px;}

@@ -70,8 +70,8 @@ class Signup extends React.Component {
               onChange={this.changeInputState} />
 
             <h6 className="box-text-nobold box-text-8">
-              By signing up, you agree to our <Link to="/account/settings/terms" className="box-text-8 box-color-black box-text-underline">terms</Link> & <Link to="/account/settings/privacy" className="box-text-8 box-color-black box-text-underline">privacy</Link>.
-              </h6>
+              By signing up, you agree to our <Link to="/terms" className="box-text-8 box-color-black box-text-underline">terms</Link> & <Link to="/privacy" className="box-text-8 box-color-black box-text-underline">privacy</Link>.
+            </h6>
 
             <div className="box-flex-row box-flex-acenter box-margin-top-20">
               <button className="box-button">Sign Up</button>

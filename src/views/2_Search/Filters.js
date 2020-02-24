@@ -7,6 +7,7 @@ import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import { SearchPtsSlider, SearchPriceSlider } from '../0_Components/Other/Sliders'
 import Tags from '../0_Components/6_Tags/Tags'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import HideTabBar from '../0_Components/Other/HideTabBar'
 
 const mapStateToProps = state => ({
   search: state.search
@@ -66,16 +67,18 @@ class Filters extends React.Component {
               maxPrice={this.props.search.maxPrice}
               changeVal={this.props.changeVal} />
 
-            <div className="tags-margin box-position-relative">
-              <h6 className="box-text-nobold box-text-uppercase box-text-7 box-margin-bottom-10">Tags</h6>
-              <Tags
-                borderColor={'black'}
-                tags={this.props.search.searchTags}
-                changeVal={this.props.changeVal}
-                allowNew={false}
-                type={'searchTags'} />
-            </div>
-            
+            <HideTabBar>
+              <div className="tags-margin box-position-relative" id="inputContainer">
+                <h6 className="box-text-nobold box-text-uppercase box-text-7 box-margin-bottom-10">Tags</h6>
+                <Tags
+                  borderColor={'black'}
+                  tags={this.props.search.searchTags}
+                  changeVal={this.props.changeVal}
+                  allowNew={false}
+                  type={'searchTags'} />
+              </div>
+            </HideTabBar>
+
           </ErrorBoundary>
         </div>
       </FadeTransition>

@@ -3,7 +3,7 @@ import './NavBar.css'
 import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { Switch, Route, Link } from 'react-router-dom'
 import Logo from '../../../img/logo.png'
-import { ChevronLeft, Settings } from 'react-feather'
+import { ChevronLeft } from 'react-feather'
 
 import SearchNav from './SearchNav'
 import NewNav from './NewNav'
@@ -42,22 +42,16 @@ const NavBar = () => {
 }
 
 const DefaultNav = (props) => {
-  let showSettings = props.location.pathname.indexOf("/login") === 0
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
         <Link to="/" className="nav-padding15 box-flex-acenter">
           <img src={Logo} className="defaultNav-logo" alt="10pts" />
         </Link>
-
         <div className="box-flex-1"></div>
-
-        {showSettings &&
-          <Link to="/account/settings"
-            className="box-flex-acenter box-flex-end nav-padding15 defaultNav-button">
-            <Settings size={18} />
-          </Link>
-        }
+        <div className="box-flex-acenter">
+          <h6 className="nav-badge box-flex-acenter">Alpha</h6>
+        </div>
       </div>
     </FadeTransition>
   )

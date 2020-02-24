@@ -11,16 +11,28 @@ const mapStateToProps = state => ({
 })
 
 const AccountNav = (props) => {
-  if(props.match.params.path === 'account') return <UserNav user={props.user} />
+  if (props.match.params.path === 'account') return <UserNav user={props.user} history={props.history} match={props.match} />
   return <MemberNav history={props.history} match={props.match} />
 }
 
 const UserNav = (props) => {
-  let username = props.user && props.user.username ? props.user.username : ""
+  let username = props.user && props.user.username ? props.user.username : "username"
+  let params = props.match.params
   return (
     <FadeTransition>
       <div className="navBar-wrapper box-expand-height box-flex-stretch">
-        <h5 className="box-flex-acenter box-flex-1 nav-padding15">{username}</h5>
+        {params.route &&
+          <button onClick={() => props.history.goBack()}
+            className="box-flex-acenter defaultNav-button nav-padding10">
+            <ChevronLeft size={24} />
+            <h5 className="box-flex-acenter box-margin-left-5">{username}</h5>
+          </button>
+        }
+        {!params.route && 
+          <h5 className="box-flex-acenter nav-padding15">{username}</h5>
+        }
+
+        <div className="box-flex-1"></div>
 
         <Link to="/account/settings"
           className="box-flex-acenter box-flex-end nav-padding15 defaultNav-button">
@@ -43,7 +55,7 @@ const MemberNav = (props) => {
 
         <div className="box-flex-1"></div>
 
-        <FollowButton className="box-margin-right-5"/>
+        <FollowButton className="box-margin-right-5 follow-blue" />
       </div>
     </FadeTransition>
   )

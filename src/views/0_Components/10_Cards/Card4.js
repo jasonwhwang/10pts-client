@@ -27,25 +27,28 @@ const Card4 = ({ tab, photos, user, foodname, foodTitle, address, pts, isLiked, 
           <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">{pts}</h6>
         </Link>
 
-        <CardBottom user={user} isLiked={isLiked} isSaved={isSaved} />
+        <CardBottom user={user} isLiked={isLiked} isSaved={isSaved} tab={tab} />
       </div>
     </div>
   )
 }
 
-const CardBottom = ({ isLiked, isSaved, user, foodname }) => {
+const CardBottom = ({ isLiked, isSaved, user, foodname, tab }) => {
   if (user) {
     return (
       <div className="box-flex-acenter card-list-bottom">
-        <img className="box-img card-userImage-s box-margin-right-5"
-          src={user.image ? user.image : Photo}
-          alt={user.username} />
-        <h6 className="box-text-bold box-text-7 box-flex-1">{user.username}</h6>
+        <Link to={`${tab}/a/${user.username}`}
+          className="box-flex-acenter box-color-black box-flex-1">
+          <img className="box-img card-userImage-s box-margin-right-5"
+            src={user.image ? user.image : Photo}
+            alt={user.username} />
+          <h6 className="box-text-bold box-text-7 box-flex-1">{user.username}</h6>
+        </Link>
         <LikeButton isLiked={isLiked} foodname={foodname} username={user.username} />
       </div>
     )
   }
-  
+
   return (
     <div className="box-flex-row card-list-bottom">
       <div className="box-text-nobold box-text-7 box-flex-1"></div>

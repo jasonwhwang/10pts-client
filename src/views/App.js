@@ -43,7 +43,7 @@ const App = (props) => {
 
           <Route exact path="/:path(saved|saved/likes|saved/following)" component={Saved} />
 
-          <Route exact path="/:path(account)/:route(settings|settings/terms|settings/privacy)" component={Settings} />
+          <Route exact path="/:path(account)/:route(settings)" component={Settings} />
           <Route exact path="/:path(account)/:route?" component={Account} />
 
           <Route exact path="/:path(login|login/signup|login/welcome|login/success|login/resetpassword|login/newpassword)" component={Login} />

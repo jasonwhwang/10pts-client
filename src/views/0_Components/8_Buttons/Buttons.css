@@ -1,2 +1,8 @@
 .follow-blue { color: var(--lightblue); }
 .follow-blue:hover { color: var(--lightblue); opacity: 0.5; }
+
+.flagDropdown {
+  height: 20px;
+  width: 20px;
+  min-width: 20px;
+}

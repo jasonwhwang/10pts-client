@@ -12,13 +12,13 @@ class HideTabBar extends React.Component {
     inputContainer && inputContainer.removeEventListener('focusout', this.showBar)
   }
   hideBar = (e) => {
-    if (e.target.matches('input')) {
+    if (e.target.matches('input') || e.target.matches('textarea')) {
       let tabBar = document.getElementById("TabBar")
       tabBar && tabBar.classList.add("tabBar-hide")
     }
   }
   showBar = (e) => {
-    if (e.target.matches("input")) {
+    if (e.target.matches("input") || e.target.matches('textarea')) {
       let tabBar = document.getElementById("TabBar")
       tabBar && tabBar.classList.remove("tabBar-hide")
     }
