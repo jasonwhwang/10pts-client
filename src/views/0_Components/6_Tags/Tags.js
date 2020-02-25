@@ -40,7 +40,6 @@ class Tags extends React.Component {
     if(duplicate.length >= 1) return
     const newTags = [].concat(this.props.tags, tag)
     this.props.changeVal(this.props.type, newTags)
-    console.log(newTags)
   }
 
   // onInput = async (query) => {

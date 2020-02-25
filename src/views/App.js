@@ -19,6 +19,7 @@ import Food from './6_Food/Food'
 import Review from './7_Review/Review'
 import MapFrame from './8_Other/MapFrame'
 import Login from './9_Login/Login'
+import About from './8_Other/About'
 
 const App = (props) => {
   return (
@@ -57,6 +58,7 @@ const App = (props) => {
 
           <Route exact path='/:path(a|search/a|saved/a|account/a)/:username/:route?' component={Account} />
 
+          <Route exact path="/:path(about|terms|privacy)" component={About} />
           <Route component={NotFound} />
         </Switch>
       </ScrollTop>

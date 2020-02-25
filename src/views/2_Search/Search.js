@@ -6,6 +6,11 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import ListRow from '../0_Components/11_List/ListRow'
+
+const mapStateToProps = state => ({
+  category: state.search.category
+})
 
 const mapDispatchToProps = dispatch => ({
   changeVal: (type, val) =>
@@ -47,10 +52,17 @@ class Search extends React.Component {
           </Helmet></HelmetProvider>
           <ErrorBoundary>
 
-            <List
-              data={data}
-              match={this.props.match}
-              location={this.props.location} />
+            {!this.props.category ?
+              <List
+                data={data}
+                match={this.props.match}
+                location={this.props.location} />
+              :
+              <ListRow
+                data={data2}
+                match={this.props.match}
+                location={this.props.location} />
+            }
 
           </ErrorBoundary>
         </div>
@@ -95,4 +107,16 @@ let data = [
   }
 ]
 
-export default connect(null, mapDispatchToProps)(Search)
+let data2 = [
+  {
+    user: { image: null, username: "username1", isFollowing: false }
+  },
+  {
+    user: { image: null, username: "username2", isFollowing: false }
+  },
+  {
+    user: { image: null, username: "username3", isFollowing: false }
+  }
+]
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

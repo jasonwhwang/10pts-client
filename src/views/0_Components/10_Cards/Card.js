@@ -12,32 +12,29 @@ import ShareButton from '../8_Buttons/ShareButton'
 import CommentButton from '../8_Buttons/CommentButton'
 import ReviewButton from '../8_Buttons/ReviewButton'
 import Ago from '../Other/Ago'
-import ErrorBoundary from '../3_ErrorBoundary/ErrorBoundary'
 
 const Card = (props) => {
-  let divID = props.user ? props.foodname+"-"+props.user.username : props.foodname
+  let divID = props.user ? props.foodname + "-" + props.user.username : props.foodname
   return (
-    <ErrorBoundary>
-      <FadeTransition>
-        <div id={divID}>
-          <UserHeading user={props.user} tab={props.tab} />
+    <FadeTransition>
+      <div id={divID}>
+        <UserHeading user={props.user} tab={props.tab} />
 
-          <Photos {...props} />
+        <Photos {...props} />
 
-          <Buttons
-            isLiked={props.isLiked} isSaved={props.isSaved}
-            hasReviewed={props.hasReviewed}
-            foodname={props.foodname} user={props.user} />
+        <Buttons
+          isLiked={props.isLiked} isSaved={props.isSaved}
+          hasReviewed={props.hasReviewed}
+          foodname={props.foodname} user={props.user} />
 
-          <FoodHeading {...props} />
+        <FoodHeading {...props} />
 
-          <StatsHeading
-            likesCount={props.likesCount} commentsCount={props.commentsCount}
-            savedCount={props.savedCount} reviewsCount={props.reviewsCount}
-            time={props.updatedAt} params={props.params} user={props.user} />
-        </div>
-      </FadeTransition>
-    </ErrorBoundary>
+        <StatsHeading
+          likesCount={props.likesCount} commentsCount={props.commentsCount}
+          savedCount={props.savedCount} reviewsCount={props.reviewsCount}
+          time={props.updatedAt} params={props.params} user={props.user} />
+      </div>
+    </FadeTransition>
   )
 }
 
@@ -58,7 +55,10 @@ const UserHeading = ({ tab, user }) => {
 }
 
 const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => {
-  let pathLetter = params.path && params.path.indexOf("/f/") !== -1 ? 'p' : 'f'
+  let pathLetter = ''
+  if (params.path) {
+    pathLetter = params.path === 'f' || params.path.indexOf("/f") !== -1 ? 'p' : 'f'
+  }
   let username = user && user.username ? `/${user.username}` : ""
   return (
     <div className="box-box">
@@ -138,7 +138,7 @@ const FoodHeading = (props) => {
 
 const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, time, params, user }) => {
   if (params.foodname) return null
-  
+
   let likesString, commentsString, savedString, reviewsString
   if (user) {
     likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
@@ -148,7 +148,7 @@ const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, tim
     reviewsString = reviewsCount === 1 ? '1 review' : `${reviewsCount} reviews`
   }
   let statsString = user ? likesString + ', ' + commentsString : savedString + ', ' + reviewsString
-  
+
   return (
     <h6 className="card-stats box-text-7 box-border-bottom box-color-gray box-text-nobold">
       {statsString}

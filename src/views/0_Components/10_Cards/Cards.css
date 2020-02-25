@@ -10,6 +10,12 @@
   box-sizing: border-box;
   padding: 0 5px;
 }
+.card-userImage-l {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+}
 .card-userImage {
   height: 30px;
   width: 30px;

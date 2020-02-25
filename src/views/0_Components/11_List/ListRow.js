@@ -1,8 +1,8 @@
 import React from 'react'
 import './List.css'
-import Card4 from '../10_Cards/Card4'
-import Card5 from '../10_Cards/Card5'
-import Card6 from '../10_Cards/Card6'
+import CardRow1 from '../10_Cards/CardRow1'
+import CardRow2 from '../10_Cards/CardRow2'
+import CardRow3 from '../10_Cards/CardRow3'
 
 class ListRow extends React.Component {
   render() {
@@ -11,6 +11,7 @@ class ListRow extends React.Component {
     if (params.path) {
       if (params.path.indexOf('saved') === 0) tab = '/saved'
       else if (params.path.indexOf('account') === 0) tab = '/account'
+      else if (params.path.indexOf('search') === 0) tab = '/search'
     }
     
     let isSaved = params.route === 'saved' || params.route === 'likes'
@@ -34,6 +35,10 @@ class ListRow extends React.Component {
       return <ListRow3 {...this.props} params={this.props.match.params} tab={tab} />
     }
 
+    else if(tab === '/search') {
+      return <ListRow3 {...this.props} params={this.props.match.params} tab={tab} />
+    }
+
     return null
   }
 }
@@ -42,8 +47,8 @@ const ListRow1 = ({ data, tab, params }) => {
   return (
     <>
       {data.map((foodItem, index) => {
-        if (foodItem) return <Card4 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
-        else return <Card4 key={'index' + index} tab={tab} params={params} />
+        if (foodItem) return <CardRow1 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+        else return <CardRow1 key={'index' + index} tab={tab} params={params} />
       })}
     </>
   )
@@ -53,8 +58,8 @@ const ListRow2 = ({ data, tab, params }) => {
   return (
     <>
       {data.map((item, index) => {
-        if (item) return <Card5 {...item} key={item._id + index} tab={tab} params={params} />
-        else return <Card5 key={'index' + index} tab={tab} params={params} />
+        if (item) return <CardRow2 {...item} key={item._id + index} tab={tab} params={params} />
+        else return <CardRow2 key={'index' + index} tab={tab} params={params} />
       })}
     </>
   )
@@ -64,8 +69,8 @@ const ListRow3 = ({ data, tab, params }) => {
   return (
     <>
       {data.map((item, index) => {
-        if (item) return <Card6 {...item} key={index} tab={tab} params={params} />
-        else return <Card6 key={'index' + index} tab={tab} params={params} />
+        if (item) return <CardRow3 {...item} key={index} tab={tab} params={params} />
+        else return <CardRow3 key={'index' + index} tab={tab} params={params} />
       })}
     </>
   )

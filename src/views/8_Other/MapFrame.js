@@ -3,13 +3,14 @@ import './Other.css'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import Loading from '../0_Components/4_Loading/Loading'
+import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 
 class MapFrame extends React.Component {
   render() {
     let title = this.props.location.search
     let query = ""
-    if(title) {
-      query = title.replace("?q=","")
+    if (title) {
+      query = title.replace("?q=", "")
       title = query.replace(/,/g, ", ").replace(/\+/g, ' ')
     }
 
@@ -23,19 +24,21 @@ class MapFrame extends React.Component {
               <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/map${this.props.location.search}`} />
             }
           </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
-          <div className="map-loading box-flex-row-center">
-            <Loading />
-          </div>
+            <div className="map-loading box-flex-row-center">
+              <Loading />
+            </div>
 
-          <div className="box-flex-1 box-flex-col">
-            <iframe className="box-expand-width box-flex-1 mapFrame"
-              title={title}
-              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_g_API_KEY}&q=${query}`}
-              allowFullScreen
+            <div className="box-flex-1 box-flex-col">
+              <iframe className="box-expand-width box-flex-1 mapFrame"
+                title={title}
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_g_API_KEY}&q=${query}`}
+                allowFullScreen
               />
-          </div>
+            </div>
 
+          </ErrorBoundary>
         </div>
       </FadeTransition>
     )

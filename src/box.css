@@ -47,11 +47,10 @@
 .box-tags {
   display: inline-block;
   box-sizing: border-box;
-  margin: 0 6px 6px 0 !important;
-  padding: 6px 8px !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 2px;
-  background: white;
+  margin: 0 6px 6px 0;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
   line-height: inherit;
 }
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Photo from '../../../img/user.png'
 import Ago from '../Other/Ago'
 
-const Card5 = ({ tab, user, notification, review, updatedAt }) => {
+const CardRow2 = ({ tab, user, notification, review, updatedAt }) => {
   let username = user && user.username ? user.username : 'username'
   return (
     <div
@@ -33,7 +33,7 @@ const Card5 = ({ tab, user, notification, review, updatedAt }) => {
   )
 }
 
-Card5.defaultProps = {
+CardRow2.defaultProps = {
   photos: [null],
   foodname: "",
   foodTitle: "",
@@ -41,4 +41,4 @@ Card5.defaultProps = {
   pts: 0
 }
 
-export default Card5
+export default CardRow2
