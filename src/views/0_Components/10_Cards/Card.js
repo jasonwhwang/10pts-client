@@ -55,10 +55,7 @@ const UserHeading = ({ tab, user }) => {
 }
 
 const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => {
-  let pathLetter = ''
-  if (params.path) {
-    pathLetter = params.path === 'f' || params.path.indexOf("/f") !== -1 ? 'p' : 'f'
-  }
+  let pathLetter = params.path && (params.path === 'f' || params.path.indexOf("/f") !== -1) ? 'p' : 'f'
   let username = user && user.username ? `/${user.username}` : ""
   return (
     <div className="box-box">

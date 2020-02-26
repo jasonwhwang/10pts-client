@@ -1,0 +1,9 @@
+.food-statsHeight {
+  box-sizing: border-box;
+  padding: 5px 0px;
+  margin: 30px 15px 0 15px;
+}
+.food-reviewsHeight {
+  height: 60px;
+  margin: 0 15px;
+}

@@ -5,6 +5,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import Card from '../0_Components/10_Cards/Card'
+import ProgressBar from '../0_Components/Other/ProgressBar'
+import { Link } from 'react-router-dom'
+import Photo from '../../img/user.png'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -52,15 +55,62 @@ const FoodMain = (props) => {
     <>
       <Card {...props.data} tab={tab} params={params} />
 
-      <div className="box-flex-row box-flex-wrap box-margin-15">
-        <h6 className="box-tags box-text-7">{`$${props.data.price}`}</h6>
-        {
-          props.data.tags.map((tag) => {
-            return <h6 key={tag._id} className="box-tags box-color-gray box-text-7 box-text-nobold">{tag.name}</h6>
-          })
-        }
-      </div>
+      <FoodTags price={props.data.price} tags={props.data.tags} />
+
+      <ProgressBar pts={props.data.ptsTaste} label={'Taste'} />
+      <ProgressBar pts={props.data.ptsAppearance} label={'Appearance'} />
+      <ProgressBar pts={props.data.ptsTexture} label={'Texture'} />
+      <ProgressBar pts={props.data.ptsAroma} label={'Aroma'} />
+      <ProgressBar pts={props.data.ptsBalance} label={'Balance'} />
+
+      <FoodStats savedCount={props.data.savedCount} reviewsCount={props.data.reviewsCount} />
+      <FoodReviews reviews={props.data.reviews} tab={tab} params={params} />
+      <div className="box-margin-bottom-60"></div>
     </>
+  )
+}
+
+const FoodTags = ({ price, tags }) => {
+  return (
+    <div className="box-flex-row box-flex-wrap box-margin-15">
+      <h6 className="box-tags box-text-7">{`$${price}`}</h6>
+      {tags.map((tag) => {
+        return <h6 key={tag._id} className="box-tags box-color-gray box-text-7 box-text-nobold">{tag.name}</h6>
+      })}
+    </div>
+  )
+}
+
+const FoodStats = ({ savedCount, reviewsCount }) => {
+  let savedString = savedCount === 1 ? '1 Save' : `${savedCount} Saves`
+  let reviewsString = reviewsCount === 1 ? '1 Review' : `${reviewsCount} Reviews`
+
+  return (
+    <div className="box-flex-acenter box-flex-between food-statsHeight box-border-bottom">
+      <h6 className="box-text-bold">{reviewsString}</h6>
+      <h6 className="box-text-nobold box-text-7">{savedString}</h6>
+    </div>
+  )
+}
+
+const FoodReviews = ({ reviews, tab, params }) => {
+  return (
+    <>{reviews.map(review => {
+      let username = review.user && review.user.username ? review.user.username : ''
+      let likes = review.likes === 1 ? '1 like' : review.likes + " likes" 
+      return (
+        <Link to={`${tab}/f/${params.foodname}/${username}`}
+          className="box-flex-acenter food-reviewsHeight box-color-black"
+          key={username} >
+          <img src={review.user && review.user.image ? review.user.image : Photo}
+            className="card-userImage-l box-img"
+            alt={username} />
+          <h6 className="box-text-bold box-flex-1 box-margin-15">{username}</h6>
+          <h6 className="box-text-nobold box-text-8">{likes}</h6>
+          <h6 className="box-margin-left-20 card-pts-medium box-flex-row-center">{review.pts}</h6>
+        </Link>
+      )
+    })}</>
   )
 }
 
@@ -84,7 +134,12 @@ let data = {
   ptsBalance: 5,
   reviews: [
     {
-      user: { image: null, username: 'username' },
+      user: { image: null, username: 'username1' },
+      pts: 5,
+      likes: 35
+    },
+    {
+      user: { image: null, username: 'username2' },
       pts: 5,
       likes: 35
     }
