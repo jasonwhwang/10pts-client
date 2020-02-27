@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { MoreHorizontal, Flag } from 'react-feather'
 
-const FlagDropdown = (props) => {
+const FlagButton = (props) => {
   let [showFlag, changeFlag] = useState(false)
   let [flagged, changeFlagged] = useState(false)
 
@@ -31,6 +31,6 @@ const FlagDropdown = (props) => {
     </div>
   )
 }
-FlagDropdown.defaultProps = { flagged: false }
+FlagButton.defaultProps = { flagged: false }
 
-export default FlagDropdown
+export default FlagButton

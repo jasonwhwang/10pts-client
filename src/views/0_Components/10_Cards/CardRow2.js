@@ -13,12 +13,12 @@ const CardRow2 = ({ tab, user, notification, review, updatedAt }) => {
           className="card-userImage box-img box-margin-right-10"
           alt={username} />
       </Link>
-      <div className="box-flex-1 box-display-block">
+      <div className="box-flex-1 box-display-inline">
         <Link to={`${tab}/a/${username}`}
-          className="box-display-block box-text-bold box-margin-right-5 box-text-6 box-color-black">
+          className="box-display-inline box-text-bold box-margin-right-5 box-text-6 box-color-black">
           {username}
         </Link>
-        <h6 className="box-display-block box-text-nobold box-margin-right-5">{notification}</h6>
+        <h6 className="box-display-inline box-text-nobold box-margin-right-5">{notification}</h6>
         {review &&
           <Link to={`${tab}/f/${review.foodname}/${review.username}`}
             className="box-text-6 box-color-black" >

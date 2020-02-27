@@ -8,6 +8,7 @@ import Card from '../0_Components/10_Cards/Card'
 import ProgressBar from '../0_Components/Other/ProgressBar'
 import { Link } from 'react-router-dom'
 import Photo from '../../img/user.png'
+import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -24,6 +25,7 @@ class Food extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
     let params = this.props.match.params
+    let isMain = params.path === 'f' || params.path.indexOf('/f') !== -1
     return (
       <FadeTransition>
         <div className="page">
@@ -34,9 +36,12 @@ class Food extends React.Component {
               <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}`} />
             }
           </Helmet></HelmetProvider>
+          <ErrorBoundary>
 
-          <FoodMain {...this.props} data={data} />
+            {isMain ? <FoodMain {...this.props} data={data} /> : <FoodPhotos {...this.props} data={data} />
+            }
 
+          </ErrorBoundary>
         </div>
       </FadeTransition>
     )
@@ -97,7 +102,7 @@ const FoodReviews = ({ reviews, tab, params }) => {
   return (
     <>{reviews.map(review => {
       let username = review.user && review.user.username ? review.user.username : ''
-      let likes = review.likes === 1 ? '1 like' : review.likes + " likes" 
+      let likes = review.likes === 1 ? '1 like' : review.likes + " likes"
       return (
         <Link to={`${tab}/f/${params.foodname}/${username}`}
           className="box-flex-acenter food-reviewsHeight box-color-black"
@@ -109,6 +114,19 @@ const FoodReviews = ({ reviews, tab, params }) => {
           <h6 className="box-text-nobold box-text-8">{likes}</h6>
           <h6 className="box-margin-left-20 card-pts-medium box-flex-row-center">{review.pts}</h6>
         </Link>
+      )
+    })}</>
+  )
+}
+
+const FoodPhotos = (props) => {
+  return (
+    <>{props.data.photos.map((photo, index) => {
+      let altTxt = `${props.data.foodTitle}, ${props.data.address}, Image ${index}`
+      return (
+        <div className="box-expand-width box-flex-col box-position-relative" key={altTxt}>
+          <img className="box-expand-width" src={photo ? photo : Photo} alt={altTxt} />
+        </div>
       )
     })}</>
   )

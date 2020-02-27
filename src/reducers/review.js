@@ -5,7 +5,6 @@ const defaultState = {
   foodTitle: '',
   foodname: '',
   price: '',
-  description: '',
   tags: [],
   pts: 5,
   ptsTaste: 5,

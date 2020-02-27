@@ -9,7 +9,7 @@ import ListRow from '../0_Components/11_List/ListRow'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import Image from '../../img/user.png'
 import { Link } from 'react-router-dom'
-import FlagDropdown from '../0_Components/8_Buttons/FlagDropdown'
+import FlagButton from '../0_Components/8_Buttons/FlagButton'
 
 const mapStateToProps = state => ({
   authUser: state.common.user
@@ -136,7 +136,7 @@ const AccountDetails = (props) => {
         <h6 className="box-text-nobold box-flex-1 box-margin-right-10">{props.bio}</h6>
         {props.match.params.username && !isAuthUser && 
           <div className="box-flex-col box-flex-end">
-            <FlagDropdown flagged={props.flagged} />
+            <FlagButton flagged={props.flagged} />
           </div>
         }
       </div>

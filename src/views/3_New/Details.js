@@ -6,7 +6,6 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import AutoSearch from '../0_Components/Other/AutoSearch'
 import PhotosList from './PhotosList'
-import TextareaAutosize from 'react-autosize-textarea'
 import Tags from '../0_Components/6_Tags/Tags'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 
@@ -74,15 +73,6 @@ class Details extends React.Component {
                 value={this.props.review.price}
                 onChange={this.changeInput}
               />
-            </div>
-
-            <div className="box-margin-15">
-              <TextareaAutosize rows={3}
-                id="description"
-                placeholder="Description"
-                className="box-input box-expand-width"
-                value={this.props.review.description}
-                onChange={this.changeInput} />
             </div>
 
             <div className="box-margin-15">

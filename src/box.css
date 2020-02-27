@@ -190,6 +190,7 @@
 .box-expand-height { height: 100%; }
 .box-expand-width { width: 100%; }
 .box-display-block { display: inline-block; }
+.box-display-inline { display: inline; }
 .box-display-none { display: none;}
 .box-show { opacity: 1; visibility: visible; transition: 150ms; }
 .box-hide { opacity: 0; visibility: hidden; transition: 150ms; }

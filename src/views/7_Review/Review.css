@@ -1,0 +1,12 @@
+.review-statsHeight {
+  box-sizing: border-box;
+  padding: 5px 0px;
+  margin: 10px 15px 0 15px;
+}
+
+.review-textarea {
+  position: fixed;
+  z-index: 90;
+  bottom: 0;
+  width: min(var(--width), 100vmin);
+}
