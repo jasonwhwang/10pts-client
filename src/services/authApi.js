@@ -22,7 +22,6 @@ async function logIn(email, password) {
       username: email,
       password
     })
-    AuthStore.setLocalStorage()
     return res
 
   } catch (error) {
@@ -43,10 +42,8 @@ async function logOut() {
 }
 
 async function refresh() {
-  AuthStore.getLocalStorage()
   try {
     let res = await Auth.currentSession()
-    AuthStore.setLocalStorage()
     return res
 
   } catch (error) {

@@ -40,11 +40,12 @@ class Login extends React.Component {
     }
     // Get User Profile
     // response = await getLogIn()
-    if (response.error) {
-      this.setState({ ...this.state, error: response.error, loading: false })
-      return
-    }
-    this.props.changeUser(response.user) // response.attributes.email
+    // if (response.error) {
+    //   this.setState({ ...this.state, error: response.error, loading: false })
+    //   return
+    // }
+    // this.props.changeUser(response.user) // response.attributes.email
+    this.props.changeUser('username')
     this.props.history.push("/")
   }
 

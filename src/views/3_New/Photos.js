@@ -31,29 +31,11 @@ const mapDispatchToProps = dispatch => ({
 class Photos extends React.Component {
   state = {
     loading: true,
-    error: '',
-    scale: false
+    error: ''
   }
   componentDidMount() {
     this.setPhotos()
     this.setState({ ...this.state, loading: false })
-    if (window.visualViewport) window.visualViewport.addEventListener('resize', this.resizeFunction)
-  }
-  componentWillUnmount() {
-    if (window.visualViewport) window.visualViewport.removeEventListener('resize', this.resizeFunction)
-  }
-  resizeFunction = () => {
-    let scale = window.visualViewport.scale !== 1
-    if (scale !== this.state.scale) this.setState({ ...this.state, scale: scale })
-  }
-  componentDidUpdate(prevState) {
-    if (prevState.scale !== this.state.scale) {
-      if (this.state.scale) {
-        document.getElementById('navBar').classList.add('navBar-hide')
-      } else {
-        document.getElementById('navBar').classList.remove('navBar-hide')
-      }
-    }
   }
 
   setPhotos = async () => {
@@ -91,7 +73,7 @@ class Photos extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
-    let hideButton = this.state.scale || this.props.review.photos.length >= 5
+    let hideButton = this.props.review.photos.length >= 5
 
     return (
       <FadeTransition>
@@ -99,7 +81,6 @@ class Photos extends React.Component {
           <HelmetProvider><Helmet>
             <title>Photos</title>
             <meta name="description" content="Photos" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=5, user-scalable=yes"></meta>
           </Helmet></HelmetProvider>
           <ErrorBoundary>
 
