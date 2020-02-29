@@ -10,3 +10,5 @@
   bottom: 0;
   width: min(var(--width), 100vmin);
 }
+
+.send-margin { margin-right: 15px; margin-top: 15px;}

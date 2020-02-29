@@ -4,7 +4,7 @@ import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Search, Filter, XCircle } from 'react-feather'
-import HideTabBar from '../Other/HideTabBar'
+import { HideTabBarInput } from '../Other/HideTabBar'
 
 const mapStateToProps = state => ({
   keywords: state.search.keywords,
@@ -35,14 +35,14 @@ class SearchNav extends React.Component {
         <div className="navBar-wrapper box-expand-height box-flex-stretch">
           <Search size={18} className="searchNav-searchIconPadding box-expand-height" />
 
-          <HideTabBar>
+          <HideTabBarInput>
             <form id="inputContainer" className="box-flex-1 box-flex-row" onSubmit={this.submitSearch}>
               <input placeholder={searchPlaceholder} id="keywords"
                 className="searchNav-searchInput box-flex-1 box-text-5"
                 value={this.props.keywords}
                 onChange={this.onChangeKeywords} />
             </form>
-          </HideTabBar>
+          </HideTabBarInput>
 
           <button type="button"
             className={`box-flex-row-center defaultNav-button searchNav-xButton

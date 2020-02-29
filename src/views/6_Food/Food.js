@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
-import Card from '../0_Components/10_Cards/Card'
-import ProgressBar from '../0_Components/Other/ProgressBar'
 import { Link } from 'react-router-dom'
 import Photo from '../../img/user.png'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import { CardRatings, PhotosList } from '../0_Components/10_Cards/CardRatings'
+import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -37,8 +37,10 @@ class Food extends React.Component {
             }
           </Helmet></HelmetProvider>
           <ErrorBoundary>
+            <HideTabBarRoute location={this.props.location} match={this.props.match} />
 
-            {isMain ? <FoodMain {...this.props} data={data} /> : <FoodPhotos {...this.props} data={data} />
+            {isMain ? <FoodMain {...this.props} data={data} />
+              : <PhotosList {...this.props} data={data} />
             }
 
           </ErrorBoundary>
@@ -58,31 +60,11 @@ const FoodMain = (props) => {
   }
   return (
     <>
-      <Card {...props.data} tab={tab} params={params} />
-
-      <FoodTags price={props.data.price} tags={props.data.tags} />
-
-      <ProgressBar pts={props.data.ptsTaste} label={'Taste'} />
-      <ProgressBar pts={props.data.ptsAppearance} label={'Appearance'} />
-      <ProgressBar pts={props.data.ptsTexture} label={'Texture'} />
-      <ProgressBar pts={props.data.ptsAroma} label={'Aroma'} />
-      <ProgressBar pts={props.data.ptsBalance} label={'Balance'} />
-
+      <CardRatings data={props.data} tab={tab} params={params} />
       <FoodStats savedCount={props.data.savedCount} reviewsCount={props.data.reviewsCount} />
       <FoodReviews reviews={props.data.reviews} tab={tab} params={params} />
       <div className="box-margin-bottom-60"></div>
     </>
-  )
-}
-
-const FoodTags = ({ price, tags }) => {
-  return (
-    <div className="box-flex-row box-flex-wrap box-margin-15">
-      <h6 className="box-tags box-text-7">{`$${price}`}</h6>
-      {tags.map((tag) => {
-        return <h6 key={tag._id} className="box-tags box-color-gray box-text-7 box-text-nobold">{tag.name}</h6>
-      })}
-    </div>
   )
 }
 
@@ -114,19 +96,6 @@ const FoodReviews = ({ reviews, tab, params }) => {
           <h6 className="box-text-nobold box-text-8">{likes}</h6>
           <h6 className="box-margin-left-20 card-pts-medium box-flex-row-center">{review.pts}</h6>
         </Link>
-      )
-    })}</>
-  )
-}
-
-const FoodPhotos = (props) => {
-  return (
-    <>{props.data.photos.map((photo, index) => {
-      let altTxt = `${props.data.foodTitle}, ${props.data.address}, Image ${index}`
-      return (
-        <div className="box-expand-width box-flex-col box-position-relative" key={altTxt}>
-          <img className="box-expand-width" src={photo ? photo : Photo} alt={altTxt} />
-        </div>
       )
     })}</>
   )

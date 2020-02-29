@@ -1,6 +1,6 @@
 import React from 'react'
 
-class HideTabBar extends React.Component {
+class HideTabBarInput extends React.Component {
   componentDidMount() {
     let inputContainer = document.getElementById('inputContainer')
     inputContainer && inputContainer.addEventListener('focusin', this.hideBar)
@@ -28,4 +28,34 @@ class HideTabBar extends React.Component {
   }
 }
 
-export default HideTabBar
+class HideTabBarRoute extends React.Component {
+  componentDidMount() {
+    this.changeHideTabBar()
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) this.changeHideTabBar()
+  }
+  changeHideTabBar = () => {
+    let params = this.props.match.params
+    let isMain = params.path === 'f' || params.path.indexOf('/f') !== -1
+    if (!isMain) {
+      let tabBar = document.getElementById("TabBar")
+      tabBar && tabBar.classList.add("tabBar-hide")
+    } else {
+      let tabBar = document.getElementById("TabBar")
+      tabBar && tabBar.classList.remove("tabBar-hide")
+    }
+  }
+  componentWillUnmount() {
+    let tabBar = document.getElementById("TabBar")
+    tabBar && tabBar.classList.remove("tabBar-hide")
+  }
+  render() {
+    return null
+  }
+}
+
+export {
+  HideTabBarInput,
+  HideTabBarRoute
+}

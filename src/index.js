@@ -15,7 +15,7 @@ import configureStore from './reducers/store'
 import { PersistGate } from 'redux-persist/integration/react'
 export const { store, persistor } = configureStore()
 
-ReactGA.initialize(process.env.REACT_APP_ga_ID)
+if (!process.env.REACT_APP_var_STAGE === 'dev') ReactGA.initialize(process.env.REACT_APP_ga_ID)
 
 Amplify.configure({
   Auth: {
@@ -23,7 +23,14 @@ Amplify.configure({
     userPoolId: process.env.REACT_APP_c_USER_POOL_ID,
     identityPoolId: process.env.REACT_APP_c_IDENTITY_POOL_ID,
     userPoolWebClientId: process.env.REACT_APP_c_APP_CLIENT_ID,
-    storage: AuthStore
+    storage: AuthStore,
+    oauth: {
+      domain: process.env.REACT_APP_c_APP_DOMAIN,
+      scope: ['email', 'profile', 'openid'],
+      redirectSignIn: `${process.env.REACT_APP_url_LINK}/account`,
+      redirectSignOut: process.env.REACT_APP_url_LINK,
+      responseType: 'token'
+    }
   },
   Storage: {
     region: process.env.REACT_APP_s3_REGION,
@@ -40,6 +47,6 @@ ReactDOM.render(
       </BrowserRouter>
     </PersistGate>
   </Provider>,
-document.getElementById('root'))
+  document.getElementById('root'))
 
 serviceWorker.register()

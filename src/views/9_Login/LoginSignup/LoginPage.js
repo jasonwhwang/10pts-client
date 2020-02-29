@@ -6,6 +6,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { logIn } from '../../../services/authApi'
 import '../Login.css'
 import LoadingPage from '../../0_Components/4_Loading/LoadingPage'
+// import { Auth } from 'aws-amplify'
 // import { getLogIn } from '../../../services/api'
 
 const mapDispatchToProps = dispatch => ({
@@ -67,6 +68,11 @@ class Login extends React.Component {
               this.state.error &&
               <h6 className="box-text-8 box-color-red box-text-nobold">{this.state.error}</h6>
             }
+
+            {/* <button type="button"
+              onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>
+              Sign in with Google
+            </button> */}
 
             <input value={this.state.email}
               type="email"

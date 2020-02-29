@@ -9,7 +9,7 @@ import SettingsAccount from './SettingsAccount'
 import SettingsImage from './SettingsImage'
 import SettingsPassword from './SettingsPassword'
 import { Link } from 'react-router-dom'
-import HideTabBar from '../0_Components/Other/HideTabBar'
+import { HideTabBarInput } from '../0_Components/Other/HideTabBar'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -44,12 +44,12 @@ class Settings extends React.Component {
           <ErrorBoundary>
 
             <SettingsImage user={this.state.user} changeUser={this.changeUser} />
-            <HideTabBar>
+            <HideTabBarInput>
               <div id="inputContainer">
                 <SettingsAccount user={this.state.user} changeUser={this.changeUser} />
                 <SettingsPassword />
               </div>
-            </HideTabBar>
+            </HideTabBarInput>
 
             <div className="box-flex-col box-margin-15 box-margin-top-40 box-margin-bottom-60 box-border-top">
               <Link to="/about" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">About</Link>
