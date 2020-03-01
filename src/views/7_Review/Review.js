@@ -79,7 +79,7 @@ const ReviewMain = (props) => {
           <h6 className="box-text-nobold box-text-8 ">
             <ReviewTime time={props.data.updatedAt} />
           </h6>
-          <FlagButton flagged={props.data.flagged} />
+          <FlagButton flagged={props.data.isFlagged} />
         </div>
       </div>
 
@@ -111,12 +111,12 @@ let data = {
   ptsAroma: 5,
   ptsBalance: 5,
   review: "Review of the food dish goes here. You can expect it to be a short but detailed review of the aspects of the food dish. While it may be a bit long, it will cover all the ratings such as taste, appearance, texture, aroma, balance, and other things about the food dish. This is just the beta version, but we will see how reviewers would like to discuss about their favorite food dish.",
-  flagged: false,
+  isFlagged: false,
   comments: [
     {
       _id: 123,
       user: { image: null, username: 'username1' },
-      comment: 'Comment from user. It can be really long, or really short depending on what the user wants to say.',
+      body: 'Comment from user. It can be really long, or really short depending on what the user wants to say.',
       isLiked: false,
       likesCount: 5,
       updatedAt: new Date()

@@ -1,18 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import FadeTransition from '../../0_Components/7_FadeTransition/FadeTransition'
-import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import { logIn } from '../../../services/authApi'
 import '../Login.css'
 import LoadingPage from '../../0_Components/4_Loading/LoadingPage'
-// import { Auth } from 'aws-amplify'
-// import { getLogIn } from '../../../services/api'
-
-const mapDispatchToProps = dispatch => ({
-  changeUser: (user) =>
-    dispatch({ type: "USER", user })
-});
+import { Auth } from 'aws-amplify'
+import GoogleLogo from '../../../img/googleoauth.png'
 
 class Login extends React.Component {
   state = {
@@ -39,15 +33,7 @@ class Login extends React.Component {
       this.setState({ ...this.state, error: response.error, loading: false })
       return
     }
-    // Get User Profile
-    // response = await getLogIn()
-    // if (response.error) {
-    //   this.setState({ ...this.state, error: response.error, loading: false })
-    //   return
-    // }
-    // this.props.changeUser(response.user) // response.attributes.email
-    this.props.changeUser('username')
-    this.props.history.push("/")
+    this.props.history.push("/account")
   }
 
   render() {
@@ -62,17 +48,18 @@ class Login extends React.Component {
           </Helmet></HelmetProvider>
 
           <form onSubmit={this.submitForm} className="box-flex-col login box-flex-1">
-            <h2 className="box-margin-bottom-30">Log In</h2>
+            <h2 className="box-margin-bottom-40">Log In</h2>
 
-            {
-              this.state.error &&
+            <button type="button" className="login-google box-border"
+              onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>
+              <img src={GoogleLogo} alt="Sign in with Google" className="box-expand-height" />
+            </button>
+
+            <div className="box-border-bottom box-margin-top-30 box-margin-bottom-20"></div>
+
+            {this.state.error &&
               <h6 className="box-text-8 box-color-red box-text-nobold">{this.state.error}</h6>
             }
-
-            {/* <button type="button"
-              onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>
-              Sign in with Google
-            </button> */}
 
             <input value={this.state.email}
               type="email"
@@ -94,7 +81,7 @@ class Login extends React.Component {
               <button className="box-button">Log In</button>
               <div className="box-flex-1"></div>
               <Link to="/login/resetpassword" className="box-margin-right-20 box-text-7">Forgot password?</Link>
-              <Link to="/login/signup" className="box-text-6">Sign Up</Link>
+              <Link to="/login/signup" className="box-text-7">Sign Up</Link>
             </div>
           </form>
 
@@ -104,4 +91,4 @@ class Login extends React.Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default Login

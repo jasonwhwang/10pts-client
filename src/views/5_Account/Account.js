@@ -70,7 +70,7 @@ class Account extends React.Component {
               match={this.props.match}
               name={this.props.name}
               bio={this.props.bio}
-              flagged={this.props.flagged} />
+              flagged={this.props.isFlagged} />
 
             <AccountTabs
               match={this.props.match} />
@@ -95,7 +95,7 @@ Account.defaultProps = {
   reviewsCount: '0',
   savedCount: '0',
   followersCount: '0',
-  flagged: false
+  isFlagged: false
 }
 
 const AccountStats = (props) => {
@@ -136,7 +136,7 @@ const AccountDetails = (props) => {
         <h6 className="box-text-nobold box-flex-1 box-margin-right-10">{props.bio}</h6>
         {props.match.params.username && !isAuthUser && 
           <div className="box-flex-col box-flex-end">
-            <FlagButton flagged={props.flagged} />
+            <FlagButton flagged={props.isFlagged} />
           </div>
         }
       </div>

@@ -19,7 +19,6 @@ const options = {
 const compress = new Compress(options)
 
 const mapStateToProps = state => ({
-  user: state.common.user,
   review: state.review
 })
 

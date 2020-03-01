@@ -18,7 +18,10 @@ class SettingsAccount extends React.Component {
   }
 
   onChangeInput = (e) => {
-    this.setState({ ...this.state, [e.target.id]: e.target.value })
+    let value = e.target.value
+    if (e.target.id === 'name') value = value.replace(/[^A-Za-z ]/gi, '')
+    else if (e.target.id === 'username') value = value.replace(/[^0-9a-z]/gi, '')
+    this.setState({ ...this.state, [e.target.id]: value })
   }
 
   onSubmitForm = async (e) => {

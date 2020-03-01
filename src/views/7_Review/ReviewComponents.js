@@ -49,7 +49,7 @@ export const ReviewComments = ({ comments, tab }) => {
               {username}
             </Link>
 
-            <h6 className="box-display-inline box-text-nobold box-margin-right-5">{comment.comment}</h6>
+            <h6 className="box-display-inline box-text-nobold box-margin-right-5">{comment.body}</h6>
 
             <div className="box-text-8 box-color-gray box-margin-top-3">
               {likesString}

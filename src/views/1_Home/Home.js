@@ -1,15 +1,10 @@
 import React from 'react'
 import './Home.css'
-import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
-
-const mapStateToProps = state => ({
-  user: state.common.user
-})
 
 class Home extends React.Component {
   state = {
@@ -85,4 +80,4 @@ let data = [
   }
 ]
 
-export default connect(mapStateToProps)(Home)
+export default Home
