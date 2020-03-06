@@ -2,17 +2,24 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import FadeTransition from '../../0_Components/7_FadeTransition/FadeTransition'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { connect } from 'react-redux'
 import { logIn } from '../../../services/authApi'
 import '../Login.css'
 import LoadingPage from '../../0_Components/4_Loading/LoadingPage'
 import { Auth } from 'aws-amplify'
 import GoogleLogo from '../../../img/googleoauth.png'
+import { getData } from '../../../services/api'
+
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
 
 class Login extends React.Component {
   state = {
-    email: "",
-    password: "",
-    error: "",
+    email: '',
+    password: '',
+    error: '',
     loading: false
   }
 
@@ -22,8 +29,8 @@ class Login extends React.Component {
 
   submitForm = async (e) => {
     e.preventDefault()
-    if (this.state.email === "" || this.state.password === "") {
-      this.setState({ ...this.state, error: "Missing required fields." })
+    if (this.state.email === '' || this.state.password === '') {
+      this.setState({ ...this.state, error: 'Missing required fields.' })
       return
     }
 
@@ -33,7 +40,14 @@ class Login extends React.Component {
       this.setState({ ...this.state, error: response.error, loading: false })
       return
     }
-    this.props.history.push("/account")
+
+    let res = await getData('/user')
+    if (res.error) {
+      this.setState({ ...this.state, error: 'Server error, please log in at another time.' })
+    } else {
+      await this.props.changeVal('user', res.user)
+      this.props.history.push('/account')
+    }
   }
 
   render() {
@@ -91,4 +105,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default connect(null, mapDispatchToProps)(Login)

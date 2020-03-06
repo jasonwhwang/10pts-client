@@ -20,6 +20,7 @@ import Review from './7_Review/Review'
 import MapFrame from './8_Other/MapFrame'
 import Login from './9_Login/Login'
 import About from './8_Other/About'
+import Callback from './8_Other/Callback'
 
 const App = (props) => {
   return (
@@ -48,6 +49,7 @@ const App = (props) => {
           <Route exact path="/:path(account)/:route?" component={Account} />
 
           <Route exact path="/:path(login|login/signup|login/welcome|login/success|login/resetpassword|login/newpassword)" component={Login} />
+          <Route exact path="/callback" component={Callback} />
 
           <Route exact path='/:path(f|search/f|saved/f|account/f)/:foodname' component={Food} />
           <Route exact path='/:path(p|search/p|saved/p|account/p)/:foodname' component={Food} />

@@ -7,15 +7,15 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case 'LOG_OUT':
       return defaultState
-    case 'USER':
+    case 'user':
       return {
         ...state,
-        user: action.user
+        [action.type]: action.val
       }
-    case 'LANGUAGE':
+    case 'language':
       return {
         ...state,
-        language: action.language
+        [action.type]: action.val
       }
     default:
       return state;

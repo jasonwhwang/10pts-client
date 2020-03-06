@@ -13,14 +13,14 @@ class HideTabBarInput extends React.Component {
   }
   hideBar = (e) => {
     if (e.target.matches('input') || e.target.matches('textarea')) {
-      let tabBar = document.getElementById("TabBar")
-      tabBar && tabBar.classList.add("tabBar-hide")
+      let tabBar = document.getElementById('TabBar')
+      tabBar && tabBar.classList.add('tabBar-hide')
     }
   }
   showBar = (e) => {
-    if (e.target.matches("input") || e.target.matches('textarea')) {
-      let tabBar = document.getElementById("TabBar")
-      tabBar && tabBar.classList.remove("tabBar-hide")
+    if (e.target.matches('input') || e.target.matches('textarea')) {
+      let tabBar = document.getElementById('TabBar')
+      tabBar && tabBar.classList.remove('tabBar-hide')
     }
   }
   render() {
@@ -39,16 +39,16 @@ class HideTabBarRoute extends React.Component {
     let params = this.props.match.params
     let isMain = params.path === 'f' || params.path.indexOf('/f') !== -1
     if (!isMain) {
-      let tabBar = document.getElementById("TabBar")
-      tabBar && tabBar.classList.add("tabBar-hide")
+      let tabBar = document.getElementById('TabBar')
+      tabBar && tabBar.classList.add('tabBar-hide')
     } else {
-      let tabBar = document.getElementById("TabBar")
-      tabBar && tabBar.classList.remove("tabBar-hide")
+      let tabBar = document.getElementById('TabBar')
+      tabBar && tabBar.classList.remove('tabBar-hide')
     }
   }
   componentWillUnmount() {
-    let tabBar = document.getElementById("TabBar")
-    tabBar && tabBar.classList.remove("tabBar-hide")
+    let tabBar = document.getElementById('TabBar')
+    tabBar && tabBar.classList.remove('tabBar-hide')
   }
   render() {
     return null

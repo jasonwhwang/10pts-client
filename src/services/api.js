@@ -6,7 +6,7 @@ let baseURL = process.env.REACT_APP_var_STAGE === 'dev' ?
 
 
 // GET - Get data
-async function getData(url, data) {
+async function getData(url) {
   await refresh()
   let token = AuthStore.getIdToken()
   let headers = {
@@ -17,8 +17,7 @@ async function getData(url, data) {
 
   const response = await fetch(baseURL+url, {
     method: 'GET',
-    headers: headers,
-    body: JSON.stringify(data)
+    headers: headers
   });
   return await response.json();
 }

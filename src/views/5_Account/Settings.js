@@ -10,6 +10,7 @@ import SettingsImage from './SettingsImage'
 import SettingsPassword from './SettingsPassword'
 import { Link } from 'react-router-dom'
 import { HideTabBarInput } from '../0_Components/Other/HideTabBar'
+import { logOut } from '../../services/authApi'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -52,6 +53,7 @@ class Settings extends React.Component {
             </HideTabBarInput>
 
             <div className="box-flex-col box-margin-15 box-margin-top-40 box-margin-bottom-60 box-border-top">
+              <button onClick={() => logOut()} className="settings-logout box-border-bottom settingss-padding-10 box-text-7 box-flex-acenter">Log Out</button>
               <Link to="/about" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">About</Link>
               <Link to="/terms" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">Terms</Link>
               <Link to="/privacy" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">Privacy</Link>

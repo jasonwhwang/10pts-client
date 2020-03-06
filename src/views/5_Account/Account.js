@@ -10,6 +10,7 @@ import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import Image from '../../img/user.png'
 import { Link } from 'react-router-dom'
 import FlagButton from '../0_Components/8_Buttons/FlagButton'
+import { getData } from '../../services/api'
 
 const mapStateToProps = state => ({
   authUser: state.common.user
@@ -21,8 +22,13 @@ class Account extends React.Component {
     loading: true
   }
   initializeState = async () => {
+    let res = await getData('/private')
+    console.log(res)
+    console.log(this.props.authUser)
+
     if (this.props.location.pathname === "/account" && !this.props.authUser) {
       this.setState({ data: null, loading: false })
+      this.props.history.push('/login')
       return
     }
 
@@ -32,7 +38,6 @@ class Account extends React.Component {
   }
 
   componentDidMount() {
-    // if(!this.props.user) this.props.history.push("/login")
     this.initializeState()
   }
   componentDidUpdate(prevProps) {
@@ -42,11 +47,9 @@ class Account extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
-    // let params = this.props.match.params
-    // let linkUsername = params.username ? params.username : this.props.user.username
-    // let route = params.route ? `/${params.route}` : ""
-    // let cLink = `${process.env.REACT_APP_url_LINK}/a/${linkUsername}${route}`
-    let cLink = `${process.env.REACT_APP_url_LINK}/account`
+    let username = this.props.match.params.username ? this.props.match.params.username : null
+    if(username === null && this.props.authUser) username = this.props.authUser.username
+    let cLink = `${process.env.REACT_APP_url_LINK}/a/${username}`
 
     return (
       <FadeTransition>

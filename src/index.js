@@ -27,9 +27,9 @@ Amplify.configure({
     oauth: {
       domain: process.env.REACT_APP_c_APP_DOMAIN,
       scope: ['email', 'profile', 'openid'],
-      redirectSignIn: process.env.REACT_APP_var_STAGE === 'dev' ? 'http://localhost:3000/account' : `${process.env.REACT_APP_url_LINK}/account`,
+      redirectSignIn: process.env.REACT_APP_var_STAGE === 'dev' ? 'http://localhost:3000/callback' : `${process.env.REACT_APP_url_LINK}/callback`,
       redirectSignOut: process.env.REACT_APP_var_STAGE === 'dev' ? 'http://localhost:3000' : process.env.REACT_APP_url_LINK,
-      responseType: 'token'
+      responseType: 'code'
     }
   },
   Storage: {
