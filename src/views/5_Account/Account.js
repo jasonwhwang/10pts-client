@@ -11,6 +11,7 @@ import Image from '../../img/user.png'
 import { Link } from 'react-router-dom'
 import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { getData } from '../../services/api'
+import { ReviewData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
   authUser: state.common.user
@@ -18,22 +19,29 @@ const mapStateToProps = state => ({
 
 class Account extends React.Component {
   state = {
+    account: null,
     data: null,
     loading: true
   }
   initializeState = async () => {
-    let res = await getData('/private')
-    console.log(res)
-    console.log(this.props.authUser)
+    this.setState({ data: {}, loading: true })
+    let params = this.props.match.params
+    let username = params.username ? params.username : this.props.authUser.username
+    let route = params.route
+    let data = null
 
-    if (this.props.location.pathname === "/account" && !this.props.authUser) {
-      this.setState({ data: null, loading: false })
-      this.props.history.push('/login')
-      return
+    switch (route) {
+      case 'saved':
+      case 'likes':
+      case 'followers':
+      case 'following':
+        data = await getData(`/account/${route}/${username}`)
+        break
+      default:
+        data = await getData(`/account/reviews/${username}`)
     }
+    console.log(data)
 
-    this.setState({ data: null, loading: true })
-    // Get User Account
     this.setState({ data: {}, loading: false })
   }
 
@@ -48,7 +56,7 @@ class Account extends React.Component {
     if (this.state.loading) return <LoadingPage />
 
     let username = this.props.match.params.username ? this.props.match.params.username : null
-    if(username === null && this.props.authUser) username = this.props.authUser.username
+    if (username === null && this.props.authUser) username = this.props.authUser.username
     let cLink = `${process.env.REACT_APP_url_LINK}/a/${username}`
 
     return (
@@ -63,23 +71,18 @@ class Account extends React.Component {
 
             <AccountStats
               match={this.props.match}
-              username={this.props.username}
-              reviewsCount={this.props.reviewsCount}
-              savedCount={this.props.savedCount}
-              followersCount={this.props.followersCount} />
+              {...this.props.account} />
 
             <AccountDetails
               authUser={this.props.authUser}
               match={this.props.match}
-              name={this.props.name}
-              bio={this.props.bio}
-              flagged={this.props.isFlagged} />
+              {...this.props.account} />
 
             <AccountTabs
               match={this.props.match} />
 
             <AccountList
-              data={data}
+              data={this.props.data}
               match={this.props.match}
               location={this.props.location} />
 
@@ -91,14 +94,17 @@ class Account extends React.Component {
 }
 
 Account.defaultProps = {
-  image: null,
-  username: 'username',
-  name: 'Firstname Lastname',
-  bio: 'Here is an example bio.',
-  reviewsCount: '0',
-  savedCount: '0',
-  followersCount: '0',
-  isFlagged: false
+  account: {
+    image: null,
+    username: 'username',
+    name: 'Firstname Lastname',
+    bio: 'Here is an example bio.',
+    reviewsCount: '0',
+    savedCount: '0',
+    followersCount: '0',
+    isFlagged: false
+  },
+  data: ReviewData
 }
 
 const AccountStats = (props) => {
@@ -137,7 +143,7 @@ const AccountDetails = (props) => {
       <h6 className="box-text-bold">{props.name}</h6>
       <div className="box-flex-row box-margin-bottom-20">
         <h6 className="box-text-nobold box-flex-1 box-margin-right-10">{props.bio}</h6>
-        {props.match.params.username && !isAuthUser && 
+        {props.match.params.username && !isAuthUser &&
           <div className="box-flex-col box-flex-end">
             <FlagButton flagged={props.isFlagged} />
           </div>
@@ -199,47 +205,5 @@ const AccountList = (props) => {
       location={props.location} />
   )
 }
-
-let data = [
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name1",
-    foodTitle: "Food Name1",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name2",
-    foodTitle: "Food Name2",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name3",
-    foodTitle: "Food Name3",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  }
-]
 
 export default connect(mapStateToProps)(Account)

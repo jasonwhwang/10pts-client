@@ -5,6 +5,7 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import { ReviewData } from '../0_Components/Other/_data'
 
 class Home extends React.Component {
   state = {
@@ -27,7 +28,7 @@ class Home extends React.Component {
           <ErrorBoundary>
 
             <List
-              data={data}
+              data={ReviewData}
               match={this.props.match}
               location={this.props.location} />
               
@@ -37,47 +38,5 @@ class Home extends React.Component {
     )
   }
 }
-
-let data = [
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name1",
-    foodTitle: "Food Name1",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name2",
-    foodTitle: "Food Name2",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name3",
-    foodTitle: "Food Name3",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  }
-]
 
 export default Home

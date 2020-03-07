@@ -102,16 +102,19 @@ const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, user }) => {
 }
 
 const FoodHeading = (props) => {
-  let addressURL = props.address.split(", ")
+  let searchParams = new URLSearchParams()
+  searchParams.set('q', props.address.replace(/,/g, ""))
+
+  let addressURL = props.address.split(",").map(txt => txt.trim())
   let place = addressURL.shift()
   let addressTxt = addressURL.join(", ")
-  addressURL = props.address.replace(/, /g, ",").replace(/\s/g, '+')
+  addressURL = searchParams.toString()
   let username = props.user && props.user.username ? `/${props.user.username}` : ""
 
   let foodLink = `${props.tab}/f/${props.foodname}`
   let reviewLink = `${props.tab}/f/${props.foodname}${username}`
-  let searchLink = `/search?q=${addressURL}`
-  let mapLink = `${props.tab}/map?q=${addressURL}`
+  let searchLink = `/search?${addressURL}`
+  let mapLink = `${props.tab}/map?${addressURL}`
 
   return (
     <div className="card-foodHeading box-flex-row">

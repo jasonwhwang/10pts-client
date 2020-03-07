@@ -7,6 +7,7 @@ import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import ListRow from '../0_Components/11_List/ListRow'
+import { FoodData, UserSearchData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
   category: state.search.category
@@ -34,8 +35,8 @@ class Search extends React.Component {
   initializeState = () => {
     let query = this.props.location.search
     if (query) {
-      query = this.props.location.search.replace("?q=", "").replace(/,/g, ", ").replace(/\+/g, ' ')
-      this.props.changeVal("keywords", query)
+      let q = new URLSearchParams(this.props.location.search).get('q')
+      this.props.changeVal("keywords", q)
     }
     this.setState({ ...this.state, loading: false })
   }
@@ -54,12 +55,12 @@ class Search extends React.Component {
 
             {!this.props.category ?
               <List
-                data={data}
+                data={FoodData}
                 match={this.props.match}
                 location={this.props.location} />
               :
               <ListRow
-                data={data2}
+                data={UserSearchData}
                 match={this.props.match}
                 location={this.props.location} />
             }
@@ -70,53 +71,5 @@ class Search extends React.Component {
     )
   }
 }
-
-let data = [
-  {
-    photos: [null, null, null],
-    foodname: "food-name1",
-    foodTitle: "Food Name1",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  },
-  {
-    photos: [null, null, null],
-    foodname: "food-name2",
-    foodTitle: "Food Name2",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  },
-  {
-    photos: [null, null, null],
-    foodname: "food-name3",
-    foodTitle: "Food Name3",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  }
-]
-
-let data2 = [
-  {
-    user: { image: null, username: "username1", isFollowing: false }
-  },
-  {
-    user: { image: null, username: "username2", isFollowing: false }
-  },
-  {
-    user: { image: null, username: "username3", isFollowing: false }
-  }
-]
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)

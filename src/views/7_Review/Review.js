@@ -10,6 +10,7 @@ import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { CardRatings, PhotosList } from '../0_Components/10_Cards/CardRatings'
 import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
 import { ReviewStats, ReviewComments, ReviewTime, ReviewUserComment } from './ReviewComponents'
+import { ReviewMainData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -44,9 +45,9 @@ class Review extends React.Component {
           <ErrorBoundary>
             <HideTabBarRoute location={this.props.location} match={this.props.match}/>
 
-            {isMain && <ReviewMain {...this.props} data={data} />}
-            {isPhotos && <PhotosList {...this.props} data={data} />}
-            {isComments && <ReviewUserComment {...this.props} data={data} />}
+            {isMain && <ReviewMain {...this.props} data={ReviewMainData} />}
+            {isPhotos && <PhotosList {...this.props} data={ReviewMainData} />}
+            {isComments && <ReviewUserComment {...this.props} data={ReviewMainData} />}
 
           </ErrorBoundary>
         </div>
@@ -88,40 +89,6 @@ const ReviewMain = (props) => {
       <div className="box-margin-bottom-60"></div>
     </>
   )
-}
-
-let data = {
-  user: { image: null, username: "username", isFollowing: false },
-  photos: [null, null, null],
-  foodname: "food-name1",
-  foodTitle: "Food Name1",
-  address: "City Hall, New York, NY",
-  pts: 5,
-  isLiked: false,
-  isSaved: false,
-  likesCount: 3,
-  commentsCount: 5,
-  updatedAt: new Date(),
-
-  price: 15,
-  tags: [{ _id: 10, name: 'Example Tag1' }, { _id: 11, name: 'Example Tag2' }, { _id: 12, name: 'Example Tag3' }, { _id: 13, name: 'Example Tag4' }],
-  ptsTaste: 5,
-  ptsAppearance: 5,
-  ptsTexture: 5,
-  ptsAroma: 5,
-  ptsBalance: 5,
-  review: "Review of the food dish goes here. You can expect it to be a short but detailed review of the aspects of the food dish. While it may be a bit long, it will cover all the ratings such as taste, appearance, texture, aroma, balance, and other things about the food dish. This is just the beta version, but we will see how reviewers would like to discuss about their favorite food dish.",
-  isFlagged: false,
-  comments: [
-    {
-      _id: 123,
-      user: { image: null, username: 'username1' },
-      body: 'Comment from user. It can be really long, or really short depending on what the user wants to say.',
-      isLiked: false,
-      likesCount: 5,
-      updatedAt: new Date()
-    }
-  ]
 }
 
 export default connect(mapStateToProps)(Review)

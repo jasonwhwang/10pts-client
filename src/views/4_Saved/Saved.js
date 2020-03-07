@@ -6,6 +6,7 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import ListRow from '../0_Components/11_List/ListRow'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import { ReviewData, FoodData, NotificationData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -22,9 +23,9 @@ class Saved extends React.Component {
   render() {
     if (this.state.loading) return <LoadingPage />
 
-    let dataSource = data
-    if (this.props.match.params.path === 'saved/likes') dataSource = data2
-    else if (this.props.match.params.path === 'saved/following') dataSource = data3
+    let dataSource = FoodData
+    if (this.props.match.params.path === 'saved/likes') dataSource = ReviewData
+    else if (this.props.match.params.path === 'saved/following') dataSource = NotificationData
 
     return (
       <FadeTransition>
@@ -47,138 +48,5 @@ class Saved extends React.Component {
     )
   }
 }
-
-let data = [
-  {
-    photos: [null, null, null],
-    foodname: "food-name1",
-    foodTitle: "Food Name1",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  },
-  {
-    photos: [null, null, null],
-    foodname: "food-name2",
-    foodTitle: "Food Name2",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  },
-  {
-    photos: [null, null, null],
-    foodname: "food-name3",
-    foodTitle: "Food Name3",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isSaved: false,
-    savedCount: 7,
-    reviewsCount: 9,
-    hasReviewed: false
-  }
-]
-
-let data2 = [
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name1",
-    foodTitle: "Food Name1",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name2",
-    foodTitle: "Food Name2",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  },
-  {
-    user: { image: null, username: "username", isFollowing: false },
-    photos: [null, null, null],
-    foodname: "food-name3",
-    foodTitle: "Food Name3",
-    address: "City Hall, New York, NY",
-    pts: 5,
-    isLiked: false,
-    isSaved: false,
-    likesCount: 3,
-    commentsCount: 5,
-    updatedAt: new Date()
-  }
-]
-
-let data3 = [
-  {
-    _id: '1',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'liked your review',
-    review: {
-      foodname: 'food-name',
-      foodTitle: 'Beef Noodle Soup',
-      username: 'username'
-    },
-    updatedAt: new Date()
-  },
-  {
-    _id: '2',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'commented on your review',
-    review: {
-      foodname: 'food-name',
-      foodTitle: 'A Long Foody Food Name',
-      username: 'username'
-    },
-    updatedAt: new Date()
-  },
-  {
-    _id: '3',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'is following you',
-    review: null,
-    updatedAt: new Date()
-  },
-  {
-    _id: '4',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'has a new review',
-    review: {
-      foodname: 'food-name',
-      foodTitle: 'Food Name',
-      username: 'username'
-    },
-    updatedAt: new Date()
-  }
-]
 
 export default connect(mapStateToProps)(Saved)

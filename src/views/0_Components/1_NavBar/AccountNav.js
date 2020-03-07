@@ -28,9 +28,7 @@ const UserNav = (props) => {
             <h5 className="box-flex-acenter box-margin-left-5">{username}</h5>
           </button>
         }
-        {!params.route && 
-          <h5 className="box-flex-acenter nav-padding15">{username}</h5>
-        }
+        {!params.route && <h5 className="box-flex-acenter nav-padding15">{username}</h5> }
 
         <div className="box-flex-1"></div>
 
