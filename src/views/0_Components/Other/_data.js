@@ -77,15 +77,9 @@ export const FoodData = [
 ]
 
 export const UserSearchData = [
-  {
-    user: { image: null, username: "username1", isFollowing: false }
-  },
-  {
-    user: { image: null, username: "username2", isFollowing: false }
-  },
-  {
-    user: { image: null, username: "username3", isFollowing: false }
-  }
+  { image: null, username: "username1", isFollowing: false },
+  { image: null, username: "username2", isFollowing: false },
+  { image: null, username: "username2", isFollowing: false }
 ]
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import './Tags.css'
-// import { getTags } from '../../../services/api'
+import { getData } from '../../../services/api'
 
 class Tags extends React.Component {
   state = {
@@ -17,8 +17,8 @@ class Tags extends React.Component {
   }
 
   async componentDidMount() {
-    // let newSuggestions = await getTags()
-    // this.setState({ ...this.state, suggestions: newSuggestions.tags })
+    let newSuggestions = await getData('/tags')
+    this.setState({ ...this.state, suggestions: newSuggestions.tags })
     let input = document.getElementsByClassName('react-tags__search-input')
     if(input && input[0]) input[0].setAttribute('maxlength', 30)
   }

@@ -7,42 +7,17 @@ import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import ListRow from '../0_Components/11_List/ListRow'
-import { FoodData, UserSearchData } from '../0_Components/Other/_data'
+// import { FoodData, UserSearchData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
-  category: state.search.category
-})
-
-const mapDispatchToProps = dispatch => ({
-  changeVal: (type, val) =>
-    dispatch({ type, val })
+  category: state.search.category,
+  data: state.search.searchData,
+  loading: state.search.searchLoading
 })
 
 class Search extends React.Component {
-  state = {
-    loading: true
-  }
-  async componentDidMount() {
-    this.initializeState()
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
-  }
-  componentWillUnmount() {
-    this.props.changeVal("keywords", "")
-  }
-
-  initializeState = () => {
-    let query = this.props.location.search
-    if (query) {
-      let q = new URLSearchParams(this.props.location.search).get('q')
-      this.props.changeVal("keywords", q)
-    }
-    this.setState({ ...this.state, loading: false })
-  }
-
   render() {
-    if (this.state.loading) return <LoadingPage />
+    if (this.props.loading) return <LoadingPage />
 
     return (
       <FadeTransition>
@@ -55,12 +30,12 @@ class Search extends React.Component {
 
             {!this.props.category ?
               <List
-                data={FoodData}
+                data={this.props.data}
                 match={this.props.match}
                 location={this.props.location} />
               :
               <ListRow
-                data={UserSearchData}
+                data={this.props.data}
                 match={this.props.match}
                 location={this.props.location} />
             }
@@ -72,4 +47,4 @@ class Search extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+export default connect(mapStateToProps)(Search)

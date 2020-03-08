@@ -1,14 +1,15 @@
 import React from 'react'
-// import { putUser } from '../../../services/api'
+import { putData } from '../../services/api'
 import Loading from '../0_Components/4_Loading/Loading'
 import TextareaAutosize from 'react-autosize-textarea'
+import ListErrors from '../0_Components/Other/ListErrors'
 
 class SettingsAccount extends React.Component {
   state = {
     name: '',
     username: '',
     bio: '',
-    error: '',
+    errors: '',
     success: '',
     loading: false
   }
@@ -19,21 +20,20 @@ class SettingsAccount extends React.Component {
 
   onChangeInput = (e) => {
     let value = e.target.value
-    if (e.target.id === 'name') value = value.replace(/[^A-Za-z ]/gi, '')
-    else if (e.target.id === 'username') value = value.replace(/[^0-9a-z]/gi, '')
+    if (e.target.id === 'username') value = value.replace(/[^a-z0-9]/gi, '')
     this.setState({ ...this.state, [e.target.id]: value })
   }
 
   onSubmitForm = async (e) => {
     e.preventDefault()
     this.setState({ ...this.state, loading: true })
-    // let res = await putUser({ user: this.state })
-    // if (res.error) {
-    //   this.setState({ ...this.state, success: "", error: res.error, loading: false })
-    // } else {
-    //   this.props.changeUser(res.user)
-    //   this.setState({ ...this.state, error: "", success: "Successfully updated account.", loading: false })
-    // }
+    let res = await putData('/user', { user: this.state })
+    if (res.errors) {
+      this.setState({ ...this.state, success: "", errors: res.errors, loading: false })
+    } else {
+      this.props.changeUser(res.user)
+      this.setState({ ...this.state, errors: "", success: "Successfully updated account.", loading: false })
+    }
   }
 
   render() {
@@ -67,11 +67,11 @@ class SettingsAccount extends React.Component {
 
         <TextareaAutosize rows={3}
           id="bio"
-          placeholder="Bio"
           maxLength={500}
           className="box-input settings-margin15"
-          value={this.state.description}
-          onChange={this.onChangeInput} />
+          onChange={this.onChangeInput}
+          value={this.state.bio}
+          placeholder="Bio" />
 
         <div className="box-flex-row settings-margin15">
           <div>
@@ -81,13 +81,13 @@ class SettingsAccount extends React.Component {
               </button>
           </div>
 
-          {this.state.error !== "" && !this.state.loading &&
-            <h6 className="box-text-8 box-color-red box-text-nobold box-margin-left-20 settings-warningHeight box-flex-row box-flex-acenter">
-              {this.state.error}
-            </h6>
+          {this.state.errors !== "" && !this.state.loading &&
+            <div className="box-margin-left-30 box-flex-acenter">
+              <ListErrors errors={this.state.errors}/>
+            </div>
           }
           {this.state.success !== "" && !this.state.loading &&
-            <h6 className="box-text-8 box-text-nobold box-margin-left-20 settings-warningHeight box-flex-row box-flex-acenter">
+            <h6 className="box-text-8 box-text-nobold box-margin-left-20 box-flex-acenter">
               {this.state.success}
             </h6>
           }

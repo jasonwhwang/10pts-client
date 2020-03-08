@@ -16,6 +16,11 @@ const mapStateToProps = state => ({
   user: state.common.user
 })
 
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
+
 class Settings extends React.Component {
   state = {
     user: null,
@@ -23,13 +28,15 @@ class Settings extends React.Component {
     loading: true
   }
   changeUser = (user) => {
-    this.setState({ ...this.state, user: user, loading: false, error: '' })
+    this.props.changeVal('user', user)
+    this.setState({ ...this.state, loading: false, error: '' })
   }
-  async componentDidMount() {
-    // let userRes = await getUser()
-    // if (userRes.error) this.setState({ ...this.state, error: userRes.error })
-    // else this.changeUser(userRes.user)
-    this.changeUser(null)
+  componentDidMount() {
+    if(!this.props.user) this.props.history.push('/login')
+    this.setState({ ...this.state, loading: false, error: '' })
+  }
+  componentDidUpdate() {
+    if(!this.props.user) this.props.history.push('/login')
   }
 
   render() {
@@ -44,10 +51,10 @@ class Settings extends React.Component {
           </Helmet></HelmetProvider>
           <ErrorBoundary>
 
-            <SettingsImage user={this.state.user} changeUser={this.changeUser} />
+            <SettingsImage user={this.props.user} changeUser={this.changeUser} />
             <HideTabBarInput>
               <div id="inputContainer">
-                <SettingsAccount user={this.state.user} changeUser={this.changeUser} />
+                <SettingsAccount user={this.props.user} changeUser={this.changeUser} />
                 <SettingsPassword />
               </div>
             </HideTabBarInput>
@@ -66,4 +73,4 @@ class Settings extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Settings)
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)

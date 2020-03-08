@@ -11,7 +11,8 @@ import Image from '../../img/user.png'
 import { Link } from 'react-router-dom'
 import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { getData } from '../../services/api'
-import { ReviewData } from '../0_Components/Other/_data'
+import TextareaAutosize from 'react-autosize-textarea'
+// import { ReviewData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
   authUser: state.common.user
@@ -19,30 +20,30 @@ const mapStateToProps = state => ({
 
 class Account extends React.Component {
   state = {
-    account: null,
-    data: null,
+    account: this.props.account,
+    data: [],
+    error: '',
     loading: true
   }
+
   initializeState = async () => {
-    this.setState({ data: {}, loading: true })
     let params = this.props.match.params
+    if (params.path.indexOf('account') !== -1 && !this.props.authUser) {
+      this.props.history.push('/login')
+      return
+    }
+    
+    this.setState({ data: {}, loading: true })
     let username = params.username ? params.username : this.props.authUser.username
     let route = params.route
-    let data = null
+    let res = null
 
-    switch (route) {
-      case 'saved':
-      case 'likes':
-      case 'followers':
-      case 'following':
-        data = await getData(`/account/${route}/${username}`)
-        break
-      default:
-        data = await getData(`/account/reviews/${username}`)
-    }
-    console.log(data)
+    if (route === 'saved' || route === 'likes' || route === 'followers' || route === 'following') {
+      res = await getData(`/account/${route}/${username}`)
+    } else res = await getData(`/account/reviews/${username}`)
 
-    this.setState({ data: {}, loading: false })
+    if (res.error) this.setState({ account: this.props.account, data: [], error: res.error, loading: false })
+    else this.setState({ account: res.account, data: res.data, error: '', loading: false })
   }
 
   componentDidMount() {
@@ -71,18 +72,18 @@ class Account extends React.Component {
 
             <AccountStats
               match={this.props.match}
-              {...this.props.account} />
+              {...this.state.account} />
 
             <AccountDetails
               authUser={this.props.authUser}
               match={this.props.match}
-              {...this.props.account} />
+              {...this.state.account} />
 
             <AccountTabs
               match={this.props.match} />
 
             <AccountList
-              data={this.props.data}
+              data={this.state.data}
               match={this.props.match}
               location={this.props.location} />
 
@@ -96,15 +97,14 @@ class Account extends React.Component {
 Account.defaultProps = {
   account: {
     image: null,
-    username: 'username',
-    name: 'Firstname Lastname',
-    bio: 'Here is an example bio.',
-    reviewsCount: '0',
-    savedCount: '0',
-    followersCount: '0',
+    username: '',
+    name: '',
+    bio: '',
+    reviewsCount: 0,
+    savedCount: 0,
+    followersCount: 0,
     isFlagged: false
-  },
-  data: ReviewData
+  }
 }
 
 const AccountStats = (props) => {
@@ -140,9 +140,15 @@ const AccountDetails = (props) => {
   let isAuthUser = props.authUser && props.authUser.username === props.match.params.username
   return (
     <div className="box-margin-15">
-      <h6 className="box-text-bold">{props.name}</h6>
+      <h6 className="box-text-bold">{props.name ? props.name : props.username}</h6>
       <div className="box-flex-row box-margin-bottom-20">
-        <h6 className="box-text-nobold box-flex-1 box-margin-right-10">{props.bio}</h6>
+        <TextareaAutosize
+          placeholder="..."
+          maxLength={500}
+          className="box-flex-1 box-margin-right-10"
+          value={props.bio}
+          disabled={true} />
+
         {props.match.params.username && !isAuthUser &&
           <div className="box-flex-col box-flex-end">
             <FlagButton flagged={props.isFlagged} />
@@ -189,6 +195,14 @@ const AccountTabs = (props) => {
 }
 
 const AccountList = (props) => {
+  if (props.data.length <= 0) {
+    return (
+      <h6 className="box-color-gray box-text-nobold box-flex-row-center box-text-8 box-margin-15">
+        None
+      </h6>
+    )
+  }
+
   let route = props.match.params.route
   if (route === 'saved' || route === 'likes' || route === 'followers' || route === 'following') {
     return (

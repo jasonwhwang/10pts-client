@@ -5,7 +5,9 @@ const defaultState = {
   maxPts: 10,
   minPrice: 0,
   maxPrice: 100,
-  searchTags: []
+  searchTags: [],
+  searchData: [],
+  searchLoading: false
 }
 
 export default (state = defaultState, action) => {
@@ -17,6 +19,8 @@ export default (state = defaultState, action) => {
     case 'minPrice':
     case 'maxPrice':
     case 'searchTags':
+    case 'searchData':
+    case 'searchLoading':
       return {
         ...state,
         [action.type]: action.val

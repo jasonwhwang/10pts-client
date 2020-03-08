@@ -12,7 +12,9 @@ const defaultState = {
   ptsTexture: 5,
   ptsAroma: 5,
   ptsBalance: 5,
-  review: ''
+  review: '',
+  reviewLoading: false,
+  reviewErrors: null
 }
 
 export default (state = defaultState, action) => {
@@ -32,6 +34,8 @@ export default (state = defaultState, action) => {
     case 'ptsAroma':
     case 'ptsBalance':
     case 'review':
+    case 'reviewLoading':
+    case 'reviewErrors':
       return {
         ...state,
         [action.type]: action.val

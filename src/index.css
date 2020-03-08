@@ -118,3 +118,5 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
 }
+
+ul { margin: 0; padding: 0; }
