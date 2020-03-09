@@ -1,5 +1,7 @@
 .follow-blue { color: var(--lightblue); }
-.follow-blue:hover { color: var(--lightblue); opacity: 0.5; }
+.follow-blue:hover { color: var(--lightblue); }
+.button-default { color: var(--mediumgray); }
+.button-default:hover { color: var(--mediumgray); }
 
 .flagDropdown {
   height: 20px;

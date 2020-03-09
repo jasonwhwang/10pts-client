@@ -45,11 +45,11 @@ class List extends React.Component {
   }
 }
 
-const List1 = ({ data, tab, params }) => {
+const List1 = ({ data, tab, params, changeFollowing }) => {
   return (
     <React.Fragment>
       {data.map((foodItem, index) => {
-        if (foodItem) return <Card {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+        if (foodItem) return <Card {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} changeFollowing={changeFollowing}/>
         else return <Card key={'index' + index} tab={tab} params={params} />
       })}
     </React.Fragment>

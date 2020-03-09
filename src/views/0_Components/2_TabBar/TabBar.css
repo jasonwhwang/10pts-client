@@ -36,10 +36,10 @@
 .tabBar-fillUser { fill: var(--black); stroke-linecap: butt; }
 .tabBar-fillHome {
   position: absolute;
+  bottom: 11px;
   z-index: 101;
   height: 12px;
   width: 4px;
-  margin-top: 7px;
   background-color: white;
 }
 .tabBar-homeWidth {

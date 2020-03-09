@@ -18,7 +18,7 @@ const Card = (props) => {
   return (
     <FadeTransition>
       <div id={divID}>
-        <UserHeading user={props.user} tab={props.tab} />
+        <UserHeading user={props.user} tab={props.tab} changeFollowing={props.changeFollowing} />
 
         <Photos {...props} />
 
@@ -38,7 +38,7 @@ const Card = (props) => {
   )
 }
 
-const UserHeading = ({ tab, user }) => {
+const UserHeading = ({ tab, user, changeFollowing }) => {
   if (!user) return null
   return (
     <div className="box-flex-row box-flex-stretch card-userHeading">
@@ -49,7 +49,7 @@ const UserHeading = ({ tab, user }) => {
         <h6 className="box-text-bold box-margin-left-10 box-color-black">{user.username}</h6>
       </Link>
 
-      <FollowButton className="follow-blue" username={user.username} isFollowing={user.isFollowing} />
+      <FollowButton className="" username={user.username} isFollowing={user.isFollowing} changeFollowing={changeFollowing} />
     </div>
   )
 }

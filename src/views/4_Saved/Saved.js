@@ -26,7 +26,10 @@ class Saved extends React.Component {
     if (prevProps.location.pathname !== this.props.location.pathname) this.initializeState()
   }
   initializeState = async () => {
-    if (!this.props.user) this.props.history.push('/login')
+    if (!this.props.user) {
+      this.props.history.push('/login')
+      return
+    }
     this.setState({ data: [], loading: true, error: '' })
     let res = null, path = this.props.match.params.path, username = this.props.user.username
 

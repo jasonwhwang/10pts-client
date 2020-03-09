@@ -86,55 +86,71 @@ export const UserSearchData = [
 export const NotificationData = [
   {
     _id: '1',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'liked your review',
+    type: 'like',
     review: {
       foodname: 'food-name',
       foodTitle: 'Beef Noodle Soup',
       username: 'username'
     },
-    updatedAt: new Date()
-  },
-  {
-    _id: '2',
-    user: {
+    from: {
       username: 'username',
       image: null
     },
-    notification: 'commented on your review',
+    to: {
+      username: 'username',
+      image: null
+    },
+    createdAt: new Date()
+  },
+  {
+    _id: '2',
+    type: 'comment',
     review: {
       foodname: 'food-name',
       foodTitle: 'A Long Foody Food Name',
       username: 'username'
     },
-    updatedAt: new Date()
+    from: {
+      username: 'username',
+      image: null
+    },
+    to: {
+      username: 'username',
+      image: null
+    },
+    createdAt: new Date()
   },
   {
     _id: '3',
-    user: {
+    type: 'follow',
+    review: null,
+    from: {
       username: 'username',
       image: null
     },
-    notification: 'is following you',
-    review: null,
-    updatedAt: new Date()
+    to: {
+      username: 'username',
+      image: null
+    },
+    createdAt: new Date()
   },
   {
     _id: '4',
-    user: {
-      username: 'username',
-      image: null
-    },
-    notification: 'has a new review',
+    type: 'new',
     review: {
       foodname: 'food-name',
       foodTitle: 'Food Name',
       username: 'username'
     },
-    updatedAt: new Date()
+    from: {
+      username: 'username',
+      image: null
+    },
+    to: {
+      username: 'username',
+      image: null
+    },
+    createdAt: new Date()
   }
 ]
 

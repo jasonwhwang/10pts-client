@@ -28,7 +28,7 @@ class Search extends React.Component {
           </Helmet></HelmetProvider>
           <ErrorBoundary>
 
-            {!this.props.category ?
+            {!this.props.category && this.props.data.length > 0 ?
               <List
                 data={this.props.data}
                 match={this.props.match}
@@ -38,6 +38,11 @@ class Search extends React.Component {
                 data={this.props.data}
                 match={this.props.match}
                 location={this.props.location} />
+            }
+            {this.props.data.length <= 0 &&
+              <h6 className="box-color-gray box-text-nobold box-flex-row-center box-text-8 box-margin-15">
+                None
+              </h6>
             }
 
           </ErrorBoundary>

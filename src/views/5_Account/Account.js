@@ -33,7 +33,7 @@ class Account extends React.Component {
       return
     }
     
-    this.setState({ data: {}, loading: true })
+    this.setState({ data: [], loading: true })
     let username = params.username ? params.username : this.props.authUser.username
     let route = params.route
     let res = null

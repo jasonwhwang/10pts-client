@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom'
 import Photo from '../../../img/user.png'
 import Ago from '../Other/Ago'
 
-const CardRow2 = ({ tab, user, notification, review, updatedAt }) => {
-  let username = user && user.username ? user.username : 'username'
+const CardRow2 = ({ tab, type, review, from, createdAt }) => {
+  let username = from && from.username ? from.username : 'username'
+  let image = from && from.image ? from.image : Photo
+  let notification = ""
+  if(type === 'like') notification = 'liked your review'
+  else if(type === 'comment') notification = 'commented on your review'
+  else if(type === 'follow') notification = 'is following you'
+  else if(type === 'new') notification = 'has a new review'
+
   return (
     <div
       className="box-flex-row box-color-black box-margin-15">
       <Link to={`${tab}/a/${username}`} >
-        <img src={user && user.image ? user.image : Photo}
+        <img src={image}
           className="card-userImage box-img box-margin-right-10"
           alt={username} />
       </Link>
@@ -26,19 +33,11 @@ const CardRow2 = ({ tab, user, notification, review, updatedAt }) => {
           </Link>
         }
         <div className="box-text-8 box-color-gray box-margin-top-3">
-          {updatedAt && <Ago time={updatedAt} />}
+          {createdAt && <Ago time={createdAt} />}
         </div>
       </div>
     </div>
   )
-}
-
-CardRow2.defaultProps = {
-  photos: [null],
-  foodname: "",
-  foodTitle: "",
-  address: "",
-  pts: 0
 }
 
 export default CardRow2

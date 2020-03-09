@@ -25,7 +25,10 @@ class Filters extends React.Component {
   async componentDidMount() {
     await this.setState({ ...this.state, loading: false })
     let container = document.getElementsByClassName('react-tags')[0]
-    if (container) container.style.border = '2px solid var(--black)'
+    if (container) {
+      container.style.border = '2px solid var(--black)'
+      container.style.boxShadow = 'none'
+    }
   }
 
   changeCategory = (e) => {
