@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Photo from '../../../img/user.png'
 
 const Card3 = ({ photos, user, foodname, foodTitle, address, pts, params }) => {
-  let linkPath = params.path === 'account' ? `/${params.path}` : `/${params.path}/${user.username}`
+  let linkPath = params.path === 'account' ? '/account' : `/${params.path}/${user.username}`
 
   let photo = photos && photos[0] ? photos[0] : Photo
   return (

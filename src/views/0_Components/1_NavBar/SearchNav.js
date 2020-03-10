@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Search, Filter, XCircle } from 'react-feather'
 import { HideTabBarInput } from '../Other/HideTabBar'
-import { getData } from '../../../services/api'
 
 const mapStateToProps = state => ({
   search: state.search,
@@ -23,7 +22,6 @@ class SearchNav extends React.Component {
   removeKeywords = async () => {
     await this.props.changeVal("keywords", "")
     this.props.history.push("/search")
-    this.search()
   }
   submitSearch = (e) => {
     e.preventDefault()
@@ -36,41 +34,8 @@ class SearchNav extends React.Component {
     }
     this.props.history.push(`/search${q}`)
   }
-  setQuery = async () => {
-    if (this.props.location.search) {
-      let q = new URLSearchParams(this.props.location.search).get('q')
-      await this.props.changeVal("keywords", q)
-    }
-  }
-  search = async () => {
-    let p = new URLSearchParams()
-    if(this.props.search.keywords) p.set('keywords', this.props.search.keywords)
-    p.set('minPts', this.props.search.minPts)
-    p.set('maxPts', this.props.search.maxPts)
-    p.set('minPrice', this.props.search.minPrice)
-    p.set('maxPrice', this.props.search.maxPrice)
-    let tags = this.props.search.searchTags.map(tag => { return tag._id })
-    if(tags.length > 0) p.set('tags', tags.join(', '))
-    let pString = p.toString()
-
-    this.props.changeVal('searchLoading', true)
-    let res = null
-    if(this.props.search.category === 'accounts') res = await getData(`/accounts?${pString}`)
-    else res = await getData(`/food?${pString}`)
-    if(res.data) this.props.changeVal('searchData', res.data)
-    this.props.changeVal('searchLoading', false)
-  }
-
-  async componentDidMount() {
-    await this.setQuery()
-    this.search()
-  }
-  componentDidUpdate(prevProps) {
-    if(this.props.location.search !== prevProps.location.search) this.search()
-  }
   componentWillUnmount() {
     this.props.changeVal('keywords', '')
-    this.props.changeVal('searchData', [])
   }
 
   render() {

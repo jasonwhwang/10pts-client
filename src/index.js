@@ -26,7 +26,7 @@ Amplify.configure({
     storage: AuthStore,
     oauth: {
       domain: process.env.REACT_APP_c_APP_DOMAIN,
-      scope: ['email', 'profile', 'openid'],
+      scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
       redirectSignIn: process.env.REACT_APP_var_STAGE === 'dev' ? 'http://localhost:3000/callback' : `${process.env.REACT_APP_url_LINK}/callback`,
       redirectSignOut: process.env.REACT_APP_var_STAGE === 'dev' ? 'http://localhost:3000' : process.env.REACT_APP_url_LINK,
       responseType: 'code'

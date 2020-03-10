@@ -35,12 +35,13 @@ class Settings extends React.Component {
     if(!this.props.user) this.props.history.push('/login')
     this.setState({ ...this.state, loading: false, error: '' })
   }
-  componentDidUpdate() {
-    if(!this.props.user) this.props.history.push('/login')
+  logOut = async () => {
+    await logOut()
+    this.props.history.push('/')
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage />
+    if (this.state.loading || !this.props.user) return <LoadingPage />
 
     return (
       <FadeTransition>
@@ -60,7 +61,7 @@ class Settings extends React.Component {
             </HideTabBarInput>
 
             <div className="box-flex-col box-margin-15 box-margin-top-40 box-margin-bottom-60 box-border-top">
-              <button onClick={() => logOut()} className="settings-logout box-border-bottom settingss-padding-10 box-text-7 box-flex-acenter">Log Out</button>
+              <button onClick={this.logOut} className="settings-logout box-border-bottom settingss-padding-10 box-text-7 box-flex-acenter">Log Out</button>
               <Link to="/about" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">About</Link>
               <Link to="/terms" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">Terms</Link>
               <Link to="/privacy" className="box-color-black box-border-bottom settingss-padding-10 box-text-7">Privacy</Link>

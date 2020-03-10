@@ -4,7 +4,8 @@ import Photo from '../../../img/user.png'
 import SaveButton from '../8_Buttons/SaveButton'
 import LikeButton from '../8_Buttons/LikeButton'
 
-const CardRow1 = ({ tab, photos, user, foodname, foodTitle, address, pts, isLiked, isSaved }) => {
+const FoodRowCard = ({ tab, photos, user, foodname, foodTitle, address, pts, isLiked, isSaved }) => {
+  if(!foodname) return null
   let username = user && user.username ? `/${user.username}` : ""
   let linkPath = `${tab}/f/${foodname}${username}`
 
@@ -57,12 +58,11 @@ const CardBottom = ({ isLiked, isSaved, user, foodname, tab }) => {
   )
 }
 
-CardRow1.defaultProps = {
+FoodRowCard.defaultProps = {
   photos: [null],
-  foodname: "",
   foodTitle: "",
   address: "",
   pts: 0
 }
 
-export default CardRow1
+export default FoodRowCard

@@ -2,18 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Photo from '../../../img/user.png'
 import FollowButton from '../8_Buttons/FollowButton'
-import { connect } from 'react-redux'
 
-const mapStateToProps = state => ({
-  authUser: state.common.user
-})
-
-const CardRow3 = (props) => {
+const AccountCard = (props) => {
   let username = props.username ? props.username : 'username'
   let [fCount, changeCount] = useState(props.followersCount)
   let followersTxt = fCount === 1 ? '1 follower' : `${fCount} followers`
-  
-  if(props.authUser && props.username === props.authUser.username) return null
+
   return (
     <div className="box-flex-stretch card-follow-margin">
       <Link to={`${props.tab}/a/${username}`}
@@ -21,7 +15,10 @@ const CardRow3 = (props) => {
         <img src={props.image ? props.image : Photo}
           className="card-userImage-l box-img"
           alt={username} />
-        <h6 className="box-text-bold box-flex-1 box-margin-15">{username}</h6>
+        <div className="box-flex-1 box-margin-15">
+          <h6 className="box-text-bold">{username}</h6>
+          <h6 className="box-text-nobold box-color-gray box-text-8">{props.name}</h6>
+        </div>
         <h6 className="box-text-nobold box-text-8 box-color-gray box-margin-right-10">{followersTxt}</h6>
       </Link>
       <FollowButton className="" type="icon"
@@ -30,4 +27,4 @@ const CardRow3 = (props) => {
   )
 }
 
-export default connect(mapStateToProps)(CardRow3)
+export default AccountCard

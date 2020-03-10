@@ -13,7 +13,7 @@ class List extends React.Component {
   }
 
   initializeState = async () => {
-    await this.setState({})
+    await this.setStateAsync({})
 
     if (this.props.location.hash) {
       let divID = this.props.location.hash.replace('#', '')
@@ -23,6 +23,11 @@ class List extends React.Component {
         window.scrollBy(0, -50)
       }
     }
+  }
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    });
   }
 
   render() {
@@ -49,19 +54,19 @@ const List1 = ({ data, tab, params, changeFollowing }) => {
   return (
     <React.Fragment>
       {data.map((foodItem, index) => {
-        if (foodItem) return <Card {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} changeFollowing={changeFollowing}/>
+        if (foodItem) return <Card {...foodItem} key={'index' + index} tab={tab} params={params} changeFollowing={changeFollowing}/>
         else return <Card key={'index' + index} tab={tab} params={params} />
       })}
     </React.Fragment>
   )
 }
 
-const List2 = ({ data, tab, params }) => {
+const List2 = ({ data, tab }) => {
   return (
     <div className="list-grid-2 box-flex-1">
       {data.map((foodItem, index) => {
-        if (foodItem) return <Card2 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
-        else return <Card2 key={'index' + index} tab={tab} params={params} />
+        if (foodItem) return <Card2 {...foodItem} key={'index' + index} tab={tab} />
+        else return <Card2 key={'index' + index} tab={tab} />
       })}
     </div>
   )
@@ -71,7 +76,7 @@ const List3 = ({ data, tab, params }) => {
   return (
     <div className="list-grid-3 box-flex-1">
       {data.map((foodItem, index) => {
-        if (foodItem) return <Card3 {...foodItem} key={foodItem.foodname + index} tab={tab} params={params} />
+        if (foodItem) return <Card3 {...foodItem} key={'index' + index} tab={tab} params={params} />
         else return <Card3 key={'index' + index} tab={tab} params={params} />
       })}
     </div>

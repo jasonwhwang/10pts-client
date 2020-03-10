@@ -35,19 +35,31 @@ class Login extends React.Component {
     }
 
     this.setState({ ...this.state, loading: true })
+    this.hideBars()
     let response = await logIn(this.state.email, this.state.password)
     if (response.error) {
       this.setState({ ...this.state, error: response.error, loading: false })
+      this.showBars()
       return
     }
 
     let res = await getData('/user')
     if (res.error) {
       this.setState({ ...this.state, error: 'Server error, please log in at another time.' })
+      this.showBars()
     } else {
       await this.props.changeVal('user', res.user)
+      this.showBars()
       this.props.history.push('/account')
     }
+  }
+  hideBars = () => {
+    document.getElementById('navBar').classList.add('navBar-hide')
+    document.getElementById('TabBar').classList.add('tabBar-hide')
+  }
+  showBars = () => {
+    document.getElementById('navBar').classList.remove('navBar-hide')
+    document.getElementById('TabBar').classList.remove('tabBar-hide')
   }
 
   render() {
