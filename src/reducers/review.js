@@ -1,4 +1,5 @@
 const defaultState = {
+  _id: null,
   photos: [],
   address: '',
   suggestions: [],

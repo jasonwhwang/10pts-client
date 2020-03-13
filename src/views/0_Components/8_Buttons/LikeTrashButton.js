@@ -1,6 +1,6 @@
 import React from 'react'
 import './Buttons.css'
-import { Heart } from 'react-feather'
+import { Heart, Trash2 } from 'react-feather'
 
 class LikeTrashButton extends React.Component {
   render() {
@@ -8,7 +8,7 @@ class LikeTrashButton extends React.Component {
       // If username matches user, show delete button
       return (
         <button className={`defaultNav-button likeButton box-flex-row-center box-margin-left-10`}>
-          <Heart size={12} />
+          <Trash2 size={12} />
         </button>
       )
     }

@@ -6,6 +6,7 @@ import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import { Plus, X } from 'react-feather'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import { removeFile } from '../../services/authApi'
 
 const Compress = require('client-compress')
 const options = {
@@ -44,7 +45,7 @@ class Photos extends React.Component {
         let res = await fetch(url)
         if (res.ok) return url
       } catch (err) {
-        URL.revokeObjectURL(url)
+        if(url.indexOf('blob:') === 0) URL.revokeObjectURL(url)
         return null
       }
     }))
@@ -63,10 +64,11 @@ class Photos extends React.Component {
     let newPhotos = [...this.props.review.photos, objectUrl]
     await this.props.changeVal('photos', newPhotos)
   }
-  removePhoto = (url) => {
+  removePhoto = async (url) => {
     let filtered = this.props.review.photos.filter(photo => photo !== url)
+    if(url.indexOf('blob:') === 0) URL.revokeObjectURL(url)
+    else await removeFile(url)
     this.props.changeVal('photos', filtered)
-    URL.revokeObjectURL(url)
   }
 
   render() {

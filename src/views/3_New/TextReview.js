@@ -8,6 +8,8 @@ import { ReviewPtsSlider, ReviewSmallSlider } from '../0_Components/Other/Slider
 import PhotosList from './PhotosList'
 import TextareaAutosize from 'react-autosize-textarea'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
+import ListErrors from '../0_Components/Other/ListErrors'
+import DeleteButton from '../0_Components/8_Buttons/DeleteButton'
 
 const mapStateToProps = state => ({
   review: state.review
@@ -38,6 +40,8 @@ class Review extends React.Component {
             <meta name="description" content="Review" />
           </Helmet></HelmetProvider>
           <ErrorBoundary>
+            
+            <ReviewErrors reviewErrors={this.props.review.reviewErrors} />
 
             <PhotosList photos={this.props.review.photos} changeVal={this.props.changeVal} />
 
@@ -86,6 +90,8 @@ class Review extends React.Component {
                 onChange={this.changeInput} />
             </div>
 
+            <DeleteButton />
+
           </ErrorBoundary>
         </div>
       </FadeTransition>
@@ -101,6 +107,18 @@ const FoodLabels = ({ foodTitle, address }) => {
       <span className="box-text-7 box-text-nobold">{address}</span>
     </div>
 
+  )
+}
+
+const ReviewErrors = ({ reviewErrors }) => {
+  if(!reviewErrors) return null
+
+  return (
+    <FadeTransition>
+      <div className="box-container box-margin-15 box-padding-15">
+        <ListErrors errors={reviewErrors} />
+      </div>
+    </FadeTransition>
   )
 }
 

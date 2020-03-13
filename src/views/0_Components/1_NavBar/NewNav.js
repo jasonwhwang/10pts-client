@@ -3,6 +3,7 @@ import './NavBar.css'
 import FadeTransition from '../7_FadeTransition/FadeTransition'
 import { Link } from 'react-router-dom'
 import { X, ChevronLeft, ChevronRight } from 'react-feather'
+import PostButton from '../8_Buttons/PostButton'
 
 const NewNav = (props) => {
   let path = props.location.pathname.indexOf("/new") === 0 ? "/new" : `/edit/${props.match.params.foodname}`
@@ -69,10 +70,7 @@ const ReviewNew = (props) => {
 
         <h6 className="box-text-bold box-flex-1 box-flex-row-center">Review</h6>
 
-        <button
-          className="box-flex-row-center chevron-right defaultNav-button box-text-extraBold box-text-6">
-          Post
-        </button>
+        <PostButton />
       </div>
     </FadeTransition>
   )

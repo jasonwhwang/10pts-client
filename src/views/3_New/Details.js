@@ -5,6 +5,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import AutoSearch from '../0_Components/Other/AutoSearch'
+import FoodInput from './FoodInput'
 import PhotosList from './PhotosList'
 import Tags from '../0_Components/6_Tags/Tags'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
@@ -36,6 +37,7 @@ class Details extends React.Component {
     this.props.changeVal(e.target.id, value)
   }
   changeAddress = (val) => { this.props.changeVal('address', val) }
+  changeFood = (val) => { this.props.changeVal('foodTitle', val) }
 
   render() {
     if (this.state.loading) return <LoadingPage />
@@ -57,15 +59,11 @@ class Details extends React.Component {
               changeAddress={this.changeAddress} />
 
             <div className="box-margin-15 box-flex-row-center">
-              <div className="box-flex-1 review-margin15">
-                <input
-                  id="foodTitle"
-                  placeholder="Food Name"
-                  className="box-input box-expand-width"
-                  value={this.props.review.foodTitle}
-                  onChange={this.changeInput}
-                />
-              </div>
+              <FoodInput
+                foodTitle={this.props.review.foodTitle}
+                address={this.props.review.address}
+                changeInput={this.changeInput}
+                changeFood={this.changeFood} />
               <input
                 id="price"
                 placeholder="Price ($)"
