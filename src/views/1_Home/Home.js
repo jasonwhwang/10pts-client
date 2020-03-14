@@ -63,7 +63,7 @@ class Home extends React.Component {
   setStateAsync(state) {
     return new Promise((resolve) => {
       this.setState(state, resolve)
-    });
+    })
   }
 
   render() {
