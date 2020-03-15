@@ -17,11 +17,13 @@ class Tags extends React.Component {
   }
 
   async componentDidMount() {
+    this.mounted = true
     let newSuggestions = await getData('/tags')
-    this.setState({ ...this.state, suggestions: newSuggestions.tags })
+    if(this.mounted) this.setState({ ...this.state, suggestions: newSuggestions.tags })
     let input = document.getElementsByClassName('react-tags__search-input')
     if(input && input[0]) input[0].setAttribute('maxlength', 30)
   }
+  componentWillUnmount() { this.mounted = false }
 
   onDelete = (i) => {
     const newTags = this.props.tags.slice(0)

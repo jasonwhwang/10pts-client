@@ -16,3 +16,9 @@
 
 .settings-logout { color: var(--red); }
 .settings-logout:hover { color: var(--red); }
+
+.account-allowSelect {
+  user-select: auto !important;
+  -webkit-user-select: auto !important;
+  -webkit-touch-callout: default !important;
+}

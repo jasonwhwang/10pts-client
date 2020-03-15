@@ -11,7 +11,6 @@ import Image from '../../img/user.png'
 import { Link } from 'react-router-dom'
 import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { getData } from '../../services/api'
-import TextareaAutosize from 'react-autosize-textarea'
 // import { ReviewData } from '../0_Components/Other/_data'
 
 const mapStateToProps = state => ({
@@ -142,12 +141,9 @@ const AccountDetails = (props) => {
     <div className="box-margin-15">
       <h6 className="box-text-bold">{props.name ? props.name : props.username}</h6>
       <div className="box-flex-row box-margin-bottom-20">
-        <TextareaAutosize
-          placeholder="..."
-          maxLength={500}
-          className="box-flex-1 box-margin-right-10"
-          value={props.bio}
-          disabled={true} />
+        <h6 className="box-text-nobold box-text-prewrap account-allowSelect">
+          {props.bio}
+        </h6>
 
         {props.match.params.username && !isAuthUser &&
           <div className="box-flex-col box-flex-end">

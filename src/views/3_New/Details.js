@@ -31,7 +31,8 @@ class Details extends React.Component {
     if (e.target.id === 'address') value = value.replace(/[^0-9A-Za-z&, ]/gi, '')
     else if (e.target.id === 'price') {
       value = value.replace(/[^0-9]/gi, '')
-      if (value.length === 1 && value === '0') value = ''
+      if (!value || (value.length === 1 && value === '0')) value = ''
+      else value = '$' + value
     }
     else if (e.target.id === 'foodTitle') value = value.replace(/[^A-Za-z ]/gi, '')
     this.props.changeVal(e.target.id, value)

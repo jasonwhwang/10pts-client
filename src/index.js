@@ -34,6 +34,7 @@ Amplify.configure({
   },
   Storage: {
     region: process.env.REACT_APP_s3_REGION,
+    level: 'public',
     bucket: process.env.REACT_APP_s3_BUCKET,
     identityPoolId: process.env.REACT_APP_c_IDENTITY_POOL_ID
   }

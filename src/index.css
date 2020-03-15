@@ -28,13 +28,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   -webkit-overflow-scrolling: touch;
-  -webkit-touch-callout: none;
 }
 #root { min-height: 100%; display: flex; }
 @media only screen and (max-width: 600px) {
   body {
     user-select: none;
     -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
 }
 

@@ -10,7 +10,7 @@ class FoodInput extends React.Component {
     }
     let p = new URLSearchParams()
     p.set('address', this.props.address)
-    let res = getData(`/food/suggestions?${p.toString()}`)
+    let res = getData(`/food/suggestions/all?${p.toString()}`)
     if (res.data) this.setState({ ...this.state, data: res.data, address: this.props.address })
     this.setState({ ...this.state, show: true })
   }

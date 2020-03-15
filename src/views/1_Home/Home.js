@@ -2,7 +2,6 @@ import React from 'react'
 import './Home.css'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
-import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import Loading from '../0_Components/4_Loading/Loading'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
@@ -67,8 +66,6 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage />
-
     return (
       <FadeTransition>
         <div className="page">
@@ -84,7 +81,7 @@ class Home extends React.Component {
               match={this.props.match}
               location={this.props.location} />
 
-            <div className="box-flex-row-center box-margin-top-30">
+            <div className="box-flex-row-center box-margin-top-30 box-margin-bottom-30">
               <Loading small={true} />
             </div>
 

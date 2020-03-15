@@ -88,14 +88,17 @@ async function uploadFile(file, name) {
   if (file.size > 500000) return { error: "File exceeds max size of 500KB." }
   let fileId = generate('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10)
   let fileExt = file.type.split('/')[1]
-  let fileName = `${name}-${fileId}.${fileExt}`
+  let filteredName = name.replace(/\s+/g, '-').replace(/,/g, '')
+  let fileName = `${filteredName}-${fileId}.${fileExt}`
 
   try {
     let userInfo = await Auth.currentUserInfo()
     let fileNameLong = `${userInfo.id}/${fileName}`
 
     let uploadFileKey = await Storage.put(fileNameLong, file, {
+      level: 'public',
       contentType: file.type,
+      acl: 'bucket-owner-full-control',
       // progressCallback(progress) {
       //   console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
       // }

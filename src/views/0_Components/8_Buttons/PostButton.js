@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Loading from '../4_Loading/Loading'
 import { postData, putData } from '../../../services/api'
-import { uploadFile } from '../../../services/authApi'
+import { uploadFile, removeFile } from '../../../services/authApi'
 
 const mapStateToProps = state => ({
   review: state.review,
@@ -17,12 +17,16 @@ const mapDispatchToProps = dispatch => ({
 class PostButton extends React.Component {
   state = { loading: false }
 
-  componentDidMount() { this.props.changeVal('reviewErrors', null) }
+  async componentDidMount() {
+    // let res = await removeFile('us-east-1:260e6482-c7f2-4190-919b-900ed3f13818/Beef-Noodle-Soup-Chef-Hung-Taiwanese-Beef-Noodle-Alton-Parkway-Irvine-CA-USA-10pts-RwPF43jupI.jpeg')
+    // console.log(res)
+    this.props.changeVal('reviewErrors', null)
+  }
 
   checkErrors = () => {
     let errors = {}
     let r = this.props.review
-    if(!this.props.user) errors.you = 'must be logged in to post a review'
+    if (!this.props.user) errors.you = 'must be logged in to post a review'
     if (r.photos.length === 0) errors.photos = 'must include at least one'
     if (!r.address) errors.address = 'is blank'
     if (!r.foodTitle) errors.food = 'is blank'
@@ -42,41 +46,66 @@ class PostButton extends React.Component {
       return
     }
     this.props.changeVal('reviewErrors', null)
+    // Convert str to int
+    r.price = parseInt(r.price.replace(/[^0-9]/gi, ''))
+    r.pts = parseInt(r.pts)
+    r.ptsTaste = parseInt(r.ptsTaste)
+    r.ptsAppearance = parseInt(r.ptsAppearance)
+    r.ptsTexture = parseInt(r.ptsTexture)
+    r.ptsAroma = parseInt(r.ptsAroma)
+    r.ptsBalance = parseInt(r.ptsBalance)
     // upload images
-    let photos = []
-    await Promise.all(r.photos.forEach(async url => {
+    let photos = await Promise.all(r.photos.map(async (url) => {
       try {
         if (url.indexOf('blob:') === 0) {
-          let img = await fetch(url)
-          if (img.ok) {
-            let imgName = r.foodTitle + ', ' + r.address + ', ' + this.props.user.username
-            let newUrl = await uploadFile(img, imgName)
-            if(!newUrl.error) photos.push(newUrl)
-          }
-        } else photos.push(url)
+          let imgName = r.foodTitle + '-' + r.address + '-' + this.props.user.username
+          let img = await fetch(url).then(r => r.blob())
+            .then(blobFile => new File([blobFile], imgName, { type: blobFile.type }))
+          if (!img) return null
+          let newUrl = await uploadFile(img, imgName)
+          if (newUrl.error) return null
+          return newUrl
+        } else if (url) return url
+        else return null
+
       } catch (err) {
         if (url.indexOf('blob:') === 0) URL.revokeObjectURL(url)
       }
     }))
-    r.photos = photos
-    // Post/Put to API
-    let res = null
-    if(r._id) res = await putData(`/review/${r._id}`, r)
-    else await postData('/review', r)
-    // Redirect to Review
-    if(res.errors) {
-      await this.props.changeVal('reviewErrors', res.errors)
-      await this.setStateAsync({ ...this.state, loading: true })
-    } else {
-      await this.props.changeVal('reviewReset', null)
-      this.props.history.push(`/f/${res.review.foodname}/${this.props.user.username}`)
+    r.photos = photos.filter(url => url !== null)
+
+    try {
+      // Post/Put to API
+      let res = null
+      if (r._id) res = await putData(`/review/${r._id}`, { review: r })
+      else await postData('/review', { review: r })
+      // Redirect to Review
+      if (!res || res.error || res.errors) {
+        await Promise.all(r.photos.map(async url => {
+          await removeFile(url)
+        }))
+        let errors = res && res.errors ? res.errors : null
+        await this.props.changeVal('reviewErrors', errors)
+        await this.setStateAsync({ ...this.state, loading: false })
+      } else {
+        await this.props.changeVal('reviewReset', null)
+        this.props.history.push(`/f/${res.review.foodname}/${this.props.user.username}`)
+      }
+    } catch (err) {
+      await Promise.all(r.photos.map(async url => {
+        await removeFile(url)
+      }))
+      await this.setStateAsync({ ...this.state, loading: false })
+      console.log(err)
     }
   }
+
   setStateAsync(state) {
     return new Promise((resolve) => {
       this.setState(state, resolve)
     });
   }
+
   render() {
     return (
       <button onClick={this.submitPost}

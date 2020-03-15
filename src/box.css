@@ -132,10 +132,6 @@
   border-radius: 5px;
 }
 .box-input:focus { box-shadow: 0 0 0 2pt rgb(241, 241, 241); }
-.box-textarea {
-  line-height: 1.75;
-}
-
 
 /* Colors */
 .box-background { background-color: var(--background); }
@@ -220,6 +216,7 @@ p, h1, h2, h3, h4, h5, h6 { margin: 0; }
 .box-text-uppercase { text-transform: uppercase; }
 .box-text-capitalize { text-transform: capitalize; }
 .box-text-nowrap { white-space: nowrap; }
+.box-text-prewrap { white-space: pre-wrap; }
 
 
 /* Margins */
