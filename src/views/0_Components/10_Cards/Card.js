@@ -14,49 +14,49 @@ import ReviewButton from '../8_Buttons/ReviewButton'
 import Ago from '../Other/Ago'
 
 const Card = (props) => {
-  let divID = props.user ? props.foodname + "-" + props.user.username : props.foodname
+  let divID = props.account ? props.foodname + "-" + props.account.username : props.foodname
   return (
     <FadeTransition>
       <div id={divID}>
-        <UserHeading user={props.user} tab={props.tab} changeFollowing={props.changeFollowing} />
+        <AccountHeading account={props.account} tab={props.tab} changeFollowing={props.changeFollowing} />
 
         <Photos {...props} />
 
         <Buttons
           isLiked={props.isLiked} isSaved={props.isSaved}
           hasReviewed={props.hasReviewed}
-          foodname={props.foodname} user={props.user} />
+          foodname={props.foodname} account={props.account} />
 
         <FoodHeading {...props} />
 
         <StatsHeading
           likesCount={props.likesCount} commentsCount={props.commentsCount}
           savedCount={props.savedCount} reviewsCount={props.reviewsCount}
-          time={props.updatedAt} params={props.params} user={props.user} />
+          time={props.updatedAt} params={props.params} account={props.account} />
       </div>
     </FadeTransition>
   )
 }
 
-const UserHeading = ({ tab, user, changeFollowing }) => {
-  if (!user) return null
+const AccountHeading = ({ tab, account, changeFollowing }) => {
+  if (!account) return null
   return (
     <div className="box-flex-row box-flex-stretch card-userHeading">
-      <Link to={`${tab}/a/${user.username}`} className="box-flex-acenter box-flex-1 box-margin-left-10">
+      <Link to={`${tab}/a/${account.username}`} className="box-flex-acenter box-flex-1 box-margin-left-10">
         <img className="box-img card-userImage"
-          src={user.image ? user.image : Image}
-          alt={user.username} />
-        <h6 className="box-text-bold box-margin-left-10 box-color-black">{user.username}</h6>
+          src={account.image ? account.image : Image}
+          alt={account.username} />
+        <h6 className="box-text-bold box-margin-left-10 box-color-black">{account.username}</h6>
       </Link>
 
-      <FollowButton className="" username={user.username} isFollowing={user.isFollowing} changeFollowing={changeFollowing} />
+      <FollowButton className="" username={account.username} isFollowing={account.isFollowing} changeFollowing={changeFollowing} />
     </div>
   )
 }
 
-const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => {
+const Photos = ({ photos, account, foodname, foodTitle, address, params, tab }) => {
   let pathLetter = params.path && (params.path === 'f' || params.path.indexOf("/f") !== -1) ? 'p' : 'f'
-  let username = user && user.username ? `/${user.username}` : ""
+  let username = account && account.username ? `/${account.username}` : ""
   return (
     <div className="box-box">
       <Carousel widgets={[Dots]}>
@@ -83,18 +83,18 @@ const Photos = ({ photos, user, foodname, foodTitle, address, params, tab }) => 
   )
 }
 
-const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, user }) => {
-  let username = user && user.username ? user.username : null
+const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, account }) => {
+  let username = account && account.username ? account.username : null
   return (
     <div className="card-buttons box-flex-row box-flex-stretch">
-      {user &&
+      {account &&
         <React.Fragment>
           <LikeButton isLiked={isLiked} foodname={foodname} username={username} />
           <CommentButton foodname={foodname} username={username} />
         </React.Fragment>
       }
       <ShareButton foodname={foodname} username={username} />
-      {!user && <ReviewButton hasReviewed={hasReviewed} />}
+      {!account && <ReviewButton hasReviewed={hasReviewed} />}
       <div className="box-flex-1"></div>
       <SaveButton isSaved={isSaved} foodname={foodname} />
     </div>
@@ -109,7 +109,7 @@ const FoodHeading = (props) => {
   let place = addressURL.shift()
   let addressTxt = addressURL.join(", ")
   addressURL = searchParams.toString()
-  let username = props.user && props.user.username ? `/${props.user.username}` : ""
+  let username = props.account && props.account.username ? `/${props.account.username}` : ""
 
   let foodLink = `${props.tab}/f/${props.foodname}`
   let reviewLink = `${props.tab}/f/${props.foodname}${username}`
@@ -117,13 +117,11 @@ const FoodHeading = (props) => {
   let mapLink = `${props.tab}/map?${addressURL}`
 
   return (
-    <div className="card-foodHeading box-flex-row">
-      <div className="box-flex-1 box-flex-col">
+    <div className="card-foodHeading box-flex-row box-margin-bottom-20">
+      <div className="box-flex-1 box-flex-col box-margin-right-20">
         <Link to={foodLink} className="box-text-4 box-text-bold box-color-black">{props.foodTitle}</Link>
-        <div className="box-flex-stretch">
-          <Link to={searchLink} className="box-color-black box-text-5 card-subText">{place}</Link>
-          <Link to={mapLink} className="box-color-black box-text-6 card-subText address-top">{addressTxt}</Link>
-        </div>
+        <Link to={searchLink} className="box-color-black box-text-5">{place}</Link>
+        <Link to={mapLink} className="box-color-black box-text-6">{addressTxt}</Link>
       </div>
 
       <div className="box-flex-row">
@@ -136,18 +134,18 @@ const FoodHeading = (props) => {
   )
 }
 
-const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, time, params, user }) => {
+const StatsHeading = ({ likesCount, commentsCount, savedCount, reviewsCount, time, params, account }) => {
   if (params.foodname) return null
 
   let likesString, commentsString, savedString, reviewsString
-  if (user) {
+  if (account) {
     likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
     commentsString = commentsCount === 1 ? '1 comment' : `${commentsCount} comments`
   } else {
     savedString = savedCount === 1 ? '1 save' : `${savedCount} saves`
     reviewsString = reviewsCount === 1 ? '1 review' : `${reviewsCount} reviews`
   }
-  let statsString = user ? likesString + ', ' + commentsString : savedString + ', ' + reviewsString
+  let statsString = account ? likesString + ', ' + commentsString : savedString + ', ' + reviewsString
 
   return (
     <h6 className="card-stats box-text-7 box-border-bottom box-color-gray box-text-nobold">

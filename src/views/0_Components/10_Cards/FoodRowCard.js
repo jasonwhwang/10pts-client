@@ -4,9 +4,9 @@ import Photo from '../../../img/user.png'
 import SaveButton from '../8_Buttons/SaveButton'
 import LikeButton from '../8_Buttons/LikeButton'
 
-const FoodRowCard = ({ tab, photos, user, foodname, foodTitle, address, pts, isLiked, isSaved }) => {
+const FoodRowCard = ({ tab, photos, account, foodname, foodTitle, address, pts, isLiked, isSaved }) => {
   if(!foodname) return null
-  let username = user && user.username ? `/${user.username}` : ""
+  let username = account && account.username ? `/${account.username}` : ""
   let linkPath = `${tab}/f/${foodname}${username}`
 
   let photo = photos && photos[0] ? photos[0] : Photo
@@ -28,24 +28,24 @@ const FoodRowCard = ({ tab, photos, user, foodname, foodTitle, address, pts, isL
           <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">{pts}</h6>
         </Link>
 
-        <CardBottom user={user} isLiked={isLiked} isSaved={isSaved} tab={tab} />
+        <CardBottom account={account} isLiked={isLiked} isSaved={isSaved} tab={tab} />
       </div>
     </div>
   )
 }
 
-const CardBottom = ({ isLiked, isSaved, user, foodname, tab }) => {
-  if (user) {
+const CardBottom = ({ isLiked, isSaved, account, foodname, tab }) => {
+  if (account) {
     return (
       <div className="box-flex-acenter card-list-bottom">
-        <Link to={`${tab}/a/${user.username}`}
+        <Link to={`${tab}/a/${account.username}`}
           className="box-flex-acenter box-color-black box-flex-1">
           <img className="box-img card-userImage-s box-margin-right-5"
-            src={user.image ? user.image : Photo}
-            alt={user.username} />
-          <h6 className="box-text-bold box-text-7 box-flex-1">{user.username}</h6>
+            src={account.image ? account.image : Photo}
+            alt={account.username} />
+          <h6 className="box-text-bold box-text-7 box-flex-1">{account.username}</h6>
         </Link>
-        <LikeButton isLiked={isLiked} foodname={foodname} username={user.username} />
+        <LikeButton isLiked={isLiked} foodname={foodname} username={account.username} />
       </div>
     )
   }

@@ -55,7 +55,7 @@ class Search extends React.Component {
     p.set('limit', this.state.limit)
     p.set('offset', this.state.offset)
     let tags = this.props.search.searchTags.map(tag => { return tag._id })
-    if(tags.length > 0) p.set('tags', tags.join(', '))
+    if(tags.length > 0) p.set('tags', tags.join('-'))
     let query = `?${p.toString()}`
 
     let res = null

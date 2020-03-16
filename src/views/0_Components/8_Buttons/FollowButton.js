@@ -14,20 +14,20 @@ class FollowButton extends React.Component {
     this.setState({ ...this.state, isFollowing: this.props.isFollowing })
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.isFollowing !== this.props.isFollowing) {
-      this.setState({ ...this.state, isFollowing: this.props.isFollowing})
+    if (prevProps.isFollowing !== this.props.isFollowing) {
+      this.setState({ ...this.state, isFollowing: this.props.isFollowing })
     }
   }
   onClick = async () => {
-    if(!this.props.authUser || this.state.loading) return
+    if (!this.props.authUser || this.state.loading) return
     await this.setStateAsync({ ...this.state, loading: true })
     let res = null
-    if(!this.state.isFollowing) res = await putData(`/account/follow/${this.props.username}`)
+    if (!this.state.isFollowing) res = await putData(`/account/follow/${this.props.username}`)
     else res = await putData(`/account/unfollow/${this.props.username}`)
-    if(res.error) return
+    if (res.error) return
     await this.setStateAsync({ isFollowing: res.isFollowing, loading: false })
-    if(this.props.changeCount) this.props.changeCount(res.followersCount)
-    if(this.props.changeFollowing) this.props.changeFollowing(this.props.username, res.isFollowing)
+    if (this.props.changeCount) this.props.changeCount(res.followersCount)
+    if (this.props.changeFollowing) this.props.changeFollowing(this.props.username, res.isFollowing)
   }
   setStateAsync(state) {
     return new Promise((resolve) => {
@@ -50,8 +50,11 @@ class FollowButton extends React.Component {
 
     return (
       <button onClick={this.onClick}
-        className={`${this.props.className} nav-padding10 box-text-8 box-text-bold box-flex-acenter`}>
-        Follow
+        className={`${this.props.className}
+        ${this.props.username === this.props.authUser.username ? 'box-hide' : ''}
+        ${this.state.isFollowing ? 'follow-blue' : 'button-default'}
+        nav-padding10 box-text-8 box-text-bold box-flex-acenter`}>
+        {this.state.isFollowing ? <Check size={12} /> : 'Follow'}
       </button>
     )
   }

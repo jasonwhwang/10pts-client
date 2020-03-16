@@ -46,14 +46,6 @@ class PostButton extends React.Component {
       return
     }
     this.props.changeVal('reviewErrors', null)
-    // Convert str to int
-    r.price = parseInt(r.price.replace(/[^0-9]/gi, ''))
-    r.pts = parseInt(r.pts)
-    r.ptsTaste = parseInt(r.ptsTaste)
-    r.ptsAppearance = parseInt(r.ptsAppearance)
-    r.ptsTexture = parseInt(r.ptsTexture)
-    r.ptsAroma = parseInt(r.ptsAroma)
-    r.ptsBalance = parseInt(r.ptsBalance)
     // upload images
     let photos = await Promise.all(r.photos.map(async (url) => {
       try {
@@ -73,12 +65,13 @@ class PostButton extends React.Component {
       }
     }))
     r.photos = photos.filter(url => url !== null)
+    r.price = r.price.replace(/[^0-9]/gi, '')
 
     try {
       // Post/Put to API
       let res = null
       if (r._id) res = await putData(`/review/${r._id}`, { review: r })
-      else await postData('/review', { review: r })
+      else res = await postData('/review', { review: r })
       // Redirect to Review
       if (!res || res.error || res.errors) {
         await Promise.all(r.photos.map(async url => {
