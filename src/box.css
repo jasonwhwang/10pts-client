@@ -119,10 +119,11 @@
   background-color: var(--background);
 }
 
-/* @media only screen and (max-width: 600px) {} */
-
 /* Square */
-.box-box { height: min(var(--width), 100vmin); background-color: var(--background); }
+.box-box { height: var(--width); background-color: var(--background); }
+@media only screen and (max-width: 600px) {
+  .box-box { height: 100vmin; }
+}
 
 /* Input */
 .box-input {

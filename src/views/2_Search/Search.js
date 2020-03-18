@@ -14,6 +14,11 @@ const mapStateToProps = state => ({
   search: state.search
 })
 
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
+
 class Search extends React.Component {
   state = {
     data: [],
@@ -114,4 +119,4 @@ class Search extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

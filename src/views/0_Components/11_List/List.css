@@ -6,7 +6,7 @@
 }
 .list-item-2:nth-child(odd) { border-right: 1px solid var(--border); }
 .list-image-2 {
-  height: min(var(--width)/2, 100vmin/2);
+  height: calc(var(--width)/2);
   width: 1fr;
 }
 .list-description-2 {
@@ -23,11 +23,17 @@
 .list-item-3 { border-right: 1px solid var(--border); }
 .list-item-3:nth-child(3n) { border-right: none; }
 .list-image-3 {
-  height: min(var(--width)/3, 100vmin/3);
+  height: calc(var(--width)/3);
   width: 1fr;
 }
 
 .list-saved-image {
-  height: min(var(--width)/3, 100vmin/3);
-  width: min(var(--width)/3, 100vmin/3);
+  height: calc(var(--width)/3);
+  width: calc(var(--width)/3);
+}
+
+@media only screen and (max-width: 600px) {
+  .list-image-2 { height: calc(100vmin/2); }
+  .list-image-3 { height: calc(100vmin/3); }
+  .list-saved-image { height: calc(100vmin/3); width: calc(100vmin/3); }
 }
