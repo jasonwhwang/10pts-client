@@ -41,7 +41,7 @@ class FollowButton extends React.Component {
       return (
         <button onClick={this.onClick}
           className={`${this.props.className}
-            ${this.props.username === authUser && authUser.username ? 'box-hide' : ''}
+            ${authUser && this.props.username === authUser.username ? 'box-hide' : ''}
             ${this.state.isFollowing ? 'follow-blue' : 'button-default'}
             nav-padding10 box-text-8 box-text-bold box-flex-acenter`}>
           {this.state.isFollowing ? <Check size={12} /> : <Plus size={12} />}
@@ -52,7 +52,7 @@ class FollowButton extends React.Component {
     return (
       <button onClick={this.onClick}
         className={`${this.props.className}
-        ${this.props.username === authUser && authUser.username ? 'box-hide' : ''}
+        ${authUser && this.props.username === authUser.username ? 'box-hide' : ''}
         ${this.state.isFollowing ? 'follow-blue' : 'button-default'}
         nav-padding10 box-text-8 box-text-bold box-flex-acenter`}>
         {this.state.isFollowing ? <Check size={12} /> : 'Follow'}

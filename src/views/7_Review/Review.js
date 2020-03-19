@@ -10,7 +10,8 @@ import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { CardRatings, PhotosList } from '../0_Components/10_Cards/CardRatings'
 import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
 import { ReviewStats, ReviewComments, ReviewTime, ReviewUserComment } from './ReviewComponents'
-import { ReviewMainData } from '../0_Components/Other/_data'
+// import { ReviewMainData } from '../0_Components/Other/_data'
+import { getData } from '../../services/api'
 
 const mapStateToProps = state => ({
   user: state.common.user
@@ -18,14 +19,18 @@ const mapStateToProps = state => ({
 
 class Review extends React.Component {
   state = {
+    review: null,
     loading: true
   }
   async componentDidMount() {
-    this.setState({ ...this.state, loading: false })
+    let p = this.props.match.params
+    let res = await getData(`/review/${p.foodname}/${p.username}`)
+    if(!res || res.error || res.errors) this.setState({ ...this.state, loading: false })
+    else this.setState({ ...this.state, review: res.review, loading: false })
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage />
+    if (this.state.loading || !this.state.review) return <LoadingPage />
 
     let params = this.props.match.params
     let isMain = params.path === 'f' || params.path.indexOf('/f') !== -1
@@ -45,9 +50,9 @@ class Review extends React.Component {
           <ErrorBoundary>
             <HideTabBarRoute location={this.props.location} match={this.props.match}/>
 
-            {isMain && <ReviewMain {...this.props} data={ReviewMainData} />}
-            {isPhotos && <PhotosList {...this.props} data={ReviewMainData} />}
-            {isComments && <ReviewUserComment {...this.props} data={ReviewMainData} />}
+            {isMain && <ReviewMain {...this.props} data={this.state.review} />}
+            {isPhotos && <PhotosList {...this.props} data={this.state.review} />}
+            {isComments && <FadeTransition><ReviewUserComment {...this.props} data={this.state.review} /></FadeTransition>}
 
           </ErrorBoundary>
         </div>
@@ -84,7 +89,7 @@ const ReviewMain = (props) => {
         </div>
       </div>
 
-      <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.commentsCount} />
+      <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.comments.length} />
       <ReviewComments comments={props.data.comments} tab={tab} />
       <div className="box-margin-bottom-60"></div>
     </>

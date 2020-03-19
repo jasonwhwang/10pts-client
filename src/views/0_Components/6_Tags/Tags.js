@@ -34,9 +34,8 @@ class Tags extends React.Component {
   onAddition = (tag) => {
     tag = {
       _id: tag._id ? tag._id : null,
-      name: tag.name
-        .replace(/[^A-Za-z0-9& ]/gi, '').toLowerCase()
-        .replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase() }).substring(0, 30)
+      name: tag.name.replace(/[^A-Za-z0-9& ]/gi, '').toLowerCase()
+        // .replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase() }).substring(0, 30)
     }
     let duplicate = this.props.tags.filter(tagItem => tagItem.name === tag.name)
     if(duplicate.length >= 1) return

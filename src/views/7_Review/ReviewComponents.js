@@ -74,7 +74,7 @@ export const ReviewUserComment = (props) => {
   }
   return (
     <>
-      <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.commentsCount} />
+      <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.comments.length} />
       <ReviewComments comments={props.data.comments} tab={tab} />
       <ReviewInput />
       <div className="box-margin-bottom-60"></div>
