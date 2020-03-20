@@ -39,8 +39,12 @@ export default (state = defaultState, action) => {
         ...state,
         [action.type]: action.val
       }
-    case 'reviewReset':
+    case 'resetReview':
       return defaultState
+    case 'setReview':
+      return {
+        ...state, ...action.val
+      }
     default:
       return state;
   }

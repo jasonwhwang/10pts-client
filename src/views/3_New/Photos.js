@@ -7,6 +7,7 @@ import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import { Plus, X } from 'react-feather'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import { removeFile } from '../../services/authApi'
+import { getData } from '../../services/api'
 
 const Compress = require('client-compress')
 const options = {
@@ -20,7 +21,8 @@ const options = {
 const compress = new Compress(options)
 
 const mapStateToProps = state => ({
-  review: state.review
+  review: state.review,
+  user: state.common.user
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -33,8 +35,21 @@ class Photos extends React.Component {
     loading: true,
     error: ''
   }
-  componentDidMount() {
-    this.setPhotos()
+  async componentDidMount() {
+    let p = this.props.match.params
+    if(p.foodname && this.props.user && p.foodname !== this.props.review.foodname) {
+      let res = await getData(`/review/${p.foodname}/${this.props.user.username}`)
+      if(!res || res.error || res.errors) return
+      if(res.review) {
+        res.review.price = "$"+res.review.price
+        await this.props.changeVal('setReview', res.review)
+      }
+
+    } else if(!p.foodname && this.props.review.foodname) {
+      await this.props.changeVal('resetReview', null)
+    }
+
+    await this.setPhotos()
     this.setState({ ...this.state, loading: false })
   }
 
@@ -49,8 +64,7 @@ class Photos extends React.Component {
         return null
       }
     }))
-    photos = photos.filter(url => url !== null)
-    await this.props.changeVal('photos', photos)
+    await this.props.changeVal('photos', photos.filter(url => url))
   }
   onChange = async (e) => {
     const files = [...e.target.files]
@@ -96,14 +110,15 @@ class Photos extends React.Component {
               </label>
             </div>
 
-            {this.props.review.photos.map(photo => {
+            {this.props.review.photos.map((photo, index) => {
               return (
-                <div className="box-expand-width box-flex-col box-position-relative" key={photo}>
+                <div className="box-expand-width box-flex-col box-position-relative"
+                  key={photo ? photo : index}>
                   <button id={photo} onClick={() => this.removePhoto(photo)}
                     className="photos-xButton box-flex-row-center">
                     <X size={18} />
                   </button>
-                  <img className="box-expand-width" src={photo} alt="New Food" />
+                  <img className="box-expand-width" src={photo} alt="Review Food" />
                 </div>
               )
             })}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Loading from '../4_Loading/Loading'
 import { postData, putData } from '../../../services/api'
 import { uploadFile, removeFile } from '../../../services/authApi'
+import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   review: state.review,
@@ -65,7 +66,7 @@ class PostButton extends React.Component {
       }
     }))
     r.photos = photos.filter(url => url !== null)
-    r.price = r.price.replace(/[^0-9]/gi, '')
+    r.price = parseInt(r.price.replace(/[^0-9]/gi, ''))
 
     try {
       // Post/Put to API
@@ -81,7 +82,7 @@ class PostButton extends React.Component {
         await this.props.changeVal('reviewErrors', errors)
         await this.setStateAsync({ ...this.state, loading: false })
       } else {
-        await this.props.changeVal('reviewReset', null)
+        await this.props.changeVal('resetReview', null)
         this.props.history.push(`/f/${res.review.foodname}/${this.props.user.username}`)
       }
     } catch (err) {
@@ -109,4 +110,4 @@ class PostButton extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostButton)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostButton))

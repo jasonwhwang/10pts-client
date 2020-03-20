@@ -55,6 +55,7 @@ const AccountHeading = ({ tab, account, changeFollowing }) => {
 }
 
 const Photos = ({ photos, account, foodname, foodTitle, address, params, tab }) => {
+  if(!photos) return null
   let pathLetter = params.path && (params.path === 'f' || params.path.indexOf("/f") !== -1) ? 'p' : 'f'
   let username = account && account.username ? `/${account.username}` : ""
   return (

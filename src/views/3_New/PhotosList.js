@@ -19,8 +19,8 @@ class PhotosList extends React.Component {
     let empty = Array(5 - this.props.photos.length).fill(0)
     return (
       <div className="photoPreviews">
-        {this.props.photos.map(photo => {
-          return <img src={photo} key={photo} alt="New Review" className="box-img" />
+        {this.props.photos.map((photo, index) => {
+          return <img src={photo} key={photo ? photo : index} alt="New Review" className="box-img" />
         })}
         {empty.map((val, index) => {
           return <div key={index} className="box-img"></div>
