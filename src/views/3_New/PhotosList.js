@@ -5,6 +5,7 @@ class PhotosList extends React.Component {
     let photos = this.props.photos
     photos = await Promise.all(photos.map(async url => {
       try {
+        if(url.indexOf('blob:') !== 0) return url
         let res = await fetch(url)
         if (res.ok) return url
       } catch (err) {

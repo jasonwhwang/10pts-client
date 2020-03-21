@@ -1,5 +1,16 @@
 import React from 'react'
 import { Trash2, MoreHorizontal } from 'react-feather'
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => ({
+  review: state.review,
+  user: state.common.user
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
 
 class DeleteButton extends React.Component {
   state = { loading: false, showDelete: false }
@@ -23,4 +34,4 @@ class DeleteButton extends React.Component {
   }
 }
 
-export default DeleteButton
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteButton)
