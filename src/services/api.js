@@ -18,8 +18,8 @@ async function getData(url) {
   const response = await fetch(baseURL+url, {
     method: 'GET',
     headers: headers
-  });
-  return await response.json();
+  })
+  return await response.json()
 }
 
 // POST - Post Data
@@ -33,8 +33,8 @@ async function postData(url, data) {
       'Authorization': `Bearer ${AuthStore.getIdToken()}`
     },
     body: JSON.stringify(data)
-  });
-  return await response.json();
+  })
+  return await response.json()
 }
 
 // PUT - Update Data
@@ -48,12 +48,12 @@ async function putData(url, data) {
       'Authorization': `Bearer ${AuthStore.getIdToken()}`
     },
     body: JSON.stringify(data)
-  });
-  return await response.json();
+  })
+  return await response.json()
 }
 
 // DELETE - Delete Data
-async function deleteData(url, data) {
+async function deleteData(url) {
   await refresh()
   const response = await fetch(baseURL+url, {
     method: 'DELETE',
@@ -61,10 +61,9 @@ async function deleteData(url, data) {
       'X-Requested-With': 'XML-HTTPRequest',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${AuthStore.getIdToken()}`
-    },
-    body: JSON.stringify(data)
-  });
-  return await response.json();
+    }
+  })
+  return await response.json()
 }
 
 export {

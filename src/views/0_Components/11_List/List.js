@@ -63,7 +63,7 @@ const List1 = ({ data, tab, params, changeFollowing }) => {
 
 const List2 = ({ data, tab }) => {
   return (
-    <div className="list-grid-2 box-flex-1">
+    <div className="list-grid-2">
       {data.map((foodItem, index) => {
         if (foodItem) return <Card2 {...foodItem} key={'index' + index} tab={tab} />
         else return <Card2 key={'index' + index} tab={tab} />
@@ -74,7 +74,7 @@ const List2 = ({ data, tab }) => {
 
 const List3 = ({ data, tab, params }) => {
   return (
-    <div className="list-grid-3 box-flex-1">
+    <div className="list-grid-3">
       {data.map((foodItem, index) => {
         if (foodItem) return <Card3 {...foodItem} key={'index' + index} tab={tab} params={params} />
         else return <Card3 key={'index' + index} tab={tab} params={params} />

@@ -1,19 +1,35 @@
 import React from 'react'
 import { Trash2, MoreHorizontal } from 'react-feather'
-import { connect } from 'react-redux'
-
-const mapStateToProps = state => ({
-  review: state.review,
-  user: state.common.user
-})
-
-const mapDispatchToProps = dispatch => ({
-  changeVal: (type, val) =>
-    dispatch({ type, val })
-})
+import { removeFile } from '../../../services/authApi'
+import { deleteData } from '../../../services/api'
 
 class DeleteButton extends React.Component {
-  state = { loading: false, showDelete: false }
+  state = { showDelete: false }
+  deletePost = async () => {
+    if(this.loading) return
+    this.loading = true
+    // Delete Photos
+    await Promise.all(this.props.review.photos.map(async url => {
+      try {
+        if(url.indexOf('blob:') === 0) URL.revokeObjectURL(url)
+        else await removeFile(url)
+      } catch (err) {
+        return null
+      }
+    }))
+    // Delete from Database
+    if(this.props.review._id) {
+      let res = await deleteData(`/review/${this.props.review._id}`)
+      if(!res || res.errors) {
+        this.props.changeVal('reviewErrors', res.errors)
+        return
+      }
+    }
+    // Delete from Store
+    this.props.changeVal('resetReview', null)
+    // Redirect
+    this.props.history.push('/account')
+  }
   render() {
     return (
       <div className="box-flex-end box-flex-acenter box-flex-stretch box-margin-15">
@@ -24,7 +40,7 @@ class DeleteButton extends React.Component {
           </button>
         }
         {this.state.showDelete &&
-          <button
+          <button onClick={this.deletePost}
             className="box-flex-row-center">
             <Trash2 size={14} />
           </button>
@@ -34,4 +50,4 @@ class DeleteButton extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteButton)
+export default DeleteButton

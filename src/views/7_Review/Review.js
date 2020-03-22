@@ -5,7 +5,6 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import LoadingPage from '../0_Components/4_Loading/LoadingPage'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
-import TextareaAutosize from 'react-autosize-textarea'
 import FlagButton from '../0_Components/8_Buttons/FlagButton'
 import { CardRatings, PhotosList } from '../0_Components/10_Cards/CardRatings'
 import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
@@ -25,7 +24,7 @@ class Review extends React.Component {
   async componentDidMount() {
     let p = this.props.match.params
     let res = await getData(`/review/${p.foodname}/${p.username}`)
-    if(!res || res.error || res.errors) this.setState({ ...this.state, loading: false })
+    if (!res || res.error || res.errors) this.setState({ ...this.state, loading: false })
     else this.setState({ ...this.state, review: res.review, loading: false })
   }
 
@@ -48,7 +47,7 @@ class Review extends React.Component {
             }
           </Helmet></HelmetProvider>
           <ErrorBoundary>
-            <HideTabBarRoute location={this.props.location} match={this.props.match}/>
+            <HideTabBarRoute location={this.props.location} match={this.props.match} />
 
             {isMain && <ReviewMain {...this.props} data={this.state.review} />}
             {isPhotos && <PhotosList {...this.props} data={this.state.review} />}
@@ -74,18 +73,16 @@ const ReviewMain = (props) => {
       <CardRatings data={props.data} tab={tab} params={params} />
 
       <div className="box-margin-top-40 box-border-top box-padding-15">
-        <TextareaAutosize rows={3}
-          id="review"
-          placeholder="User review..."
-          className="box-expand-width box-textarea box-text-5"
-          value={props.data.review}
-          disabled={true}
-          onChange={(e) => console.log(e)} />
-        <div className="box-margin-top-10 box-flex-between">
+        <h5 className="box-text-nobold box-text-prewrap account-allowSelect box-flex-1 box-text-lineheight1">
+          {props.data.review}
+        </h5>
+        <div className="box-margin-top-20 box-flex-between">
           <h6 className="box-text-nobold box-text-8 ">
             <ReviewTime time={props.data.updatedAt} />
           </h6>
-          <FlagButton flagged={props.data.isFlagged} />
+          {props.user && props.data.account && props.user.username !== props.data.account.username &&
+            <FlagButton flagged={props.data.isFlagged} />
+          }
         </div>
       </div>
 

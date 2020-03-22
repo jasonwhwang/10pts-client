@@ -12,7 +12,8 @@ import ListErrors from '../0_Components/Other/ListErrors'
 import DeleteButton from '../0_Components/8_Buttons/DeleteButton'
 
 const mapStateToProps = state => ({
-  review: state.review
+  review: state.review,
+  user: state.common.user
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -90,7 +91,11 @@ class Review extends React.Component {
                 onChange={this.changeInput} />
             </div>
 
-            <DeleteButton />
+            <DeleteButton
+              history={this.props.history}
+              changeVal={this.props.changeVal}
+              review={this.props.review}
+              user={this.props.user} />
 
           </ErrorBoundary>
         </div>

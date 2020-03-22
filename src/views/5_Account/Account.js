@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 
 class Account extends React.Component {
   state = {
-    account: this.props.account,
+    account: null,
     data: [],
     error: '',
     loading: true
@@ -31,7 +31,7 @@ class Account extends React.Component {
       this.props.history.push('/login')
       return
     }
-    
+
     this.setState({ data: [], loading: true })
     let username = params.username ? params.username : this.props.authUser.username
     let route = params.route
@@ -41,7 +41,7 @@ class Account extends React.Component {
       res = await getData(`/account/${route}/${username}`)
     } else res = await getData(`/account/reviews/${username}`)
 
-    if (res.error) this.setState({ account: this.props.account, data: [], error: res.error, loading: false })
+    if (res.error) this.setState({ account: null, data: [], error: res.error, loading: false })
     else this.setState({ account: res.account, data: res.data, error: '', loading: false })
   }
 
@@ -69,22 +69,15 @@ class Account extends React.Component {
           </Helmet></HelmetProvider>
           <ErrorBoundary>
 
-            <AccountStats
-              match={this.props.match}
-              {...this.state.account} />
-
-            <AccountDetails
-              authUser={this.props.authUser}
-              match={this.props.match}
-              {...this.state.account} />
-
-            <AccountTabs
-              match={this.props.match} />
-
-            <AccountList
-              data={this.state.data}
-              match={this.props.match}
-              location={this.props.location} />
+            {this.props.match.params.route !== 'image' ?
+              <AccountMain
+                {...this.props}
+                authUser={this.props.authUser}
+                account={this.state.account}
+                data={this.state.data} />
+              :
+              <img src={this.state.account.image} alt={this.state.account.username} className="box-img" />
+            }
 
           </ErrorBoundary>
         </div>
@@ -106,6 +99,29 @@ Account.defaultProps = {
   }
 }
 
+const AccountMain = ({ match, account, authUser, data, location }) => {
+  return (
+    <>
+      <AccountStats
+        match={match}
+        {...account} />
+
+      <AccountDetails
+        authUser={authUser}
+        match={match}
+        {...account} />
+
+      <AccountTabs
+        match={match} />
+
+      <AccountList
+        data={data}
+        match={match}
+        location={location} />
+    </>
+  )
+}
+
 const AccountStats = (props) => {
   let params = props.match.params
   let tab = params.username ? `/${params.path}/${params.username}` : `/${params.path}`
@@ -113,9 +129,11 @@ const AccountStats = (props) => {
   let followerText = props.followersCount === 1 ? 'Follower' : 'Followers'
   return (
     <div className="box-flex-acenter box-margin-15">
-      <img src={props.image ? props.image : Image}
-        className="account-image box-img box-margin-right-10"
-        alt={props.username} />
+      <Link to={`${tab}/image`}>
+        <img src={props.image ? props.image : Image}
+          className="account-image box-img box-margin-right-10"
+          alt={props.username} />
+      </Link>
       <Link to={`${tab}`}
         className="box-flex-col-center box-flex-1 box-color-black">
         <h3 className="box-text-bold">{props.reviewsCount}</h3>
@@ -141,7 +159,7 @@ const AccountDetails = (props) => {
     <div className="box-margin-15">
       <h6 className="box-text-bold">{props.name ? props.name : props.username}</h6>
       <div className="box-flex-row box-margin-bottom-20">
-        <h6 className="box-text-nobold box-text-prewrap account-allowSelect">
+        <h6 className="box-text-nobold box-text-prewrap account-allowSelect box-flex-1">
           {props.bio}
         </h6>
 
