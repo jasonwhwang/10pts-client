@@ -15,16 +15,22 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const ReviewButton = (props) => {
+  let pts = props.isReviewed || props.page.isReviewed
+  let foodname = props.foodname || props.page.foodname
+  let link = null
+  if (!props.user) link = '/login'
+  else link = `/f/${foodname}/${props.user.username}`
+
   return (
-    <Link to={`/f/${props.foodname}/${props.authUsername}`}
+    <Link to={link}
       className="defaultNav-button nav-padding10">
-      <PlusSquare size={18} />
+      {pts === -1 ?
+        <PlusSquare size={18} />
+        :
+        <h6 className="card-pts-small box-flex-row-center box-text-7">{pts}</h6>
+      }
     </Link>
   )
-}
-ReviewButton.defaultProps = {
-  authUsername: "AuthUsername",
-  foodname: "PageFoodName"
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewButton)

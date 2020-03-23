@@ -16,6 +16,11 @@ const mapStateToProps = state => ({
   user: state.common.user
 })
 
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
+
 class Review extends React.Component {
   state = {
     review: null,
@@ -24,8 +29,15 @@ class Review extends React.Component {
   async componentDidMount() {
     let p = this.props.match.params
     let res = await getData(`/review/${p.foodname}/${p.username}`)
-    if (!res || res.error || res.errors) this.setState({ ...this.state, loading: false })
-    else this.setState({ ...this.state, review: res.review, loading: false })
+    if (!res || res.error || res.errors) {
+      this.setState({ ...this.state, loading: false })
+      return
+    }
+    this.setState({ ...this.state, review: res.review, loading: false })
+    let page = {
+      _id: res.review._id, isLiked: res.review.isLiked, isSaved: res.review.isSaved
+    }
+    this.props.changeVal('setPage', page)
   }
 
   render() {
@@ -81,7 +93,10 @@ const ReviewMain = (props) => {
             <ReviewTime time={props.data.updatedAt} />
           </h6>
           {props.user && props.data.account && props.user.username !== props.data.account.username &&
-            <FlagButton flagged={props.data.isFlagged} />
+            <FlagButton
+              flagged={props.data.isFlagged}
+              type={'review'}
+              target={props.data._id} />
           }
         </div>
       </div>
@@ -93,4 +108,4 @@ const ReviewMain = (props) => {
   )
 }
 
-export default connect(mapStateToProps)(Review)
+export default connect(mapStateToProps, mapDispatchToProps)(Review)

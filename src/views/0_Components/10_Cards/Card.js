@@ -22,9 +22,9 @@ const Card = (props) => {
 
         <Photos {...props} />
 
-        <Buttons
+        <Buttons _id={props._id}
           isLiked={props.isLiked} isSaved={props.isSaved}
-          hasReviewed={props.hasReviewed}
+          isReviewed={props.isReviewed}
           foodname={props.foodname} account={props.account} />
 
         <FoodHeading {...props} />
@@ -84,18 +84,18 @@ const Photos = ({ photos, account, foodname, foodTitle, address, params, tab }) 
   )
 }
 
-const Buttons = ({ isLiked, isSaved, hasReviewed, foodname, account }) => {
+const Buttons = ({ _id, isLiked, isSaved, isReviewed, foodname, account }) => {
   let username = account && account.username ? account.username : null
   return (
     <div className="card-buttons box-flex-row box-flex-stretch">
       {account &&
         <React.Fragment>
-          <LikeButton isLiked={isLiked} foodname={foodname} username={username} />
+          <LikeButton isLiked={isLiked} _id={_id} />
           <CommentButton foodname={foodname} username={username} />
         </React.Fragment>
       }
       <ShareButton foodname={foodname} username={username} />
-      {!account && <ReviewButton hasReviewed={hasReviewed} />}
+      {!account && <ReviewButton isReviewed={isReviewed} foodname={foodname} />}
       <div className="box-flex-1"></div>
       <SaveButton isSaved={isSaved} foodname={foodname} />
     </div>

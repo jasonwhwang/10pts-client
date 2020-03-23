@@ -35,7 +35,14 @@ class Photos extends React.Component {
     loading: true,
     error: ''
   }
+  hideNav = () => {
+    document.getElementById('navBar').classList.add('navBar-hide')
+  }
+  showNav = () => {
+    document.getElementById('navBar').classList.remove('navBar-hide')
+  }
   async componentDidMount() {
+    this.hideNav()
     let p = this.props.match.params
     if(p.foodname && this.props.user && p.foodname !== this.props.review.foodname) {
       let res = await getData(`/review/${p.foodname}/${this.props.user.username}`)
@@ -51,6 +58,7 @@ class Photos extends React.Component {
 
     await this.setPhotos()
     this.setState({ ...this.state, loading: false })
+    this.showNav()
   }
 
   setPhotos = async () => {

@@ -11,7 +11,8 @@ const NotificationCard = ({ type, review, from, createdAt }) => {
   if(type === 'like') notification = 'liked your review'
   else if(type === 'comment') notification = 'commented on your review'
   else if(type === 'follow') notification = 'is following you'
-  else if(type === 'new') notification = 'has a new review'
+  else if(type === 'review' && review) notification = 'has a new review'
+  else if(type === 'review' && !review) notification = 'deleted a review'
 
   return (
     <div

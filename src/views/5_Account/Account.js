@@ -165,7 +165,10 @@ const AccountDetails = (props) => {
 
         {props.match.params.username && !isAuthUser &&
           <div className="box-flex-col box-flex-end">
-            <FlagButton flagged={props.isFlagged} />
+            <FlagButton
+              flagged={props.isFlagged}
+              type={'account'}
+              target={props.match.params.username} />
           </div>
         }
       </div>

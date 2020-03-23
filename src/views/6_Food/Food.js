@@ -9,18 +9,31 @@ import Photo from '../../img/user.png'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import { CardRatings, PhotosList } from '../0_Components/10_Cards/CardRatings'
 import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
-import { FoodMainData } from '../0_Components/Other/_data'
+// import { FoodMainData } from '../0_Components/Other/_data'
+import { getData } from '../../services/api'
 
 const mapStateToProps = state => ({
   user: state.common.user
 })
 
+const mapDispatchToProps = dispatch => ({
+  changeVal: (type, val) =>
+    dispatch({ type, val })
+})
+
 class Food extends React.Component {
   state = {
+    food: null,
     loading: true
   }
   async componentDidMount() {
-    this.setState({ ...this.state, loading: false })
+    let res = await getData(`/food/${this.props.match.params.foodname}`)
+    if(!res || res.error || res.errors) return
+    this.setState({ ...this.state, food: res.food, loading: false })
+    let page = {
+      _id: res.food._id, isReviewed: res.food.isReviewed, isSaved: res.food.isSaved, foodname: res.food.foodname
+    }
+    this.props.changeVal('setPage', page)
   }
 
   render() {
@@ -40,8 +53,8 @@ class Food extends React.Component {
           <ErrorBoundary>
             <HideTabBarRoute location={this.props.location} match={this.props.match} />
 
-            {isMain ? <FoodMain {...this.props} data={FoodMainData} />
-              : <PhotosList {...this.props} data={FoodMainData} />
+            {isMain ? <FoodMain {...this.props} data={this.state.food} />
+              : <PhotosList {...this.props} data={this.state.food} />
             }
 
           </ErrorBoundary>
@@ -84,22 +97,22 @@ const FoodStats = ({ savedCount, reviewsCount }) => {
 const FoodReviews = ({ reviews, tab, params }) => {
   return (
     <>{reviews.map(review => {
-      let username = review.user && review.user.username ? review.user.username : ''
-      let likes = review.likes === 1 ? '1 like' : review.likes + " likes"
+      let username = review.account && review.account.username ? review.account.username : ''
+      let likes = review.likesCount === 1 ? '1 like' : review.likesCount + " likes"
       return (
         <Link to={`${tab}/f/${params.foodname}/${username}`}
           className="box-flex-acenter food-reviewsHeight box-color-black"
           key={username} >
-          <img src={review.user && review.user.image ? review.user.image : Photo}
+          <img src={review.account && review.account.image ? review.account.image : Photo}
             className="card-userImage-l box-img"
             alt={username} />
           <h6 className="box-text-bold box-flex-1 box-margin-15">{username}</h6>
-          <h6 className="box-text-nobold box-text-8">{likes}</h6>
-          <h6 className="box-margin-left-20 card-pts-medium box-flex-row-center">{review.pts}</h6>
+          <h6 className="box-text-nobold box-text-8 box-margin-15">{likes}</h6>
+          <h6 className="card-pts-medium box-flex-row-center">{review.pts}</h6>
         </Link>
       )
     })}</>
   )
 }
 
-export default connect(mapStateToProps)(Food)
+export default connect(mapStateToProps, mapDispatchToProps)(Food)

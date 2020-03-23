@@ -8,8 +8,8 @@ const FoodRowCard = ({ tab, photos, account, foodname, foodTitle, address, pts, 
   if(!foodname) return null
   let username = account && account.username ? `/${account.username}` : ""
   let linkPath = `${tab}/f/${foodname}${username}`
-
   let photo = photos && photos[0] ? photos[0] : Photo
+  let restaurant = address.split(',')[0]
 
   return (
     <div className="list-item-3 box-border-bottom box-flex-row box-color-black">
@@ -20,10 +20,10 @@ const FoodRowCard = ({ tab, photos, account, foodname, foodTitle, address, pts, 
 
       <div className="box-flex-col box-flex-1">
         <Link to={linkPath}
-          className="box-flex-row box-flex-1 box-padding-15 box-color-black">
+          className="box-flex-row box-flex-1 box-color-black box-margin-top-10 box-margin-left-10 box-margin-right-10">
           <div className="box-flex-1">
-            <h5 className="box-text-bold">{foodTitle}</h5>
-            <h6 className="box-text-nobold box-text-7">{address}</h6>
+            <h6 className="box-text-bold">{foodTitle}</h6>
+            <h6 className="box-text-nobold box-text-7">{restaurant}</h6>
           </div>
           <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">{pts}</h6>
         </Link>
@@ -43,7 +43,7 @@ const CardBottom = ({ isLiked, isSaved, account, foodname, tab }) => {
           <img className="box-img card-userImage-s box-margin-right-5"
             src={account.image ? account.image : Photo}
             alt={account.username} />
-          <h6 className="box-text-bold box-text-7 box-flex-1">{account.username}</h6>
+          <h6 className="box-text-bold box-text-8 box-flex-1">{account.username}</h6>
         </Link>
         <LikeButton isLiked={isLiked} foodname={foodname} username={account.username} />
       </div>

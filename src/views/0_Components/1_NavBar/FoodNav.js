@@ -31,7 +31,7 @@ const FoodNav = (props) => {
 
           {username !== authUsername &&
             <div className="box-flex-1 box-flex-acenter box-flex-end box-margin-right-5">
-              <LikeButton />
+              <LikeButton type={'nav'} />
               <CommentButton foodname={foodname} username={username} />
               <ShareButton foodname={foodname} username={username} />
             </div>

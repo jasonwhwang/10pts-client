@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { MoreHorizontal, Flag } from 'react-feather'
+import { putData } from '../../../services/api'
 
 const FlagButton = (props) => {
   let [showFlag, changeFlag] = useState(false)
   let [flagged, changeFlagged] = useState(false)
+  let [loading, changeLoading] = useState(false)
 
   const initialize = () => {
     if(props.flagged) {
@@ -14,6 +16,17 @@ const FlagButton = (props) => {
 
   useEffect(initialize, [])
 
+  const onFlag = async () => {
+    if(loading) return
+    changeLoading(true)
+    let res = null
+    if(flagged) res = await putData(`/${props.type}/unflag/${props.target}`)
+    else res = await putData(`/${props.type}/flag/${props.target}`)
+    if(!res || res.error || res.errors) return
+    changeFlagged(res.isFlagged)
+    changeLoading(false)
+  }
+
   return (
     <div className="box-position-relative flagDropdown box-flex-row-center">
       {!flagged && !showFlag &&
@@ -23,7 +36,7 @@ const FlagButton = (props) => {
         </button>
       }
       {showFlag &&
-        <button onClick={() => changeFlagged(!flagged)}
+        <button onClick={onFlag}
           className="box-expand-height box-expand-width box-flex-row-center">
           <Flag size={14} className={flagged ? "box-fill-red box-color-red" : ""} />
         </button>
