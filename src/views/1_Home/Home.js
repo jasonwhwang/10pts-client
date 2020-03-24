@@ -33,7 +33,7 @@ class Home extends React.Component {
     p.set('limit', this.state.limit)
     p.set('offset', this.state.offset)
     let query = `?${p.toString()}`
-    
+
     let res = await getData(`/reviews${query}`)
     if (res.error) return
     this.setState({
@@ -81,9 +81,11 @@ class Home extends React.Component {
               match={this.props.match}
               location={this.props.location} />
 
-            <div className="box-flex-row-center box-margin-top-30 box-margin-bottom-30">
-              <Loading small={true} />
-            </div>
+            {this.state.loading &&
+              <div className="box-flex-row-center box-margin-top-30 box-margin-bottom-30">
+                <Loading small={true} />
+              </div>
+            }
 
           </ErrorBoundary>
         </div>

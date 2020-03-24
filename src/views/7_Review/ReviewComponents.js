@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextareaAutosize from 'react-autosize-textarea'
 import { Send } from 'react-feather'
 import Photo from '../../img/user.png'
 import { Link } from 'react-router-dom'
 import Ago from '../0_Components/Other/Ago'
 import LikeTrashButton from '../0_Components/8_Buttons/LikeTrashButton'
+import Loading from '../0_Components/4_Loading/Loading'
+import { postData } from '../../services/api'
 
 export const ReviewStats = ({ likesCount, commentsCount }) => {
-  let likesString = likesCount === 1 ? '1 Like' : `${likesCount} Likes`
+  let likesString = likesCount === 1 ? '1 like' : `${likesCount} likes`
   let commentsString = commentsCount === 1 ? '1 Comment' : `${commentsCount} Comments`
 
   return (
@@ -29,42 +31,52 @@ export const ReviewTime = ({ time }) => {
   return returnTime
 }
 
-export const ReviewComments = ({ comments, tab }) => {
+export const ReviewComments = (props) => {
   return (
-    <>{comments.map(comment => {
-      let username = comment.user && comment.user.username ? comment.user.username : 'username'
-      let image = comment.user && comment.user.image ? comment.user.image : Photo
-      let likesString = comment.likes === 1 ? '1 like' : `${comment.likesCount} likes`
-      return (
-        <div key={comment._id}
-          className="box-flex-row box-color-black box-margin-15">
-          <Link to={`${tab}/a/${username}`} >
-            <img src={image}
-              className="card-userImage box-img box-margin-right-10"
-              alt={username} />
-          </Link>
-          <div className="box-flex-1 box-display-inline">
-            <Link to={`${tab}/a/${username}`}
-              className="box-display-inline box-text-bold box-margin-right-5 box-text-6 box-color-black">
-              {username}
-            </Link>
-
-            <h6 className="box-display-inline box-text-nobold box-margin-right-5">{comment.body}</h6>
-
-            <div className="box-text-8 box-color-gray box-margin-top-3">
-              {likesString}
-              {', '}
-              {comment.updatedAt && <Ago time={comment.updatedAt} />}
-            </div>
-          </div>
-          <LikeTrashButton isLiked={comment.isLiked} _id={comment._id} />
-        </div>
-      )
+    <>{props.comments.map(comment => {
+      return <ReviewComment comment={comment} {...props} key={comment._id} />
     })}</>
+  )
+}
+export const ReviewComment = ({ user, comment, tab, changeComments }) => {
+  let [likes, changeLikes] = useState(comment.likesCount)
+  let username = comment.account && comment.account.username ? comment.account.username : 'username'
+  let image = comment.account && comment.account.image ? comment.account.image : Photo
+  let likesString = likes === 1 ? '1 like' : `${likes} likes`
+  return (
+    <div key={comment._id}
+      className="box-flex-row box-color-black box-margin-15">
+      <Link to={`${tab}/a/${username}`} >
+        <img src={image}
+          className="card-userImage box-img box-margin-right-10"
+          alt={username} />
+      </Link>
+      <div className="box-flex-1 box-display-inline">
+        <Link to={`${tab}/a/${username}`}
+          className="box-display-inline box-text-bold box-margin-right-5 box-text-6 box-color-black">
+          {username}
+        </Link>
+
+        <h6 className="box-display-inline box-text-nobold box-margin-right-5">{comment.body}</h6>
+
+        <div className="box-text-8 box-color-gray box-margin-top-3">
+          {likesString}
+          {', '}
+          {comment.updatedAt && <Ago time={comment.updatedAt} />}
+        </div>
+      </div>
+      <LikeTrashButton
+        isLiked={comment.isLiked}
+        _id={comment._id}
+        showTrash={user._id === comment.account._id}
+        changeLikes={changeLikes}
+        changeComments={changeComments} />
+    </div>
   )
 }
 
 export const ReviewUserComment = (props) => {
+  if (!props.user) props.history.push('/login')
   let params = props.match.params
   let tab = ''
   if (params.path) {
@@ -75,16 +87,26 @@ export const ReviewUserComment = (props) => {
   return (
     <>
       <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.comments.length} />
-      <ReviewComments comments={props.data.comments} tab={tab} />
-      <ReviewInput />
+      <ReviewComments comments={props.data.comments} tab={tab} changeComments={props.changeComments} user={props.user} />
+      <ReviewInput changeComments={props.changeComments} _id={props.data._id} />
       <div className="box-margin-bottom-60"></div>
     </>
   )
 }
 
 class ReviewInput extends React.Component {
-  state = { comment: '' }
+  state = { comment: '', loading: false }
   changeInput = (e) => this.setState({ [e.target.id]: e.target.value })
+  onComment = async () => {
+    if (this.state.loading || !this.state.comment) return
+    this.setState({ ...this.state, loading: true })
+    let res = await postData(`/comment/${this.props._id}`, { comment: this.state.comment })
+    if (!res || res.error || res.errors) this.setState({ ...this.state, loading: false })
+    else {
+      this.props.changeComments(res.comments)
+      this.setState({ comment: '', loading: false })
+    }
+  }
   render() {
     return (
       <div className="box-border-top review-textarea box-flex-row">
@@ -95,9 +117,15 @@ class ReviewInput extends React.Component {
           value={this.state.comment}
           autoFocus={true}
           onChange={this.changeInput} />
-        <div><button className="follow-blue send-margin">
-          <Send size={18}/>
-        </button></div>
+        <div className="box-background-white">
+          <button onClick={this.onComment}
+            className="follow-blue send-margin">
+            {this.state.loading ?
+              <Loading small={true} />
+              :
+              <Send size={18} />}
+          </button>
+        </div>
       </div>
     )
   }

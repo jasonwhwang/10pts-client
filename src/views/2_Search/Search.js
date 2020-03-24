@@ -3,7 +3,7 @@ import './Search.css'
 import { connect } from 'react-redux'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
-import LoadingPage from '../0_Components/4_Loading/LoadingPage'
+import Loading from '../0_Components/4_Loading/Loading'
 import List from '../0_Components/11_List/List'
 import ErrorBoundary from '../0_Components/3_ErrorBoundary/ErrorBoundary'
 import { AccountRow } from '../0_Components/11_List/ListRow'
@@ -36,7 +36,8 @@ class Search extends React.Component {
     window.removeEventListener('scroll', this.scrollListener, false)
   }
   async componentDidUpdate(prevProps) {
-    if(this.props.location.search !== prevProps.location.search) {
+    if (this.props.location.search !== prevProps.location.search) {
+      await this.setQuery()
       await this.setStateAsync({ ...this.state, data: [], offset: 0, noMoreData: false })
       this.fetchData()
     }
@@ -49,10 +50,10 @@ class Search extends React.Component {
     }
   }
   fetchData = async () => {
-    if(this.state.noMoreData || this.state.loading) return
+    if (this.state.noMoreData || this.state.loading) return
     await this.setStateAsync({ ...this.state, loading: true })
     let p = new URLSearchParams()
-    if(this.props.search.keywords) p.set('keywords', this.props.search.keywords)
+    if (this.props.search.keywords) p.set('keywords', this.props.search.keywords)
     p.set('minPts', this.props.search.minPts)
     p.set('maxPts', this.props.search.maxPts)
     p.set('minPrice', this.props.search.minPrice)
@@ -60,13 +61,13 @@ class Search extends React.Component {
     p.set('limit', this.state.limit)
     p.set('offset', this.state.offset)
     let tags = this.props.search.searchTags.map(tag => { return tag._id })
-    if(tags.length > 0) p.set('tags', tags.join('-'))
+    if (tags.length > 0) p.set('tags', tags.join('-'))
     let query = `?${p.toString()}`
 
     let res = null
-    if(this.props.search.category === 'accounts') res = await getData(`/accounts${query}`)
+    if (this.props.search.category === 'accounts') res = await getData(`/accounts${query}`)
     else res = await getData(`/food${query}`)
-    if(res.error) return
+    if (res.error) return
     this.setState({
       ...this.state,
       data: this.state.data.concat(res.data),
@@ -87,8 +88,6 @@ class Search extends React.Component {
   }
 
   render() {
-    if (this.state.loading) return <LoadingPage />
-
     return (
       <FadeTransition>
         <div className="page box-flex-col">
@@ -106,10 +105,16 @@ class Search extends React.Component {
               :
               <AccountRow data={this.state.data} tab="/search" />
             }
-            {this.state.data.length === 0 &&
+            {this.state.data.length === 0 && !this.state.loading &&
               <h6 className="box-color-gray box-text-nobold box-flex-row-center box-text-8 box-margin-15">
                 None
               </h6>
+            }
+
+            {this.state.loading &&
+              <div className="box-flex-row-center box-margin-top-30 box-margin-bottom-30">
+                <Loading small={true} />
+              </div>
             }
 
           </ErrorBoundary>

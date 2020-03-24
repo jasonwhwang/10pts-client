@@ -21,7 +21,7 @@ const SaveButton = (props) => {
   let p = props.match.params
 
   const setSaved = (val) => {
-    if(p.username) props.changeVal('isSaved', val)
+    if(p.foodname) props.changeVal('isSaved', val)
     else changeSaved(val)
   }
 
@@ -30,10 +30,12 @@ const SaveButton = (props) => {
     changeLoading(true)
     let foodname = p.foodname ? props.page.foodname : props.foodname
     let res = null
-    if(saved) res = await putData(`/food/unsave/${foodname}`)
+    let savedVal = p.foodname ? props.page.isSaved : saved
+    if(savedVal) res = await putData(`/food/unsave/${foodname}`)
     else res = await putData(`/food/save/${foodname}`)
     if(!res || res.error || res.errors) return
     setSaved(res.isSaved)
+    if(props.changeSavedCount) props.changeSavedCount(res.savedCount)
     changeLoading(false)
   }
 

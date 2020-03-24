@@ -22,8 +22,8 @@
 }
 
 .photoPreviews {
-  height: min(100vmin/5, var(--width)/5);
-  max-height: min(100vmin/5, var(--width)/5);
+  height: calc(100vmin/5);
+  max-height: calc(100vmin/5);
   width: 100%;
   box-sizing: border-box;
   border-left: 1px solid var(--border);
@@ -37,18 +37,29 @@
 .photoPreviews div:last-child {
   border: none;
 }
+@media only screen and (min-width: 600px) {
+  .photoPreviews {
+    height: calc(var(--width)/5);
+    max-height: calc(var(--width)/5);
+  }
+}
 
 .review-price { width: 75px; }
 .review-margin15 { margin-right: 15px; }
 
 .review-heading {
   display: inline-block;
-  width: min(100vmin, var(--width));
+  width: 100vmin;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   box-sizing: border-box;
   padding: 15px 15px 0 15px;
+}
+@media only screen and (min-width: 600px) {
+  .review-heading {
+    width: var(--width);
+  }
 }
 
 .errorPadding {

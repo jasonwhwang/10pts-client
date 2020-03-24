@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Cards.css'
 import FadeTransition from '../7_FadeTransition/FadeTransition'
 import Carousel from '../9_Carousel/Carousel'
@@ -14,6 +14,9 @@ import ReviewButton from '../8_Buttons/ReviewButton'
 import Ago from '../Other/Ago'
 
 const Card = (props) => {
+  let [likesCount, changeLikesCount] = useState(props.likesCount)
+  let [savedCount, changeSavedCount] = useState(props.savedCount)
+
   let divID = props.account ? props.foodname + "-" + props.account.username : props.foodname
   return (
     <FadeTransition>
@@ -23,6 +26,8 @@ const Card = (props) => {
         <Photos {...props} />
 
         <Buttons _id={props._id}
+          changeLikesCount={changeLikesCount}
+          changeSavedCount={changeSavedCount}
           isLiked={props.isLiked} isSaved={props.isSaved}
           isReviewed={props.isReviewed}
           foodname={props.foodname} account={props.account} />
@@ -30,8 +35,8 @@ const Card = (props) => {
         <FoodHeading {...props} />
 
         <StatsHeading
-          likesCount={props.likesCount} commentsCount={props.commentsCount}
-          savedCount={props.savedCount} reviewsCount={props.reviewsCount}
+          likesCount={likesCount} commentsCount={props.comments ? props.comments.length : 0}
+          savedCount={savedCount} reviewsCount={props.reviewsCount}
           time={props.updatedAt} params={props.params} account={props.account} />
       </div>
     </FadeTransition>
@@ -84,20 +89,21 @@ const Photos = ({ photos, account, foodname, foodTitle, address, params, tab }) 
   )
 }
 
-const Buttons = ({ _id, isLiked, isSaved, isReviewed, foodname, account }) => {
+const Buttons = ({ _id, isLiked, isSaved, isReviewed, foodname,
+  foodTitle, address, account, changeLikesCount, changeSavedCount }) => {
   let username = account && account.username ? account.username : null
   return (
     <div className="card-buttons box-flex-row box-flex-stretch">
       {account &&
         <React.Fragment>
-          <LikeButton isLiked={isLiked} _id={_id} />
+          <LikeButton isLiked={isLiked} _id={_id} changeLikesCount={changeLikesCount}/>
           <CommentButton foodname={foodname} username={username} />
         </React.Fragment>
       }
       <ShareButton foodname={foodname} username={username} />
-      {!account && <ReviewButton isReviewed={isReviewed} foodname={foodname} />}
+      {!account && <ReviewButton isReviewed={isReviewed} foodname={foodname} foodTitle={foodTitle} address={address} />}
       <div className="box-flex-1"></div>
-      <SaveButton isSaved={isSaved} foodname={foodname} />
+      <SaveButton isSaved={isSaved} foodname={foodname} changeSavedCount={changeSavedCount} />
     </div>
   )
 }
@@ -117,6 +123,8 @@ const FoodHeading = (props) => {
   let searchLink = `/search?${addressURL}`
   let mapLink = `${props.tab}/map?${addressURL}`
 
+  let pts = props.account ? props.pts : Number(props.pts).toFixed(1)
+
   return (
     <div className="card-foodHeading box-flex-row box-margin-bottom-20">
       <div className="box-flex-1 box-flex-col box-margin-right-20">
@@ -128,7 +136,7 @@ const FoodHeading = (props) => {
       <div className="box-flex-row">
         <Link to={reviewLink}
           className="card-pts box-flex-col-center box-color-white box-text-extraBold box-text-4">
-          {props.pts}
+          {pts}
         </Link>
       </div>
     </div>

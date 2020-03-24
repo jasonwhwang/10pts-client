@@ -31,7 +31,12 @@ class Food extends React.Component {
     if(!res || res.error || res.errors) return
     this.setState({ ...this.state, food: res.food, loading: false })
     let page = {
-      _id: res.food._id, isReviewed: res.food.isReviewed, isSaved: res.food.isSaved, foodname: res.food.foodname
+      _id: res.food._id,
+      isReviewed: res.food.isReviewed,
+      isSaved: res.food.isSaved,
+      foodname: res.food.foodname,
+      foodTitle: res.food.foodTitle,
+      address: res.food.address,
     }
     this.props.changeVal('setPage', page)
   }
@@ -40,12 +45,15 @@ class Food extends React.Component {
     if (this.state.loading) return <LoadingPage />
     let params = this.props.match.params
     let isMain = params.path === 'f' || params.path.indexOf('/f') !== -1
+    let f = this.state.food
+    let title = f ? `${f.foodTitle} | ${f.address}` : 'Food'
+    let description = f ? `${f.foodTitle} at ${f.address}, 10pts` : 'Food'
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>Food</title>
-            <meta name="description" content="Food" />
+            <title>{title}</title>
+            <meta name="description" content={description} />
             {params.path !== "f" &&
               <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}`} />
             }
@@ -83,7 +91,7 @@ const FoodMain = (props) => {
 }
 
 const FoodStats = ({ savedCount, reviewsCount }) => {
-  let savedString = savedCount === 1 ? '1 Save' : `${savedCount} Saves`
+  let savedString = savedCount === 1 ? '1 save' : `${savedCount} saves`
   let reviewsString = reviewsCount === 1 ? '1 Review' : `${reviewsCount} Reviews`
 
   return (

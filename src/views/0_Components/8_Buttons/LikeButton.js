@@ -30,10 +30,12 @@ const LikeButton = (props) => {
     changeLoading(true)
     let _id = p.username ? props.page._id : props._id
     let res = null
-    if(liked) res = await putData(`/review/unlike/${_id}`)
+    let likedVal = p.username ? props.page.isLiked : liked
+    if(likedVal) res = await putData(`/review/unlike/${_id}`)
     else res = await putData(`/review/like/${_id}`)
     if(!res || res.error || res.errors) return
     setLiked(res.isLiked)
+    if(props.changeLikesCount) props.changeLikesCount(res.likesCount)
     changeLoading(false)
   }
 

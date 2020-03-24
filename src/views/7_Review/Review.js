@@ -39,6 +39,12 @@ class Review extends React.Component {
     }
     this.props.changeVal('setPage', page)
   }
+  changeComments = (comments) => {
+    let review = this.state.review
+    review.comments = comments
+    this.setState({ ...this.state, review: review })
+    window.scrollTo(0, document.body.scrollHeight)
+  }
 
   render() {
     if (this.state.loading || !this.state.review) return <LoadingPage />
@@ -48,12 +54,16 @@ class Review extends React.Component {
     let isPhotos = params.path === 'p' || params.path.indexOf('/p') !== -1
     let isComments = params.path === 'c' || params.path.indexOf('/c') !== -1
 
+    let r = this.state.review
+    let title = r ? `${r.foodTitle} | ${r.address} | ${this.props.match.params.username}` : 'Review'
+    let description = r ? `${r.foodTitle} at ${r.address} reviewed by ${this.props.match.params.username}, 10pts` : 'Review'
+
     return (
       <FadeTransition>
         <div className="page">
           <HelmetProvider><Helmet>
-            <title>Review</title>
-            <meta name="description" content="Review" />
+            <title>{title}</title>
+            <meta name="description" content={description} />
             {params.path !== "f" &&
               <link rel="canonical" href={`${process.env.REACT_APP_url_LINK}/f/${params.foodname}/${params.username}`} />
             }
@@ -61,9 +71,18 @@ class Review extends React.Component {
           <ErrorBoundary>
             <HideTabBarRoute location={this.props.location} match={this.props.match} />
 
-            {isMain && <ReviewMain {...this.props} data={this.state.review} />}
+            {isMain && <ReviewMain {...this.props} data={this.state.review} changeComments={this.changeComments} />}
             {isPhotos && <PhotosList {...this.props} data={this.state.review} />}
-            {isComments && <FadeTransition><ReviewUserComment {...this.props} data={this.state.review} /></FadeTransition>}
+            {isComments && 
+              <FadeTransition>
+                <ReviewUserComment
+                  {...this.props}
+                  history={this.props.history}
+                  user={this.props.user}
+                  changeComments={this.changeComments}
+                  data={this.state.review} />
+              </FadeTransition>
+            }
 
           </ErrorBoundary>
         </div>
@@ -102,7 +121,7 @@ const ReviewMain = (props) => {
       </div>
 
       <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.comments.length} />
-      <ReviewComments comments={props.data.comments} tab={tab} />
+      <ReviewComments comments={props.data.comments} tab={tab} changeComments={props.changeComments} user={props.user} />
       <div className="box-margin-bottom-60"></div>
     </>
   )

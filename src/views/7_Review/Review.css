@@ -8,7 +8,10 @@
   position: fixed;
   z-index: 90;
   bottom: 0;
-  width: min(var(--width), 100vmin);
+  width: 100vmin;
+}
+@media only screen and (min-width: 600px) {
+  .review-textarea { width: var(--width); }
 }
 
 .send-margin { margin-right: 15px; margin-top: 15px;}

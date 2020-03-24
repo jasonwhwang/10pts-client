@@ -1,6 +1,6 @@
 .mapFrame {
   height: calc(100% - 100px);
-  width: min(600px, 100vmin);
+  width: 100vmin;
   margin: 0 auto;
   border: none;
   box-sizing: border-box;
@@ -10,9 +10,13 @@
 }
 .map-loading {
   height: calc(100% - 100px);
-  width: min(600px, 100vmin);
+  width: 100vmin;
   margin: 0 auto;
   position: absolute;
   z-index: 9;
   overflow: hidden;
+}
+@media only screen and (min-width: 600px) {
+  .mapFrame { width: var(--width); }
+  .map-loading { width: var(--width); }
 }

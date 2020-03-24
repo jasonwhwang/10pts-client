@@ -10,6 +10,7 @@ const FoodRowCard = ({ tab, photos, account, foodname, foodTitle, address, pts, 
   let linkPath = `${tab}/f/${foodname}${username}`
   let photo = photos && photos[0] ? photos[0] : Photo
   let restaurant = address.split(',')[0]
+  let roundPts = Math.round(pts)
 
   return (
     <div className="list-item-3 box-border-bottom box-flex-row box-color-black">
@@ -25,7 +26,7 @@ const FoodRowCard = ({ tab, photos, account, foodname, foodTitle, address, pts, 
             <h6 className="box-text-bold">{foodTitle}</h6>
             <h6 className="box-text-nobold box-text-7">{restaurant}</h6>
           </div>
-          <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">{pts}</h6>
+          <h6 className="box-margin-left-10 card-pts-medium box-flex-row-center">{roundPts}</h6>
         </Link>
 
         <CardBottom account={account} isLiked={isLiked} isSaved={isSaved} tab={tab} />
