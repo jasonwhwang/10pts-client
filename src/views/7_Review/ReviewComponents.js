@@ -68,7 +68,7 @@ export const ReviewComment = ({ user, comment, tab, changeComments }) => {
       <LikeTrashButton
         isLiked={comment.isLiked}
         _id={comment._id}
-        showTrash={user._id === comment.account._id}
+        showTrash={user && user._id === comment.account._id}
         changeLikes={changeLikes}
         changeComments={changeComments} />
     </div>
