@@ -13,7 +13,8 @@ import { ReviewStats, ReviewComments, ReviewTime, ReviewUserComment } from './Re
 import { getData } from '../../services/api'
 
 const mapStateToProps = state => ({
-  user: state.common.user
+  user: state.common.user,
+  likesCount: state.page.likesCount
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +36,10 @@ class Review extends React.Component {
     }
     this.setState({ ...this.state, review: res.review, loading: false })
     let page = {
-      _id: res.review._id, isLiked: res.review.isLiked, isSaved: res.review.isSaved
+      _id: res.review._id,
+      isLiked: res.review.isLiked,
+      isSaved: res.review.isSaved,
+      likesCount: res.review.likesCount
     }
     this.props.changeVal('setPage', page)
   }
@@ -120,7 +124,7 @@ const ReviewMain = (props) => {
         </div>
       </div>
 
-      <ReviewStats likesCount={props.data.likesCount} commentsCount={props.data.comments.length} />
+      <ReviewStats likesCount={props.likesCount} commentsCount={props.data.comments.length} />
       <ReviewComments comments={props.data.comments} tab={tab} changeComments={props.changeComments} user={props.user} />
       <div className="box-margin-bottom-60"></div>
     </>

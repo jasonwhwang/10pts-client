@@ -35,7 +35,8 @@ const LikeButton = (props) => {
     else res = await putData(`/review/like/${_id}`)
     if(!res || res.error || res.errors) return
     setLiked(res.isLiked)
-    if(props.changeLikesCount) props.changeLikesCount(res.likesCount)
+    if(p.username) props.changeVal('likesCount', res.likesCount)
+    else if(props.changeLikesCount) props.changeLikesCount(res.likesCount)
     changeLoading(false)
   }
 

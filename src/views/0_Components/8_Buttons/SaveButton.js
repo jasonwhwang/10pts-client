@@ -35,7 +35,8 @@ const SaveButton = (props) => {
     else res = await putData(`/food/save/${foodname}`)
     if(!res || res.error || res.errors) return
     setSaved(res.isSaved)
-    if(props.changeSavedCount) props.changeSavedCount(res.savedCount)
+    if(p.foodname) props.changeVal('savedCount', res.savedCount)
+    else if(props.changeSavedCount) props.changeSavedCount(res.savedCount)
     changeLoading(false)
   }
 

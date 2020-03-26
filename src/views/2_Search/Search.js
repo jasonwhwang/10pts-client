@@ -88,6 +88,16 @@ class Search extends React.Component {
   }
 
   render() {
+    if (this.state.data.length === 0 && this.state.loading) {
+      return (
+        <div className="page box-flex-col">
+          <div className="box-flex-row-center box-margin-top-30 box-margin-bottom-30">
+            <Loading small={true} />
+          </div>
+        </div>
+      )
+    }
+
     return (
       <FadeTransition>
         <div className="page box-flex-col">

@@ -13,7 +13,8 @@ import { HideTabBarRoute } from '../0_Components/Other/HideTabBar'
 import { getData } from '../../services/api'
 
 const mapStateToProps = state => ({
-  user: state.common.user
+  user: state.common.user,
+  savedCount: state.page.savedCount
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -37,6 +38,7 @@ class Food extends React.Component {
       foodname: res.food.foodname,
       foodTitle: res.food.foodTitle,
       address: res.food.address,
+      savedCount: res.food.savedCount
     }
     this.props.changeVal('setPage', page)
   }
@@ -83,7 +85,7 @@ const FoodMain = (props) => {
   return (
     <>
       <CardRatings data={props.data} tab={tab} params={params} />
-      <FoodStats savedCount={props.data.savedCount} reviewsCount={props.data.reviewsCount} />
+      <FoodStats savedCount={props.savedCount} reviewsCount={props.data.reviewsCount} />
       <FoodReviews reviews={props.data.reviews} tab={tab} params={params} />
       <div className="box-margin-bottom-60"></div>
     </>

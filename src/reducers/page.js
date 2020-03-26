@@ -3,7 +3,9 @@ const defaultState = {
   isLiked: false,
   isSaved: false,
   isReviewed: -1,
-  foodname: ''
+  foodname: '',
+  likesCount: 0,
+  savedCount: 0
 }
 
 export default (state = defaultState, action) => {
@@ -12,6 +14,8 @@ export default (state = defaultState, action) => {
       return defaultState
     case 'isLiked':
     case 'isSaved':
+    case 'likesCount':
+    case 'savedCount':
       return {
         ...state,
         [action.type]: action.val
