@@ -16,6 +16,7 @@
   z-index: 9;
   overflow: hidden;
 }
+.about-image { height: 50px; width: auto; margin: 30px auto; display: block; }
 @media only screen and (min-width: 600px) {
   .mapFrame { width: var(--width); }
   .map-loading { width: var(--width); }

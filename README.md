@@ -18,3 +18,6 @@ This project was made using create-react-app.
 3. New: Create a new review
 4. Saved: Saved list of food, liked reviews, and following notifications
 5. Account: User account and settings
+
+## Version 1 Complete!
+Currently in debug stage.

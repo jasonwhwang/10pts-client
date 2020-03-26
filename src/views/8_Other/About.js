@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
+import Image from '../../img/logo.png'
 
 const About = (props) => {
   if (props.location.pathname === '/terms') return <Terms />
@@ -18,8 +19,9 @@ const MainAbout = () => {
         </Helmet></HelmetProvider>
 
         <div className="box-padding-15">
-          <h5 className="box-margin-bottom-20">About</h5>
-          <p>10pts is a food review app currently under active development.</p>
+          <img src={Image} alt="10pts" className="box-img about-image" />
+          <h3 className="box-margin-bottom-10">About</h3>
+          <p className="box-text-3">10pts is a food review app currently under active development.</p>
         </div>
 
       </div>

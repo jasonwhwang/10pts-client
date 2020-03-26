@@ -116,7 +116,6 @@
   object-fit: cover;
   user-select: none;
   -webkit-user-drag: none;
-  background-color: var(--background);
 }
 
 /* Square */
