@@ -204,6 +204,7 @@ p, h1, h2, h3, h4, h5, h6 { margin: 0; }
 .box-text-6, h6 { font-size: 14px; }
 .box-text-7 { font-size: 12px; }
 .box-text-8 { font-size: 10px; }
+.box-text-9 { font-size: 8px; }
 
 .box-text-nobold { font-weight: 400; }
 .box-text-bold { font-weight: 500; }

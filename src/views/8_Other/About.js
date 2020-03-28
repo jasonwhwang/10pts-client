@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import Image from '../../img/logo.png'
@@ -21,7 +21,12 @@ const MainAbout = () => {
         <div className="box-padding-15">
           <img src={Image} alt="10pts" className="box-img about-image" />
           <h3 className="box-margin-bottom-10">About</h3>
-          <p className="box-text-3">10pts is a food review app currently under active development.</p>
+          <h3 className="box-text-3 box-text-nobold box-margin-bottom-10">
+            10pts is a food review app currently under active development.
+          </h3>
+          <h3 className="box-text-3 box-text-nobold">
+            Dev stage: Alpha
+          </h3>
         </div>
 
       </div>
@@ -156,57 +161,31 @@ const PrivacyText = () => {
   return (
     <>
       <h2 className="box-margin-bottom-20">Privacy Policy</h2>
-      <p>At&nbsp;10pts, accessible at&nbsp;10pts.co, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by&nbsp;10pts&nbsp;and how we use it.</p>
-      <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through email at&nbsp;the10pts@gmail.com</p>
-      <h2 className="box-margin-top-20">General Data Protection Regulation (GDPR)</h2>
-      <p>We are a Data Controller of your information.</p>
-      <p>10pts&nbsp;legal basis for collecting and using the personal information described in this Privacy Policy depends on the Personal Information we collect and the specific context in which we collect the information:</p>
-      <ul>
-        <li>10pts&nbsp;needs to perform a contract with you</li>
-        <li>You have given&nbsp;10pts&nbsp;permission to do so</li>
-        <li>Processing your personal information is in&nbsp;10pts&nbsp;legitimate interests</li>
-        <li>10pts&nbsp;needs to comply with the law</li>
-      </ul>
-      <p>10pts&nbsp;will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our policies.</p>
-      <p>If you are a resident of the European Economic Area (EEA), you have certain data protection rights. If you wish to be informed what Personal Information we hold about you and if you want it to be removed from our systems, please contact us.</p>
-      <p>In certain circumstances, you have the following data protection rights:</p>
-      <ul>
-        <li>The right to access, update or to delete the information we have on you.</li>
-        <li>The right of rectification.</li>
-        <li>The right to object.</li>
-        <li>The right of restriction.</li>
-        <li>The right to data portability</li>
-        <li>The right to withdraw consent</li>
-      </ul>
-      <p><strong>Log Files</strong></p>
-      <p>10pts&nbsp;follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
-      <h3>Cookies and Web Beacons</h3>
-      <p>Like any other website,&nbsp;10pts&nbsp;uses &lsquo;cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
-      <h3>DoubleClick DART Cookie</h3>
-      <p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.10pts.co and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL &ndash;&nbsp;<a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a>.</p>
-      <p>Some of advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.</p>
-      <ul>
-        <li>
-          <p>Google</p>
-          <p><a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></p>
-        </li>
-      </ul>
-      <p><strong>Privacy Policies</strong></p>
-      <p>You may consult this list to find the Privacy Policy for each of the advertising partners of&nbsp;10pts.</p>
-      <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on&nbsp;10pts, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
-      <p>Note that&nbsp;10pts&nbsp;has no access to or control over these cookies that are used by third-party advertisers.</p>
-      <p><strong>Third Part Privacy Policies</strong></p>
-      <p>10pts's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. You may find a complete list of these Privacy Policies and their links here: Privacy Policy Links.</p>
-      <p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites.</p>
-      <p><strong>Children's Information</strong></p>
-      <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
-      <p>10pts&nbsp;does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
-      <p><strong>Online Privacy Policy Only</strong></p>
-      <p>This privacy policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in&nbsp;10pts. This policy is not applicable to any information collected offline or via channels other than this website.</p>
-      <p><strong>Consent</strong></p>
-      <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+      <Iubenda policyId={54202776} />
+      <p className="box-margin-top-10 box-text-lineheight1 box-margin-bottom-10">
+        Our privacy policy is provided by iubenda, linked above.
+        Here are the main key points:</p>
+      <ol className="box-text-5 box-margin-bottom-20">
+        <li className="box-margin-bottom-10">Google Services: 10pts uses services by Google. By agreeing to use this app, you also agree to Google's terms and privacy policies.</li>
+        <li className="box-margin-bottom-10">Data: 10pts does not sell your data in any capacity, and only uses information you provide for food reviews.</li>
+        <li className="box-margin-bottom-10">Ads: 10pts may show ads to you in order to support the platform.</li>
+        <li className="box-margin-bottom-10">Content: All data and content posted to 10pts is made public.</li>
+        <li>User: You may remove any content you post to 10pts at any time.</li>
+      </ol>
+      <p className="box-text-lineheight1">If you have any questions, feel free to email us at the10pts@gmail.com</p>
     </>
   )
+}
+
+const Iubenda = ({ policyId }) => {
+  useEffect(() => {
+    var s = document.createElement("script")
+    let tag = document.getElementsByTagName("script")[0]
+    s.src = "https://cdn.iubenda.com/iubenda.js"
+    tag.parentNode.insertBefore(s, tag)
+  }, [])
+
+  return <a href={`https://www.iubenda.com/privacy-policy/${policyId}`} className="iubenda-black iubenda-embed" title="Privacy Policy ">Privacy Policy</a>
 }
 
 export default About

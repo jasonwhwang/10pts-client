@@ -120,7 +120,7 @@ const ReviewErrors = ({ reviewErrors }) => {
 
   return (
     <FadeTransition>
-      <div className="box-border-bottom errorPadding">
+      <div className="box-border-bottom box-padding-15">
         <ListErrors errors={reviewErrors} />
       </div>
     </FadeTransition>

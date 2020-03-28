@@ -24,7 +24,7 @@ class PhotosList extends React.Component {
           return <img src={photo} key={photo ? photo : index} alt="New Review" className="box-img" />
         })}
         {empty.map((val, index) => {
-          return <div key={index} className="box-img"></div>
+          return <div key={index} className="box-img box-background"></div>
         })}
       </div>
     )

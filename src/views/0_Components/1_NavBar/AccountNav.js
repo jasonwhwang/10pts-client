@@ -53,7 +53,7 @@ const MemberNav = (props) => {
 
         <div className="box-flex-1"></div>
 
-        <FollowButton className="box-margin-right-5" />
+        <FollowButton className="box-margin-right-5" username={props.match.params.username} />
       </div>
     </FadeTransition>
   )
