@@ -20,13 +20,42 @@ const MainAbout = () => {
 
         <div className="box-padding-15">
           <img src={Image} alt="10pts" className="box-img about-image" />
-          <h3 className="box-margin-bottom-10">About</h3>
-          <h3 className="box-text-3 box-text-nobold box-margin-bottom-10">
-            10pts is a food review app currently under active development.
+          <div className="box-flex-row-center box-margin-bottom-30">
+            <h5 className="box-text-italic box-color-gray box-text-nobold">Find the best food in the world.</h5>
+          </div>
+          <h3 className="box-text-nobold box-margin-bottom-10 box-text-lineheight1">
+            10pts is a food review app for chefs, gourmets,
+            and eaters. Our mission is to find the best food
+            and share them with the world. We hope to
+            categorize all the best cuisines so that no matter
+            where you are, you can find the best dishes that suit
+            your palate.
           </h3>
-          <h3 className="box-text-3 box-text-nobold">
-            Dev stage: Alpha
+          <h5 className="box-margin-top-30 box-text-italic box-color-gray box-text-nobold">- The 10pts Team</h5>
+          {/* <h3 className="box-text-nobold box-text-lineheight1">
+            Reviews on 10pts are rated on a scale of 0-10 points:
           </h3>
+          <h3 className="box-text-nobold">10 - Perfect</h3>
+          <h3 className="box-text-nobold">9 - Masterclass</h3>
+          <h3 className="box-text-nobold">8 - Topclass</h3>
+          <h3 className="box-text-nobold">7 - Extraordinary</h3>
+          <h3 className="box-text-nobold">6 - Delicious</h3>
+          <h3 className="box-text-nobold">5 - Good</h3>
+          <h3 className="box-text-nobold">4 - Average</h3>
+          <h3 className="box-text-nobold">3 - Bad</h3>
+          <h3 className="box-text-nobold">2 - Terrible</h3>
+          <h3 className="box-text-nobold">1 - Danger</h3>
+          <h3 className="box-text-nobold">0 - Hazard</h3>
+
+          <h3 className="box-text-nobold box-text-lineheight1 box-margin-top-10">
+            Subratings include the following:
+          </h3>
+          <h3 className="box-text-nobold">Taste</h3>
+          <h3 className="box-text-nobold">Appearance</h3>
+          <h3 className="box-text-nobold">Texture</h3>
+          <h3 className="box-text-nobold">Aroma</h3>
+          <h3 className="box-text-nobold">Balance</h3> */}
+
         </div>
 
       </div>

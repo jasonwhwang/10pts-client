@@ -5,7 +5,7 @@
 Find the best food in the world.  
 Food reviews by chefs & food lovers.  
 
-Point Rankings: 0. Hazard 1. Danger 2. Terrible 3. Bad 4. Average 5. Good 6. Delicious 7. Extraordinary  8. Highclass 9. Masterclass 10. Perfect.  
+Point Rankings: 0. Hazard 1. Danger 2. Terrible 3. Bad 4. Average 5. Good 6. Delicious 7. Extraordinary  8. Topclass 9. Masterclass 10. Perfect.  
 
 Sub Ratings: Taste, Appearance, Texture, Aroma, Balance  
 
@@ -20,4 +20,4 @@ This project was made using create-react-app.
 5. Account: User account and settings
 
 ## Version 1 Complete!
-Currently in debug stage.
+Currently in deployment phase.
