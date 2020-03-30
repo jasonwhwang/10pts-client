@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import FadeTransition from '../0_Components/7_FadeTransition/FadeTransition'
 import Image from '../../img/logo.png'
+import { Link } from 'react-router-dom'
 
 const About = (props) => {
   if (props.location.pathname === '/terms') return <Terms />
@@ -32,6 +33,11 @@ const MainAbout = () => {
             your palate.
           </h3>
           <h5 className="box-margin-top-30 box-text-italic box-color-gray box-text-nobold">- The 10pts Team</h5>
+          
+          <div className="box-margin-top-60 box-flex-col">
+            <Link className="box-text-7 box-margin-bottom-10" to='/terms'>Terms</Link>
+            <Link className="box-text-7" to='/privacy'>Privacy</Link>
+          </div>
           {/* <h3 className="box-text-nobold box-text-lineheight1">
             Reviews on 10pts are rated on a scale of 0-10 points:
           </h3>

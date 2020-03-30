@@ -49,7 +49,7 @@ const DefaultNav = (props) => {
           <img src={Logo} className="defaultNav-logo" alt="10pts" />
         </Link>
         <div className="box-flex-1"></div>
-        <Link to="/privacy" className="box-flex-acenter box-text-9 box-margin-right-10">Privacy</Link>
+        {/* <Link to="/privacy" className="box-flex-acenter box-text-9 box-margin-right-10">Privacy</Link> */}
         <Link className="box-flex-acenter" to="/about">
           <h6 className="nav-badge box-flex-acenter">About</h6>
         </Link>
