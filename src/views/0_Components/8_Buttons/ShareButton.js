@@ -2,6 +2,8 @@ import React from 'react'
 import './Buttons.css'
 import { Send } from 'react-feather'
 
+// Share button to allow users to send links to others
+// only shown on mobile browsers
 const onShare = (foodname, username) => {
   let fName = foodname.replace(/-/g, ' ')
     .replace(/(?:^|\s)\S/g, function (a) { return a.toUpperCase() })

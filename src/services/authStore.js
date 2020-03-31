@@ -1,6 +1,8 @@
 import SecureLS from 'secure-ls'
 var ls = new SecureLS({encodingType: 'aes'})
 
+// Secure Local Storage
+// Encrypt JWT tokens before saving in Local Storage
 class AuthStoreClass {
   setItem(key, value) {
     ls.set(key, value)

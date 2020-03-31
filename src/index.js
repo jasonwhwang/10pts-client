@@ -15,8 +15,10 @@ import configureStore from './reducers/store'
 import { PersistGate } from 'redux-persist/integration/react'
 export const { store, persistor } = configureStore()
 
+// Google Analytics
 if (!process.env.REACT_APP_var_STAGE === 'dev') ReactGA.initialize(process.env.REACT_APP_ga_ID)
 
+// AWS Amplify Config
 Amplify.configure({
   Auth: {
     region: process.env.REACT_APP_c_REGION,

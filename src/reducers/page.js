@@ -1,3 +1,6 @@
+// Page
+// Saves state for like/save buttons and counts
+// - used for disjoint state between buttons in navBar and app body
 const defaultState = {
   _id: '',
   isLiked: false,

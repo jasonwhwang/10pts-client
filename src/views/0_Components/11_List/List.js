@@ -4,6 +4,9 @@ import Card from '../10_Cards/Card'
 import Card2 from '../10_Cards/Card2'
 import Card3 from '../10_Cards/Card3'
 
+// List Component
+// - renders cards in 1 or 2 or 3 column views
+// - tapping on 2 or 3 column views leads to 1 column views (ie. preview to main view)
 class List extends React.Component {
   async componentDidMount() {
     this.initializeState()
@@ -14,12 +17,13 @@ class List extends React.Component {
 
   initializeState = async () => {
     await this.setStateAsync({})
-
+    // scroll to div if link has #
     if (this.props.location.hash) {
       let divID = this.props.location.hash.replace('#', '')
       let divEL = document.getElementById(divID)
       if (divEL) {
         divEL.scrollIntoView({ block: 'start' })
+        // account for navBar
         window.scrollBy(0, -50)
       }
     }

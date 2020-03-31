@@ -15,12 +15,12 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type, val })
 })
 
+// Post Button
+// - Logic for posting new review to database
 class PostButton extends React.Component {
   state = { loading: false }
 
   async componentDidMount() {
-    // let res = await removeFile('us-east-1:260e6482-c7f2-4190-919b-900ed3f13818/Beef-Noodle-Soup-Chef-Hung-Taiwanese-Beef-Noodle-Alton-Parkway-Irvine-CA-USA-10pts-RwPF43jupI.jpeg')
-    // console.log(res)
     this.props.changeVal('reviewErrors', null)
   }
 
@@ -40,6 +40,7 @@ class PostButton extends React.Component {
   submitPost = async () => {
     await this.setStateAsync({ ...this.state, loading: true })
     let r = { ...this.props.review }
+    // Errors - check review for errors
     let errors = this.checkErrors()
     if (Object.entries(errors).length !== 0) {
       this.props.changeVal('reviewErrors', errors)
@@ -47,7 +48,7 @@ class PostButton extends React.Component {
       return
     }
     this.props.changeVal('reviewErrors', null)
-    // upload images
+    // Images - fetch images from objectURL and upload each
     let photos = await Promise.all(r.photos.map(async (url) => {
       try {
         if (url.indexOf('blob:') === 0) {
@@ -56,6 +57,7 @@ class PostButton extends React.Component {
             .then(blobFile => new File([blobFile], imgName, { type: blobFile.type }))
           if (!img) return null
           let newUrl = await uploadFile(img, imgName)
+          URL.revokeObjectURL(url)
           if (newUrl.error) return null
           return newUrl
         } else if (url) return url
@@ -65,16 +67,19 @@ class PostButton extends React.Component {
         if (url.indexOf('blob:') === 0) URL.revokeObjectURL(url)
       }
     }))
+    // Remove null URL photos
     r.photos = photos.filter(url => url !== null)
+    // Remove '$' prefix from review price
     r.price = parseInt(r.price.replace(/[^0-9]/gi, ''))
 
     try {
-      // Post/Put to API
+      // Upload - Post/Put to API
       let res = null
       if (r._id) res = await putData(`/review/${r._id}`, { review: r })
       else res = await postData('/review', { review: r })
-      // Redirect to Review
+      // Check if errors
       if (!res || res.error || res.errors) {
+        // if error, remove all uploaded photos
         await Promise.all(r.photos.map(async url => {
           await removeFile(url)
         }))
@@ -82,10 +87,12 @@ class PostButton extends React.Component {
         await this.props.changeVal('reviewErrors', errors)
         await this.setStateAsync({ ...this.state, loading: false })
       } else {
+        // else remove review from store & redirect
         await this.props.changeVal('resetReview', null)
         this.props.history.push(`/f/${res.review.foodname}/${this.props.user.username}`)
       }
     } catch (err) {
+      // if error on review upload, remove all uploaded photos
       await Promise.all(r.photos.map(async url => {
         await removeFile(url)
       }))

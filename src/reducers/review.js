@@ -1,3 +1,5 @@
+// Review
+// Saves data for new reviews in the '+' tab
 const defaultState = {
   _id: null,
   photos: [],

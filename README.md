@@ -21,3 +21,4 @@ This project was made using create-react-app.
 
 ## Version 1 Complete!
 Currently in deployment phase.
+Add comments to code

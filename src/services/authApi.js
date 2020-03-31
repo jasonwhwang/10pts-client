@@ -3,6 +3,8 @@ import AuthStore from './authStore'
 import { store } from '../index'
 const generate = require('nanoid/generate')
 
+// AWS Amplify Authentication & Storage API Functions
+
 async function signUp(email, password) {
   try {
     let res = await Auth.signUp({

@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type, val })
 })
 
+// Search Nav
+// - Input adds keywords to URL Search Params and redirects on search(enter)
+// - App body will monitor params, on change will call based on new keywords
 class SearchNav extends React.Component {
   onChangeKeywords = (e) => {
     this.props.changeVal(e.target.id, e.target.value)

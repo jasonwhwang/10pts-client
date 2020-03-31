@@ -2,6 +2,14 @@ import React from 'react'
 import Script from 'react-load-script'
 import './AutoSearch.css'
 
+// Google Search Autocomplete
+// - use google API to search to autocomplete addresses
+// - custom component instead of widget to show only food/restaurants
+// Sources:
+// https://medium.com/@hamzaqaisrani/using-the-google-maps-places-autocomplete-javascript-api-in-a-react-project-5742bab4abc9
+// https://developers.google.com/places/web-service/autocomplete#place_autocomplete_results
+// Get predictions programatically:
+// https://developers.google.com/maps/documentation/javascript/places-autocomplete
 class AutoSearch extends React.Component {
   state = { predictions: [], click: false }
   load = () => {

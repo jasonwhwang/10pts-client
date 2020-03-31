@@ -44,6 +44,8 @@ class Photos extends React.Component {
   async componentDidMount() {
     this.hideNav()
     let p = this.props.match.params
+    // Determine if is new or edit
+    // if has foodname param, is edit, and load data to store
     if(p.foodname && this.props.user && p.foodname !== this.props.review.foodname) {
       let res = await getData(`/review/${p.foodname}/${this.props.user.username}`)
       if(!res || res.error || res.errors) return
@@ -55,13 +57,14 @@ class Photos extends React.Component {
     } else if(!p.foodname && this.props.review.foodname) {
       await this.props.changeVal('resetReview', null)
     }
-
+    // Check for valid photos
     await this.setPhotos()
     this.setState({ ...this.state, loading: false })
     this.showNav()
   }
 
   setPhotos = async () => {
+    // Checks all blobs if they are still valid, ie not expired such as on refresh
     let photos = this.props.review.photos
     photos = await Promise.all(photos.map(async url => {
       try {
@@ -79,11 +82,11 @@ class Photos extends React.Component {
     const files = [...e.target.files]
     e.target.value = ''
     if (files.length < 1) return
+    // compress photos before creating URL
     let conversions = await compress.compress(files)
     const { photo } = conversions[0]
     // console.log({ photo, info })
     const objectUrl = URL.createObjectURL(photo.data)
-    // console.log(objectUrl)
     let newPhotos = [...this.props.review.photos, objectUrl]
     await this.props.changeVal('photos', newPhotos)
   }

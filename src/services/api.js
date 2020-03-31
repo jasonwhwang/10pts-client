@@ -1,11 +1,12 @@
 import { refresh } from './authApi'
 import AuthStore from "./authStore"
 
+// 10pts API Endpoints
+
 let baseURL = process.env.REACT_APP_var_STAGE === 'dev' ?
   'http://localhost:5000/api' : `${process.env.REACT_APP_api_LINK}/api`
 
-
-// GET - Get data
+// GET - Get Data
 async function getData(url) {
   await refresh()
   let token = AuthStore.getIdToken()

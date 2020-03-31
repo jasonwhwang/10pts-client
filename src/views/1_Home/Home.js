@@ -44,11 +44,13 @@ class Home extends React.Component {
       loading: false
     })
   }
+  // Infinite scroll load data
   scrollListener = () => {
     if ((window.innerHeight + window.scrollY + 300) >= document.body.offsetHeight) {
       this.fetchData()
     }
   }
+  // Change following if account is in list multiple times
   changeFollowing = (username, isFollowing) => {
     let newData = this.state.data.map(review => {
       if (review.account.username === username) {

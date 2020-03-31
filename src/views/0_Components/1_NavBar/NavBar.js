@@ -10,6 +10,10 @@ import NewNav from './NewNav'
 import AccountNav from './AccountNav'
 import FoodNav from './FoodNav'
 
+// Navbar Component
+// - Displays the correct Navbar depending on the route
+// - State is separate from app body, relies on redux store to share state
+
 const NavBar = () => {
   return (
     <div id="navBar">
@@ -49,9 +53,8 @@ const DefaultNav = (props) => {
           <img src={Logo} className="defaultNav-logo" alt="10pts" />
         </Link>
         <div className="box-flex-1"></div>
-        {/* <Link to="/privacy" className="box-flex-acenter box-text-9 box-margin-right-10">Privacy</Link> */}
         <Link className="box-flex-acenter" to="/about">
-          <h6 className="nav-badge box-flex-acenter">About</h6>
+          <h6 className="nav-badge box-flex-acenter">Alpha</h6>
         </Link>
       </div>
     </FadeTransition>

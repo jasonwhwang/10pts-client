@@ -21,11 +21,13 @@ import MapFrame from './8_Other/MapFrame'
 import Login from './9_Login/Login'
 import About from './8_Other/About'
 import Callback from './8_Other/Callback'
+import PWAprompt from './0_Components/5_PWAprompt/PWAprompt'
 
 const App = (props) => {
   return (
     <div className="app">
       <NavBar {...props} />
+      <PWAprompt />
 
       <ScrollTop location={props.location} >
         <Switch>

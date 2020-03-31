@@ -38,30 +38,6 @@ const MainAbout = () => {
             <Link className="box-text-7 box-margin-bottom-10" to='/terms'>Terms</Link>
             <Link className="box-text-7" to='/privacy'>Privacy</Link>
           </div>
-          {/* <h3 className="box-text-nobold box-text-lineheight1">
-            Reviews on 10pts are rated on a scale of 0-10 points:
-          </h3>
-          <h3 className="box-text-nobold">10 - Perfect</h3>
-          <h3 className="box-text-nobold">9 - Masterclass</h3>
-          <h3 className="box-text-nobold">8 - Topclass</h3>
-          <h3 className="box-text-nobold">7 - Extraordinary</h3>
-          <h3 className="box-text-nobold">6 - Delicious</h3>
-          <h3 className="box-text-nobold">5 - Good</h3>
-          <h3 className="box-text-nobold">4 - Average</h3>
-          <h3 className="box-text-nobold">3 - Bad</h3>
-          <h3 className="box-text-nobold">2 - Terrible</h3>
-          <h3 className="box-text-nobold">1 - Danger</h3>
-          <h3 className="box-text-nobold">0 - Hazard</h3>
-
-          <h3 className="box-text-nobold box-text-lineheight1 box-margin-top-10">
-            Subratings include the following:
-          </h3>
-          <h3 className="box-text-nobold">Taste</h3>
-          <h3 className="box-text-nobold">Appearance</h3>
-          <h3 className="box-text-nobold">Texture</h3>
-          <h3 className="box-text-nobold">Aroma</h3>
-          <h3 className="box-text-nobold">Balance</h3> */}
-
         </div>
 
       </div>

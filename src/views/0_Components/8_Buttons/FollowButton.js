@@ -26,7 +26,9 @@ class FollowButton extends React.Component {
     else res = await putData(`/account/unfollow/${this.props.username}`)
     if (res.error) return
     await this.setStateAsync({ isFollowing: res.isFollowing, loading: false })
+    // changeCount prop function if parent component is keeping track of follower count
     if (this.props.changeCount) this.props.changeCount(res.followersCount)
+    // changeFollowing on home to change all card follow buttons to new state if matched username
     if (this.props.changeFollowing) this.props.changeFollowing(this.props.username, res.isFollowing)
   }
   setStateAsync(state) {
@@ -37,6 +39,7 @@ class FollowButton extends React.Component {
 
   render() {
     let authUser = this.props.authUser
+    // Icon type used for account list components
     if (this.props.type === 'icon') {
       return (
         <button onClick={this.onClick}
@@ -49,6 +52,7 @@ class FollowButton extends React.Component {
       )
     }
 
+    // Default 'Follow' button used for review cards and account profile
     return (
       <button onClick={this.onClick}
         className={`${this.props.className}
